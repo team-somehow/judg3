@@ -17,11 +17,15 @@ const StyleThemeProvider = (props: { children: React.ReactNode }) => {
       },
       text: {
         primary: '#ffffff',
+        secondary: 'rgba(255, 255, 255, 0.60)',
       },
       divider: 'rgba(255,255,255,0.2)',
     },
     shape: {
-      borderRadius: 5,
+      borderRadius: 15,
+    },
+    typography: {
+      fontFamily: 'Poppins',
     },
     components: {
       MuiAppBar: {
