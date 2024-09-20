@@ -1,5 +1,5 @@
-import { logout, saveToken } from '../../../utils/comman';
-import { useMagic } from './MagicContext';
+import { logout, saveToken } from "../../../utils/comman";
+import { useMagic } from "./MagicContext";
 
 interface Props {
   setLoading: (loading: boolean) => void;
@@ -9,7 +9,7 @@ interface Props {
 const useMagicLogin = () => {
   const { magic } = useMagic();
   const handleOnLogin = async ({ setLoading, setToken, email }: Props) => {
-    if (!magic) console.error("Magic not initialized");
+    if (!magic) return console.error("Magic not initialized");
     try {
       setLoading(true);
       const token = await magic?.auth.loginWithEmailOTP({ email });
@@ -25,7 +25,7 @@ const useMagicLogin = () => {
   };
 
   const handleDisconnect = async () => {
-    if (!magic) console.error("Magic not initialized");
+    if (!magic) return console.error("Magic not initialized");
     try {
       await logout(magic);
     } catch (error) {

@@ -6,6 +6,7 @@ import {
 
 import { WORLDCOIN_VERIFICATION_ROUTE } from "../../../constants";
 import { Button } from "@mui/material";
+import { useAuth } from "../../../context/AuthContext";
 
 type Props = {
   onSuccess: () => void;
@@ -14,6 +15,7 @@ type Props = {
 };
 
 const AuthWorldCoin = ({ onSuccess, buttonText, onVerify }: Props) => {
+  const { setToken } = useAuth();
   const handleVerify = async (proof: ISuccessResult) => {
     console.log(proof);
 
@@ -26,6 +28,7 @@ const AuthWorldCoin = ({ onSuccess, buttonText, onVerify }: Props) => {
       body: JSON.stringify(proof),
     });
     const data = await res.json();
+    setToken(data.token);
     localStorage.setItem("jwtToken", data.token);
     onVerify && onVerify(data); // TODO: handle response from backend and only return token string
 

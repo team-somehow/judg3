@@ -1,6 +1,7 @@
 import { WorldcoinLogin } from "../../components/auth/worldcoin";
 import { Box } from "@mui/material";
 import { enqueueSnackbar } from "notistack";
+
 import { useNavigate } from "react-router-dom";
 
 const LoginWithWorldCoin = () => {
