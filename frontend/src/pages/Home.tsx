@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Typography,
   Button,
   CircularProgress,
   Container,
-} from '@mui/material';
-import Bg from '../components/ui/Bg';
-import EventCard from '../components/shared/EventCard';
-import GradientCard from '../components/ui/GradientCard';
+} from "@mui/material";
+import Bg from "../components/ui/Bg";
+import EventCard from "../components/shared/EventCard";
+import GradientCard from "../components/ui/GradientCard";
+import { useMagic } from "../components/auth/magic/MagicContext";
+import { useAuth } from "../context/AuthContext";
 
 interface Hackathon {
   id: number;
@@ -21,6 +23,27 @@ interface Hackathon {
 const Home: React.FC = () => {
   const [hackathons, setHackathons] = useState<Hackathon[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const { setAddress } = useAuth();
+  const { magic } = useMagic();
+  useEffect(() => {
+    const fetchData = async () => {
+      if (!magic) return console.error("Magic not initialized");
+      try {
+        console.log("Fetching user metadata");
+
+        setLoading(true);
+        const m = await magic.user.getMetadata();
+        setAddress(m.publicAddress!);
+
+        setLoading(false);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, [magic, setAddress]);
 
   // Simulate fetching data from JSON file
   useEffect(() => {
@@ -30,27 +53,27 @@ const Home: React.FC = () => {
       const data = [
         {
           id: 1,
-          avatar: '/ethglobal.png',
-          name: 'ETH Singapore',
+          avatar: "/ethglobal.png",
+          name: "ETH Singapore",
           description:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
-          imgUrl: '/ethsingapore.png',
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+          imgUrl: "/ethsingapore.png",
         },
         {
           id: 2,
-          avatar: '/ethglobal.png',
-          name: 'ETH Global',
+          avatar: "/ethglobal.png",
+          name: "ETH Global",
           description:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
-          imgUrl: '/ethsingapore.png',
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+          imgUrl: "/ethsingapore.png",
         },
         {
           id: 3,
-          avatar: '/ethglobal.png',
-          name: 'ETH India',
+          avatar: "/ethglobal.png",
+          name: "ETH India",
           description:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
-          imgUrl: '/ethsingapore.png',
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+          imgUrl: "/ethsingapore.png",
         },
       ];
       setHackathons(data);
@@ -64,9 +87,9 @@ const Home: React.FC = () => {
   }
 
   return (
-    <Box sx={{ textAlign: 'center', padding: '1rem' }}>
+    <Box sx={{ textAlign: "center", padding: "1rem" }}>
       <Container maxWidth="lg">
-        <Typography variant="h3" sx={{ fontWeight: '900', my: 2 }}>
+        <Typography variant="h3" sx={{ fontWeight: "900", my: 2 }}>
           Revolutionizing Voting with 3-Cast
         </Typography>
         <Typography variant="h6" color="text.secondary" sx={{ mb: 4 }}>
@@ -84,10 +107,10 @@ const Home: React.FC = () => {
         startIcon={
           <img
             src="/logo-black.svg"
-            style={{ height: '20px', color: 'black' }}
+            style={{ height: "20px", color: "black" }}
           />
         }
-        onClick={() => console.log('Organise Voting')}
+        onClick={() => console.log("Organise Voting")}
       >
         Organise Voting
       </Button>
@@ -100,7 +123,7 @@ const Home: React.FC = () => {
       >
         <Typography
           variant="h4"
-          sx={{ mb: 3, color: '#fff' }}
+          sx={{ mb: 3, color: "#fff" }}
           textAlign="start"
           fontWeight="bold"
         >
@@ -108,10 +131,10 @@ const Home: React.FC = () => {
         </Typography>
         <Box
           sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            gap: '2rem',
-            flexWrap: 'wrap',
+            display: "flex",
+            justifyContent: "center",
+            gap: "2rem",
+            flexWrap: "wrap",
           }}
         >
           {hackathons.map((hackathon) => (

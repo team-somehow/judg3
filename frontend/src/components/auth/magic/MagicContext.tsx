@@ -1,11 +1,17 @@
-import { Magic as MagicBase } from 'magic-sdk';
-import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
+import { Magic as MagicBase } from "magic-sdk";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
-import { FlowExtension } from '@magic-ext/flow';
-import { OAuthExtension } from '@magic-ext/oauth';
-import * as fcl from '@onflow/fcl';
+import { FlowExtension } from "@magic-ext/flow";
+import { OAuthExtension } from "@magic-ext/oauth";
+import * as fcl from "@onflow/fcl";
 
-import { getNetwork, getNetworkUrl } from '../../../utils/network';
+import { getNetwork, getNetworkUrl } from "../../../utils/network";
 
 export type Magic = MagicBase<OAuthExtension[] & FlowExtension[]>;
 
@@ -34,8 +40,6 @@ const MagicProvider = ({ children }: { children: ReactNode }) => {
           ],
         }
       );
-
-      console.log("magic", magic);
 
       setMagic(magic);
       fcl.config().put("accessNode.api", getNetworkUrl());

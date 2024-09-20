@@ -7,7 +7,7 @@ import { Box, Button, CircularProgress, Typography } from "@mui/material";
 import useMagicLogin from "../../components/auth/magic/useLogin";
 import InputField from "../../components/shared/InputField";
 
-const LoginWithMina = () => {
+const LoginWithMagic = () => {
   const { handleOnLogin } = useMagicLogin();
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
@@ -16,7 +16,8 @@ const LoginWithMina = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      await handleOnLogin({ setLoading: setLoading, email });
+      const magic = await handleOnLogin({ setLoading: setLoading, email });
+      if (!magic) return;
       enqueueSnackbar("Logged in successfully", { variant: "success" });
       navigate("/login/verify");
     } catch (error) {
@@ -69,4 +70,4 @@ const LoginWithMina = () => {
   );
 };
 
-export default LoginWithMina;
+export default LoginWithMagic;

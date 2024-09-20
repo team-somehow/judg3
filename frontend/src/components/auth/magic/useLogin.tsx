@@ -17,6 +17,7 @@ const useMagicLogin = () => {
 
       saveToken(token!, "EMAIL");
       setToken && setToken(token!);
+      return magic;
     } catch (error) {
       console.log("error", error);
     } finally {
