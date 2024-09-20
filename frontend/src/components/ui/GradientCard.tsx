@@ -15,6 +15,8 @@ function GradientCard({ children, style }: Props) {
         padding: '1rem',
         borderRadius: '1rem',
         border: '1px solid rgba(255, 255, 255, 0.20)',
+        margin: '0.5rem',
+        overflowX: 'auto',
         ...style,
       }}
     >

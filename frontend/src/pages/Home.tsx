@@ -66,7 +66,7 @@ const Home: React.FC = () => {
   return (
     <Box sx={{ textAlign: 'center', padding: '1rem' }}>
       <Container maxWidth="lg">
-        <Typography variant="h3" sx={{ fontWeight: '900', my: 1 }}>
+        <Typography variant="h3" sx={{ fontWeight: '900', my: 2 }}>
           Revolutionizing Voting with 3-Cast
         </Typography>
         <Typography variant="h6" color="text.secondary" sx={{ mb: 4 }}>
@@ -87,6 +87,7 @@ const Home: React.FC = () => {
             style={{ height: '20px', color: 'black' }}
           />
         }
+        onClick={() => console.log('Organise Voting')}
       >
         Organise Voting
       </Button>
@@ -105,13 +106,20 @@ const Home: React.FC = () => {
         >
           Upcoming Hackathons
         </Typography>
-        <Box sx={{ display: 'flex', justifyContent: 'center', gap: '2rem' }}>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            gap: '2rem',
+            flexWrap: 'wrap',
+          }}
+        >
           {hackathons.map((hackathon) => (
             <EventCard
               key={hackathon.id}
               avatar={hackathon.avatar}
               title={hackathon.name}
-              subheader="Upcoming"
+              subheader="EthGlobal"
               image={hackathon.imgUrl}
               description={hackathon.description}
             />

@@ -22,6 +22,10 @@ const EventCard: React.FC<EventCardProps> = ({
   image,
   description,
 }) => {
+  const handleButtonClick = () => {
+    console.log('Button clicked');
+  };
+
   return (
     <Card
       sx={{
@@ -50,7 +54,7 @@ const EventCard: React.FC<EventCardProps> = ({
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <Button variant="outlined" fullWidth>
+        <Button variant="outlined" fullWidth onClick={handleButtonClick}>
           Start Voting
         </Button>
       </CardActions>
