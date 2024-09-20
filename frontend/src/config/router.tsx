@@ -10,6 +10,7 @@ import LoginWrapper from '../pages/Login/LoginWrapper';
 import LoginWithWorldCoin from '../pages/Login/LoginWithWorldCoin';
 import Dashboard from '../pages/Dashboard';
 import VoterDashboard from '../pages/VoterDashboard';
+import Applications from '../pages/Applications';
 
 const router = createBrowserRouter([
   {
@@ -46,7 +47,16 @@ const router = createBrowserRouter([
       // ADMIN ROUTES
       {
         path: '/dashboard',
-        element: <Dashboard />,
+        children: [
+          {
+            path: '',
+            element: <Dashboard />,
+          },
+          {
+            path: 'applications',
+            element: <Applications />,
+          },
+        ],
       },
       // VOTER ROUTES
       {

@@ -54,19 +54,42 @@ const AdminCreateEventModal: React.FC<AdminCreateEventModalProps> = ({
   };
 
   const handleUpload = async (file: File) => {
-    const path = `events/${file.name}`;
-    const imageUrl = await uploadFileToFirebase(file, path);
-    if (imageUrl) {
+    try {
+      const path = `events/${file.name}`;
+      const imageUrl = await uploadFileToFirebase(file, path);
+      if (imageUrl) {
+        setFormData((prevData) => ({
+          ...prevData,
+          imageURL: imageUrl,
+          uploading: false,
+        }));
+      } else {
+        throw new Error('Failed to upload the image.');
+      }
+    } catch (error) {
+      console.error('Error uploading image:', error);
       setFormData((prevData) => ({
         ...prevData,
-        imageURL: imageUrl,
         uploading: false,
       }));
-    } else {
-      setFormData((prevData) => ({
-        ...prevData,
-        uploading: false,
-      }));
+    }
+  };
+
+  const handleFormSubmit = async () => {
+    try {
+      if (!formData.eventName || !formData.description) {
+        throw new Error('Event name and description are required.');
+      }
+
+      await handleSubmit();
+      handleClose();
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      if (error instanceof Error) {
+        alert(`Error: ${error.message}`);
+      } else {
+        alert('An unknown error occurred.');
+      }
     }
   };
 
@@ -131,7 +154,7 @@ const AdminCreateEventModal: React.FC<AdminCreateEventModalProps> = ({
       }
       open={open}
       handleClose={handleClose}
-      onSubmit={handleSubmit}
+      onSubmit={handleFormSubmit}
     />
   );
 };
