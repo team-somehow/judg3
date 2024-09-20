@@ -44,10 +44,10 @@ class Event(models.Model):
 
 # projects
 
-
 class Project(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField()
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
     url = models.URLField()
     photo = models.URLField()
     created_at = models.DateTimeField(auto_now_add=True)
