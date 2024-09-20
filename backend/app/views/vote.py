@@ -2,7 +2,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
-from app.models import Vote, Event, Project, Application
+from app.models import Vote, Event, Project, Application, ProjectMatchup
 from rest_framework import serializers
 from django.shortcuts import get_object_or_404
 
@@ -44,12 +44,12 @@ def create_vote(request):
     if winner not in [project1, project2]:
         return Response({"error": "Winner must be either project1 or project2."}, status=status.HTTP_400_BAD_REQUEST)
 
-    # Ensure the winner is an accepted voter for the event
+    # Ensure the voter is an accepted voter for the event
     try:
         application = Application.objects.get(
             user=request.user, event=event, status='Accepted')
     except Application.DoesNotExist:
-        return Response({"error": "Winner must be an accepted voter for the event."}, status=status.HTTP_400_BAD_REQUEST)
+        return Response({"error": "You must be an accepted voter for the event."}, status=status.HTTP_400_BAD_REQUEST)
 
     # Create the vote
     vote = Vote.objects.create(
@@ -59,6 +59,22 @@ def create_vote(request):
         project2=project2,
         winner=winner
     )
+
+    # Find or create the ProjectMatchup for project1 and project2
+    matchup, created = ProjectMatchup.objects.get_or_create(
+        event=event,
+        project1=project1,
+        project2=project2
+    )
+
+    # Update the win count for the correct project
+    if winner == project1:
+        matchup.project1_wins += 1
+    elif winner == project2:
+        matchup.project2_wins += 1
+
+    # Save the updated matchup
+    matchup.save()
 
     # Serialize and return the created vote
     vote_serializer = VoteSerializer(vote)

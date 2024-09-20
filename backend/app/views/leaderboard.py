@@ -38,12 +38,14 @@ def get_leaderboard(request):
     # Initialize project scores
     project_scores = {project.id: 1.0 for project in projects}
 
+    # for matchup in matchups:
+    #     print(matchup.project1.id, matchup.project2.id, matchup.project1_wins, matchup.project2_wins)
     # Iteratively update project scores based on Bradley-Terry Model
     for _ in range(100):  # Iterate for 100 rounds to converge scores
         for project in projects:
             project_id = project.id
-            sum_num = 0
-            sum_den = 0
+            sum_num = 0.0
+            sum_den = 0.0
 
             for matchup in matchups:
                 if matchup.project1.id == project_id:
@@ -61,11 +63,17 @@ def get_leaderboard(request):
 
                 # Bradley-Terry Formula (Equation 5)
                 p_i = project_scores[project_id]
+
+                if (p_i + opponent_score) == 0:
+                    continue
+
                 sum_num += wins * (opponent_score / (p_i + opponent_score))
                 sum_den += losses / (p_i + opponent_score)
 
+            # print(project_id, sum_num, sum_den)
+
             # Update project score
-            if sum_den > 0:
+            if sum_den > 0 and sum_num > 0:
                 project_scores[project_id] = sum_num / sum_den
 
         # Normalize the scores (use geometric mean normalization)
@@ -76,7 +84,6 @@ def get_leaderboard(request):
             project_scores = {
                 pid: score / geometric_mean for pid, score in project_scores.items()}
 
-    # Prepare leaderboard response with project names and scores
     temp_leaderboard = []
     for project in projects:
         temp_leaderboard.append({
