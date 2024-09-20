@@ -11,13 +11,17 @@ class EventCreateSerializer(serializers.ModelSerializer):
         model = Event
         fields = ['id', 'name', 'description', 'photo']
 
+    def create(self, validated_data):
+        # Ensure the creator is set manually in the view
+        return Event.objects.create(**validated_data)
+
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def create_event(request):
     serializer = EventCreateSerializer(data=request.data)
     if serializer.is_valid():
-        serializer.save()
+        serializer.save(creator=request.user)
         return Response({'message': 'Event created successfully.'}, status=status.HTTP_201_CREATED)
     else:
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
