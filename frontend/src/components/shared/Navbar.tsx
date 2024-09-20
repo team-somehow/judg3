@@ -4,9 +4,15 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { Box, Button, Divider } from "@mui/material";
 import { useAuth } from "../../context/AuthContext";
+// import { DynamicWidget } from "@dynamic-labs/sdk-react-core";
+import useMagicLogin from "../auth/magic/useLogin";
 
 const NavBar: React.FC = () => {
   const { token, address } = useAuth();
+  const { handleDisconnect } = useMagicLogin();
+  console.log("Token", token);
+  console.log("Address", address);
+
   return (
     <>
       <AppBar position="sticky" elevation={1}>
@@ -23,13 +29,20 @@ const NavBar: React.FC = () => {
           <Box sx={{ gap: 2, display: "flex" }}>
             {token ? (
               <>
-                <Button variant="contained">Organise Voting</Button>
-                <Divider orientation="vertical" variant="middle" flexItem />
-                <Button variant="outlined">Start Voting</Button>
+                <Button onClick={handleDisconnect} variant="outlined">
+                  {address}
+                </Button>
               </>
             ) : (
               <>
-                <Button variant="outlined">{address}</Button>
+                <Button variant="contained">Organise Voting</Button>
+                <Divider orientation="vertical" variant="middle" flexItem />
+                <Button variant="outlined">Start Voting</Button>
+                {/* <DynamicWidget
+                  innerButtonComponent={
+                    <Button variant="outlined">Start Voting</Button>
+                  }
+                /> */}
               </>
             )}
           </Box>

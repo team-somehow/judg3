@@ -10,6 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@dynamic-labs/ethereum": "^3.1.0",
+    "@dynamic-labs/ethereum-aa": "^3.1.0",
+    "@dynamic-labs/sdk-react-core": "^3.1.0",
+    "@dynamic-labs/wagmi-connector": "^3.1.0",
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
     "@magic-ext/flow": "^23.10.0",
@@ -17,6 +21,7 @@
     "@mui/icons-material": "^6.1.1",
     "@mui/material": "^6.1.1",
     "@onflow/fcl": "^1.11.0",
+    "@tanstack/react-query": "^5.56.2",
     "@worldcoin/idkit": "^1.3.0",
     "firebase": "^10.13.2",
     "magic-sdk": "^28.10.0",
@@ -24,7 +29,8 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-firebase-hooks": "^5.1.1",
-    "react-router-dom": "^6.26.2"
+    "react-router-dom": "^6.26.2",
+    "wagmi": "^2.12.12"
   },
   "devDependencies": {
     "@types/react": "^18.3.1",

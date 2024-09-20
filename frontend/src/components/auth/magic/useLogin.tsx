@@ -26,6 +26,8 @@ const useMagicLogin = () => {
   };
 
   const handleDisconnect = async () => {
+    console.log("Disconnecting...");
+
     if (!magic) return console.error("Magic not initialized");
     try {
       await logout(magic);

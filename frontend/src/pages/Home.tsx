@@ -77,7 +77,7 @@ const Home: React.FC = () => {
         },
       ];
       setHackathons(data);
-      setLoading(false);
+      // setLoading(false);
     };
     fetchData();
   }, []);

@@ -6,16 +6,19 @@ import MagicProvider from "./components/auth/magic/MagicContext";
 import router from "./config/router";
 import StyleThemeProvider from "./theme/ThemeProvider";
 import AuthProvider from "./context/AuthContext";
+import DynamicAuthProvider from "./components/auth/dynamic/DynamicAuthProvider";
 
 const App: React.FC = () => {
   return (
     <StyleThemeProvider>
       <SnackbarProvider maxSnack={3} autoHideDuration={1500}>
-        <MagicProvider>
-          <AuthProvider>
-            <RouterProvider router={router} />
-          </AuthProvider>
-        </MagicProvider>
+        <DynamicAuthProvider>
+          <MagicProvider>
+            <AuthProvider>
+              <RouterProvider router={router} />
+            </AuthProvider>
+          </MagicProvider>
+        </DynamicAuthProvider>
       </SnackbarProvider>
     </StyleThemeProvider>
   );

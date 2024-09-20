@@ -28,13 +28,14 @@ const AuthWorldCoin = ({ onSuccess, buttonText, onVerify }: Props) => {
       body: JSON.stringify(proof),
     });
     const data = await res.json();
-    setToken(data.token);
+    setToken("data.token");
     localStorage.setItem("jwtToken", data.token);
     onVerify && onVerify(data); // TODO: handle response from backend and only return token string
 
-    if (!res.ok) {
-      throw new Error("Verification failed.");
-    }
+    // if (!res.ok) {
+    //   throw new Error("Verification failed.");
+    // }
+    return true;
   };
 
   return (
