@@ -6,6 +6,8 @@ from app.models import Project, ProjectMatchup, UserPairing, Event, Vote
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
 import numpy as np
+from itertools import combinations
+
 
 EPSILON = 0.2  # Greedy epsilon
 
@@ -42,6 +44,7 @@ def calculate_information_gain(base_project, project):
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def suggest(request, event_id):
+
     user = request.user
     event = get_object_or_404(Event, pk=event_id)
 
@@ -57,29 +60,49 @@ def suggest(request, event_id):
     base_project = None if base_project_id is None else get_object_or_404(Project, pk=base_project_id)
 
     # If it's the first recommendation, randomly choose two projects
+
+
     if base_project is None:
         if all_projects.count() < 2:
             return Response({"error": "Not enough projects available for comparison"}, status=400)
 
-        left_proj, right_proj = random.sample(list(all_projects), 2)
+        # Generate all possible pairs of projects
+        project_pairs = list(combinations(all_projects, 2))
+        
+        # Shuffle the pairs randomly to add a layer of randomness
+        random.shuffle(project_pairs)
+
+        for left_proj, right_proj in project_pairs:
+            # Check if the pairing already exists for the user
+            existing_pairing = UserPairing.objects.filter(
+                user=user,
+                project1=left_proj if left_proj.id < right_proj.id else right_proj,
+                project2=right_proj if left_proj.id < right_proj.id else left_proj
+            )
+
+            # If no existing pairing is found, break the loop and use this pair
+            if not existing_pairing:
+                break
+        else:
+            # If all pairs have been used, return an error
+            return Response({"error": "No available unique project pair for comparison"}, status=400)
     else:
         # Get all other projects except the base project
         other_projects = Project.objects.filter(event=event).exclude(id=base_project.id)
 
         # Filter out the projects already paired for this user
-        already_paired_projects = UserPairing.objects.filter(
+        already_paired_projects = UserPairing.objects.get(
             Q(project1=base_project) | Q(project2=base_project),
             user=user,
             event=event
         ).values_list('project1', 'project2')
 
-        already_paired_project_ids = set([proj_id for pair in already_paired_projects for proj_id in pair])
 
-        suggested_projects = [proj for proj in other_projects if proj.id not in already_paired_project_ids]
+        suggested_projects = [proj for proj in other_projects if proj not in already_paired_projects]
 
         if not suggested_projects:
             return Response({"error": "No new pairings available for the user"}, status=404)
-
+        
         # Implement Greedy Epsilon strategy
         if random.random() < EPSILON:
             right_proj = random.choice(suggested_projects)
