@@ -6,7 +6,6 @@ import requests
 from django.conf import settings
 from ..models import User
 import logging
-import hashlib
 
 logger = logging.getLogger(__name__)
 
@@ -17,17 +16,7 @@ class WorldIDInputSerializer(serializers.Serializer):
     merkle_root = serializers.CharField(required=True)
     verification_level = serializers.CharField(required=True)
     action = serializers.CharField(required=True)
-
-
-class UserVerificationSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ['world_id_user_hash', 'is_verified']
-
-
-def hash_signal(signal: str) -> str:
-    """Generate the signal hash using the 'hashToField' function, mimicking a hash function."""
-    return hashlib.sha256(signal.encode('utf-8')).hexdigest()
+    signal_hash = serializers.CharField(required=False)
 
 
 @api_view(['POST'])
@@ -45,6 +34,13 @@ def verify_world_id(request):
         verification_level = validated_data['verification_level']
         action = validated_data['action']
 
+        user, created = User.objects.get_or_create(
+            world_id_user_hash=nullifier_hash)
+        if user.is_verified:
+
+            token, _ = Token.objects.get_or_create(user=user)
+            return Response({'token': token.key}, status=status.HTTP_200_OK)
+
         app_id = settings.APP_ID
 
         verify_url = f'https://developer.worldcoin.org/api/v2/verify/{app_id}'
@@ -59,20 +55,21 @@ def verify_world_id(request):
         if response.status_code == 200:
             data = response.json()
             if data['success']:
-                world_id_user_hash = data['nullifier_hash']
 
-                user, created = User.objects.get_or_create(
-                    world_id_user_hash=world_id_user_hash)
                 user.is_verified = True
                 user.save()
 
-                token, created = Token.objects.get_or_create(user=user)
+                token, _ = Token.objects.get_or_create(user=user)
 
                 return Response({'token': token.key}, status=status.HTTP_200_OK)
             else:
                 return Response({'error': "Verification failed."}, status=status.HTTP_400_BAD_REQUEST)
+        elif response.status_code == 400 and response.json().get('code') == 'max_verifications_reached':
+
+            token, _ = Token.objects.get_or_create(user=user)
+            return Response({'token': token.key}, status=status.HTTP_200_OK)
         else:
-            print(response.json())
+
             return Response({'error': response.json().get('message', 'Error contacting World ID API.')},
                             status=status.HTTP_400_BAD_REQUEST)
 
