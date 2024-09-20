@@ -55,8 +55,32 @@ const StyleThemeProvider = (props: { children: React.ReactNode }) => {
       MuiTextField: {
         styleOverrides: {
           root: {
-            '& .MuiInputBase-root': {
+            '& .MuiFilledInput-root': {
+              backgroundColor: 'rgba(255, 255, 255, 0.1)',
               borderRadius: 10,
+              border: '1px solid rgba(255, 255, 255, 0.3)', // Default border
+              '&:hover': {
+                backgroundColor: 'rgba(255, 255, 255, 0.15)',
+              },
+              '&.Mui-focused': {
+                backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                border: '2px solid #FC72FF', // Full border on focus
+              },
+              '&:before': {
+                display: 'none', // Remove the default bottom border line
+              },
+              '&:after': {
+                display: 'none', // Prevent the after pseudo-element from adding another border
+              },
+            },
+            '& .MuiFilledInput-input': {
+              color: '#fff',
+            },
+            '& .MuiInputLabel-root': {
+              color: 'rgba(255, 255, 255, 0.60)',
+              '&.Mui-focused': {
+                color: '#FC72FF',
+              },
             },
           },
         },
