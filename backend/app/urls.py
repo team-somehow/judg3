@@ -20,6 +20,8 @@ urlpatterns = [
 
     # voters
     path('voters/<int:event_id>/', voters.get_voters, name='get_voters'),
+    path('voters/update-status/', voters.update_voter_status,
+         name='update_voter_status'),
 
     path('vote/', vote.create_vote, name="create_vote"),
     path('leaderboard/', leaderboard.get_leaderboard, name="get_leaderboard")
