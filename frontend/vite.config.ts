@@ -14,8 +14,8 @@ export default defineConfig({
     },
 
     manifest: {
-      name: 'frontend',
-      short_name: 'frontend',
+      name: '3-Cast',
+      short_name: '3-Cast',
       description: 'Decentralize Voting app',
       theme_color: '#ffffff',
     },
