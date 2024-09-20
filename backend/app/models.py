@@ -54,3 +54,20 @@ class Project(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
 
 
+# voter application
+
+
+class Application(models.Model):
+    STATUS_CHOICES = (
+        ('Pending', 'Pending'),
+        ('Accepted', 'Accepted'),
+        ('Rejected', 'Rejected'),
+    )
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    status = models.CharField(
+        max_length=10, choices=STATUS_CHOICES, default='Pending')
+
+    def __str__(self):
+        return f"{self.user} - {self.event} - {self.status}"
+
