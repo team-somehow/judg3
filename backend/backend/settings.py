@@ -10,17 +10,12 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 from pathlib import Path
-import environ
-
-# Initialise environment variables
-env = environ.Env()
-
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-APP_ID = env('WORLDCOIN_APP_ID')
-ACTION_ID = env('WORLDCOIN_ACTION_ID')
+APP_ID = 'app_staging_28318b7225dd14787048a5add1940b4b'
+ACTION_ID = 'login'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -43,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'app',
 
     'rest_framework',
     'rest_framework.authtoken',
@@ -95,6 +91,9 @@ DATABASES = {
     }
 }
 
+AUTH_USER_MODEL = 'app.User'
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -138,4 +137,3 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-AUTH_USER_MODEL = 'users.User'
