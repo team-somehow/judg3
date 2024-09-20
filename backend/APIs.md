@@ -1,90 +1,120 @@
-/login [POST]
-Input: 
-world coin verification
-Output: 
-auth token
+Here is the API documentation converted to markdown:
 
+```markdown
+### Authentication
 
-/event [POST]
-Input:
-Name
-Description
-Photo
-Output: 
-Success
+#### /login [POST]
+- **Input**: 
+  - World Coin Verification
+- **Output**: 
+  - Auth Token
 
+---
 
-/event [GET]
-Output: 
-Array: 
-	A. project_id
-	B. photo
-	C. url
-	D. name
-	E. Description
-      2. Status
+### Events
 
-/apply [POST]
-Input:
-Event id
-Output:
-Status : “Pending” / “Accepted” / “Rejected”
+#### /event [POST]
+- **Input**: 
+  - Name
+  - Description
+  - Photo
+- **Output**: 
+  - Success
 
-/voters/<event_id> [GET]
-Output:
-Array:
-Voter_id
-status
+#### /event [GET]
+- **Output**: 
+  - Array of Events:
+    - A. project_id
+    - B. photo
+    - C. url
+    - D. name
+    - E. description
+    - F. status
 
-/voters/<event_id>/<user_id> [POST]
-Input:
-Status: “Accepted” / “Rejected”
-Output:
-Status
+---
 
-/project [POST]
-Input:
-Photo
-URL
-Name
-description
+### Applications
 
-Output: 
-Project id
+#### /apply [POST]
+- **Input**: 
+  - Event ID
+- **Output**: 
+  - Status: “Pending” / “Accepted” / “Rejected”
 
-/suggest [POST]
-Input:
-Event ID
-Base Project ID
-Output:
-Left_project_id
-Right_project_id
+---
 
-/project/<id> [GET]
-Output:
-Photo
-URL
-Name
-description
+### Voters
 
-/vote [POST]
-Input:
-Project1 id
-Project 2 id
-Winner Project id
-Event Id
+#### /voters/<event_id> [GET]
+- **Output**: 
+  - Array of Voters:
+    - voter_id
+    - status
 
-Output:
-Status
+#### /voters/<event_id>/<user_id> [POST]
+- **Input**: 
+  - Status: “Accepted” / “Rejected”
+- **Output**: 
+  - Status
 
-/leaderboard [GET]
-Output:
-Array:
-Project id
-Rank
-Name
-URL
-Photo
-Description
+---
 
+### Projects
 
+#### /project [POST]
+- **Input**: 
+  - Photo
+  - URL
+  - Name
+  - Description
+- **Output**: 
+  - Project ID
+
+#### /project/<id> [GET]
+- **Output**: 
+  - Photo
+  - URL
+  - Name
+  - Description
+
+---
+
+### Suggestions
+
+#### /suggest [POST]
+- **Input**: 
+  - Event ID
+  - Base Project ID
+- **Output**: 
+  - Left_project_id
+  - Right_project_id
+
+---
+
+### Voting
+
+#### /vote [POST]
+- **Input**: 
+  - Project1 ID
+  - Project2 ID
+  - Winner Project ID
+  - Event ID
+- **Output**: 
+  - Status
+
+---
+
+### Leaderboard
+
+#### /leaderboard [GET]
+- **Output**: 
+  - Array of Projects:
+    - Project ID
+    - Rank
+    - Name
+    - URL
+    - Photo
+    - Description
+```
+
+This formatting should make the API structure clearer in markdown format!
