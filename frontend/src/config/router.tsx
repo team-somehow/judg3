@@ -3,6 +3,7 @@ import { Box } from '@mui/material';
 import NotFound from '../pages/NotFound';
 import Navbar from '../components/shared/Navbar';
 import Home from '../pages/Home';
+import Dashboard from '../pages/Dashboard';
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,16 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <Home />,
+      },
+      // ADMIN ROUTES
+      {
+        path: '/dashboard',
+        element: <Dashboard />,
+      },
+      // VOTER ROUTES
+      {
+        path: '/vote',
+        element: <h1>Vote</h1>,
       },
     ],
   },

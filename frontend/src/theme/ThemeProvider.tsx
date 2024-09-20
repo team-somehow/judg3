@@ -44,6 +44,10 @@ const StyleThemeProvider = (props: { children: React.ReactNode }) => {
             '&.MuiButton-outlined': {
               border: 'none',
               backgroundColor: 'rgba(255, 255, 255, 0.05)',
+              '&:hover': {
+                backgroundColor: 'rgba(255, 255, 255, 0.10)',
+                transition: '0.3s all ease-in-out',
+              },
             },
           },
         },
