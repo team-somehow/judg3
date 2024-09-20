@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import hello
 from .views import auth
-from .views import events, vote, leaderboard, apply, voters, projects
+from .views import events, vote, leaderboard, apply, voters, projects, suggest
 
 urlpatterns = [
     path("", hello.index, name="index"),
@@ -26,6 +26,9 @@ urlpatterns = [
     # project
     path('project', projects.create_project, name='create_project'),
     path('project/<int:id>/', projects.get_project, name='get_project'),
+
+    # suggest
+    path('suggest/<int:event_id>/', suggest.suggest, name='suggest'),
 
     path('vote', vote.create_vote, name="create_vote"),
     path('leaderboard', leaderboard.get_leaderboard, name="get_leaderboard")
