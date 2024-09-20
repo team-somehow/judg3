@@ -1,14 +1,18 @@
+import { SnackbarProvider } from 'notistack';
 import React from 'react';
 import { RouterProvider } from 'react-router-dom';
-import StyleThemeProvider from './theme/ThemeProvider';
+
+import MagicProvider from './components/auth/magic/MagicContext';
 import router from './config/router';
-import { SnackbarProvider } from 'notistack';
+import StyleThemeProvider from './theme/ThemeProvider';
 
 const App: React.FC = () => {
   return (
     <StyleThemeProvider>
       <SnackbarProvider maxSnack={3} autoHideDuration={1500}>
-        <RouterProvider router={router} />
+        <MagicProvider>
+          <RouterProvider router={router} />
+        </MagicProvider>
       </SnackbarProvider>
     </StyleThemeProvider>
   );

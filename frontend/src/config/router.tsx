@@ -1,38 +1,61 @@
-import { Outlet, createBrowserRouter } from 'react-router-dom';
-import { Box } from '@mui/material';
-import NotFound from '../pages/NotFound';
-import Navbar from '../components/shared/Navbar';
-import Home from '../pages/Home';
-import Dashboard from '../pages/Dashboard';
+import { createBrowserRouter, Outlet } from "react-router-dom";
+
+import { Box } from "@mui/material";
+
+import Navbar from "../components/shared/Navbar";
+import Home from "../pages/Home";
+import NotFound from "../pages/NotFound";
+import LoginWithMina from "../pages/Login/LoginWithMagic";
+import LoginWrapper from "../pages/Login/LoginWrapper";
+import LoginWithWorldCoin from "../pages/Login/LoginWithWorldCoin";
+import Dashboard from "../pages/Dashboard";
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: (
-      <Box sx={{ minHeight: '100svh' }}>
+      <Box sx={{ minHeight: "100svh" }}>
         <Navbar />
         <Outlet />
       </Box>
     ),
     children: [
       {
-        path: '/',
+        path: "/",
         element: <Home />,
+      },
+      {
+        path: "/login",
+        element: <LoginWrapper />,
+        children: [
+          {
+            path: "",
+            element: <LoginWithMina />,
+          },
+          {
+            path: "verify",
+            element: <LoginWithWorldCoin />,
+          },
+          {
+            path: "*",
+            element: <NotFound />,
+          },
+        ],
       },
       // ADMIN ROUTES
       {
-        path: '/dashboard',
+        path: "/dashboard",
         element: <Dashboard />,
       },
       // VOTER ROUTES
       {
-        path: '/vote',
+        path: "/vote",
         element: <h1>Vote</h1>,
       },
     ],
   },
   {
-    path: '*',
+    path: "*",
     element: <NotFound />,
   },
 ]);

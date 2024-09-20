@@ -1,13 +1,19 @@
-import { IDKitWidget, ISuccessResult, VerificationLevel } from '@worldcoin/idkit';
+import {
+  IDKitWidget,
+  ISuccessResult,
+  VerificationLevel,
+} from "@worldcoin/idkit";
 
-import { WORLDCOIN_VERIFICATION_ROUTE } from '../../../constants';
+import { WORLDCOIN_VERIFICATION_ROUTE } from "../../../constants";
+import { Button } from "@mui/material";
 
 type Props = {
   onSuccess: () => void;
+  onVerify?: (token: string) => void;
   buttonText: string;
 };
 
-const AuthWorldCoin = ({ onSuccess, buttonText }: Props) => {
+const AuthWorldCoin = ({ onSuccess, buttonText, onVerify }: Props) => {
   const handleVerify = async (proof: ISuccessResult) => {
     console.log(proof);
 
@@ -19,6 +25,9 @@ const AuthWorldCoin = ({ onSuccess, buttonText }: Props) => {
       },
       body: JSON.stringify(proof),
     });
+    const data = await res.json();
+    localStorage.setItem("jwtToken", data.token);
+    onVerify && onVerify(data); // TODO: handle response from backend and only return token string
 
     if (!res.ok) {
       throw new Error("Verification failed.");
@@ -35,7 +44,9 @@ const AuthWorldCoin = ({ onSuccess, buttonText }: Props) => {
         verification_level={VerificationLevel.Device}
       >
         {({ open }: { open: () => void }) => (
-          <button onClick={open}>{buttonText}</button>
+          <Button variant="contained" onClick={open}>
+            {buttonText}
+          </Button>
         )}
       </IDKitWidget>
     </div>
