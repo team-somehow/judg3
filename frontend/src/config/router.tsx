@@ -12,6 +12,7 @@ import Dashboard from '../pages/Dashboard';
 import VoterDashboard from '../pages/VoterDashboard';
 import Applications from '../pages/Applications';
 import VotingSystem from '../components/voter/Voting';
+import VoterLeaderboard from '../pages/VoterLeaderboard';
 
 const router = createBrowserRouter([
   {
@@ -70,6 +71,10 @@ const router = createBrowserRouter([
           {
             path: 'voting',
             element: <VotingSystem />,
+          },
+          {
+            path: 'leaderboard',
+            element: <VoterLeaderboard />,
           },
         ],
       },
