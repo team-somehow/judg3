@@ -6,6 +6,7 @@ import { Box, Button, CircularProgress, Typography } from "@mui/material";
 
 import useMagicLogin from "../../components/auth/magic/useLogin";
 import InputField from "../../components/shared/InputField";
+import { DynamicWidget } from "@dynamic-labs/sdk-react-core";
 
 const LoginWithMagic = () => {
   const { handleOnLogin } = useMagicLogin();
@@ -66,6 +67,22 @@ const LoginWithMagic = () => {
           </Box>
         </form>
       )}
+
+      <Box
+        width="100%"
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        mt={4}
+      >
+        <DynamicWidget
+          innerButtonComponent={
+            <Button variant="outlined" fullWidth>
+              Login with Dynamic
+            </Button>
+          }
+        />
+      </Box>
     </>
   );
 };

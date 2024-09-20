@@ -7,7 +7,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const config: HardhatUserConfig = {
-  solidity: "0.8.27",
+  solidity: "0.8.24",
   networks: {
     hederaTestnet: {
       url: process.env.HEDERA_TESTNET_ENDPOINT,

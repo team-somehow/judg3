@@ -23,7 +23,7 @@ interface Hackathon {
 const Home: React.FC = () => {
   const [hackathons, setHackathons] = useState<Hackathon[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const { setAddress } = useAuth();
+  const { setAddress, setToken } = useAuth();
   const { magic } = useMagic();
   useEffect(() => {
     const fetchData = async () => {
@@ -34,6 +34,7 @@ const Home: React.FC = () => {
         setLoading(true);
         const m = await magic.user.getMetadata();
         setAddress(m.publicAddress!);
+        setToken(localStorage.getItem("token")!);
 
         setLoading(false);
       } catch (error) {
@@ -43,7 +44,7 @@ const Home: React.FC = () => {
       }
     };
     fetchData();
-  }, [magic, setAddress]);
+  }, [magic, setAddress, setToken]);
 
   // Simulate fetching data from JSON file
   useEffect(() => {

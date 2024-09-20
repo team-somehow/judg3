@@ -15,7 +15,9 @@ const App: React.FC = () => {
         <DynamicAuthProvider>
           <MagicProvider>
             <AuthProvider>
+              {/* <AppKitProvider> */}
               <RouterProvider router={router} />
+              {/* </AppKitProvider> */}
             </AuthProvider>
           </MagicProvider>
         </DynamicAuthProvider>

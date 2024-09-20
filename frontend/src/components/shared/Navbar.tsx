@@ -6,12 +6,21 @@ import { Box, Button, Divider } from "@mui/material";
 import { useAuth } from "../../context/AuthContext";
 // import { DynamicWidget } from "@dynamic-labs/sdk-react-core";
 import useMagicLogin from "../auth/magic/useLogin";
+import { useDynamicWallet } from "../auth/dynamic/dynamicHooks";
 
 const NavBar: React.FC = () => {
-  const { token, address } = useAuth();
+  const { token, address, setAddress, setToken } = useAuth();
+  const { handleLogOut } = useDynamicWallet();
   const { handleDisconnect } = useMagicLogin();
   console.log("Token", token);
   console.log("Address", address);
+
+  const handleDisconnectOnClick = async () => {
+    await handleDisconnect();
+    await handleLogOut();
+    setAddress("");
+    setToken("");
+  };
 
   return (
     <>
@@ -29,7 +38,7 @@ const NavBar: React.FC = () => {
           <Box sx={{ gap: 2, display: "flex" }}>
             {token ? (
               <>
-                <Button onClick={handleDisconnect} variant="outlined">
+                <Button onClick={handleDisconnectOnClick} variant="outlined">
                   {address}
                 </Button>
               </>
