@@ -1,14 +1,10 @@
 import { Outlet, createBrowserRouter } from 'react-router-dom';
 import { Box } from '@mui/material';
 import NotFound from '../pages/NotFound';
-import Home from '../pages/Home';
 import Navbar from '../components/shared/Navbar';
+import Home from '../pages/Home';
 
 const router = createBrowserRouter([
-  {
-    path: 'app',
-    element: <Home />,
-  },
   {
     path: '/',
     element: (
@@ -20,7 +16,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <Box>Dashboard</Box>,
+        element: <Home />,
       },
     ],
   },
