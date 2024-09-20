@@ -79,6 +79,7 @@ const LiveEvents: React.FC = () => {
             approvalStatus={event.approvalStatus}
             buttonText={event.buttonText}
             onButtonClick={handleButtonClick}
+            isAdmin
           />
         ))
       )}

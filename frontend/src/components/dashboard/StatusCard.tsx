@@ -8,7 +8,7 @@ import {
   Avatar,
 } from '@mui/material';
 import { OpenInNew } from '@mui/icons-material';
-import AdminStepper from '../shared/AdminStepper';
+import CustomStepper from '../shared/CustomStepper';
 
 interface StatusCardProps {
   image: string;
@@ -19,6 +19,7 @@ interface StatusCardProps {
   approvalStatus: string;
   buttonText: string;
   onButtonClick: () => void;
+  isAdmin?: boolean;
 }
 
 const StatusCard: React.FC<StatusCardProps> = ({
@@ -30,6 +31,7 @@ const StatusCard: React.FC<StatusCardProps> = ({
   approvalStatus,
   buttonText,
   onButtonClick,
+  isAdmin = false,
 }) => {
   return (
     <Card
@@ -39,7 +41,7 @@ const StatusCard: React.FC<StatusCardProps> = ({
         cursor: 'pointer',
         transition: '0.3s all ease-in-out',
         '&:hover': {
-            bgcolor: 'rgba(255, 255, 255, 0.30)',
+          bgcolor: 'rgba(255, 255, 255, 0.30)',
         },
       }}
     >
@@ -93,7 +95,7 @@ const StatusCard: React.FC<StatusCardProps> = ({
             <Typography variant="subtitle1" fontWeight="bold">
               Approval Status
             </Typography>
-            <AdminStepper status={approvalStatus} />
+            <CustomStepper status={approvalStatus} isAdmin={isAdmin} />
           </Box>
 
           <Button
@@ -101,6 +103,7 @@ const StatusCard: React.FC<StatusCardProps> = ({
             fullWidth
             onClick={onButtonClick}
             startIcon={<OpenInNew />}
+            disabled={!isAdmin && approvalStatus !== 'Voting Open'}
           >
             {buttonText}
           </Button>

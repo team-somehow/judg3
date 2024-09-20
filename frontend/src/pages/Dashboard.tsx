@@ -1,31 +1,47 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Box, Button, Typography, Container, Tabs, Tab } from '@mui/material';
 import { Add } from '@mui/icons-material';
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
+import { storage } from '../config/firebase';
+
 import LiveEvents from '../components/dashboard/LiveEvents';
 import PastEvents from '../components/dashboard/PastEvents';
 import GradientCard from '../components/ui/GradientCard';
 import Bg from '../components/ui/Bg';
-import { storage } from '../config/firebase';
 import AdminCreateEventModal from '../components/dashboard/AdminCreateEventModal';
 
-function Dashboard() {
-  const [tabValue, setTabValue] = useState(0);
-  const [open, setOpen] = useState(false);
-  const [formData, setFormData] = useState({
+// Define a TypeScript interface for form data
+interface FormData {
+  eventName: string;
+  description: string;
+  image: File | null;
+  imageURL: string | null;
+  uploading: boolean;
+}
+
+const Dashboard: React.FC = () => {
+  const [tabValue, setTabValue] = useState<number>(0);
+  const [open, setOpen] = useState<boolean>(false);
+  const [formData, setFormData] = useState<FormData>({
     eventName: '',
     description: '',
-    image: null as File | null,
-    imageURL: null as string | null,
+    image: null,
+    imageURL: null,
     uploading: false,
   });
 
-  const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
-    setTabValue(newValue);
-  };
+  // Handle tab change
+  const handleTabChange = useCallback(
+    (event: React.SyntheticEvent, newValue: number) => {
+      setTabValue(newValue);
+    },
+    []
+  );
 
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => {
+  // Open and close modal handlers
+  const handleOpen = useCallback(() => setOpen(true), []);
+
+  const handleClose = useCallback(() => {
     setOpen(false);
     setFormData({
       eventName: '',
@@ -34,82 +50,101 @@ function Dashboard() {
       imageURL: null,
       uploading: false,
     });
-  };
+  }, []);
 
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
-  };
+  // Handle input changes for text fields
+  const handleInputChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      const { name, value } = e.target;
+      setFormData((prevData) => ({ ...prevData, [name]: value }));
+    },
+    []
+  );
 
-  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      setFormData((prevData) => ({ ...prevData, image: file }));
-      const reader = new FileReader();
-      reader.onload = () =>
-        setFormData((prevData) => ({
-          ...prevData,
-          imageURL: reader.result as string,
-        }));
-      reader.readAsDataURL(file);
+  // Handle image file selection
+  const handleImageChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const file = e.target.files?.[0];
+      if (file) {
+        setFormData((prevData) => ({ ...prevData, image: file }));
+        const reader = new FileReader();
+        reader.onload = () => {
+          setFormData((prevData) => ({
+            ...prevData,
+            imageURL: reader.result as string,
+          }));
+        };
+        reader.readAsDataURL(file);
+      }
+    },
+    []
+  );
+
+  // Handle file upload to Firebase
+  const handleUpload = useCallback(() => {
+    if (!formData.image) {
+      console.warn('No image selected for upload.');
+      return;
     }
-  };
 
-  const handleUpload = () => {
-    if (formData.image) {
-      const storageRef = ref(storage, `events/${formData.image.name}`);
-      setFormData((prevData) => ({ ...prevData, uploading: true }));
+    const storageRef = ref(storage, `events/${formData.image.name}`);
+    setFormData((prevData) => ({ ...prevData, uploading: true }));
 
-      const uploadTask = uploadBytesResumable(storageRef, formData.image);
+    const uploadTask = uploadBytesResumable(storageRef, formData.image);
 
-      uploadTask.on(
-        'state_changed',
-        null,
-        (error) => {
-          console.error('Upload failed:', error);
-          setFormData((prevData) => ({ ...prevData, uploading: false }));
-        },
-        () => {
-          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+    uploadTask.on(
+      'state_changed',
+      (error) => {
+        console.error('Upload failed:', error);
+        setFormData((prevData) => ({ ...prevData, uploading: false }));
+      },
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref)
+          .then((downloadURL) => {
             setFormData((prevData) => ({
               ...prevData,
-              imageURL: downloadURL, // Set Firebase URL here
+              imageURL: downloadURL,
               uploading: false,
             }));
-
-            // Log event name, description, and the Firebase image URL here
-            console.log('Event Name:', formData.eventName);
-            console.log('Description:', formData.description);
-            console.log('Firebase Image URL:', downloadURL); // Log the correct URL
+            console.log('File available at', downloadURL);
+          })
+          .catch((error) => {
+            console.error('Error getting download URL:', error);
+            setFormData((prevData) => ({ ...prevData, uploading: false }));
           });
-        }
-      );
-    }
-  };
+      }
+    );
+  }, [formData.image]);
 
-  const handleSubmit = () => {
-    // Log event details on form submission
-    console.log('Event Name:', formData.eventName);
-    console.log('Description:', formData.description);
-    console.log('Image URL:', formData.imageURL);
-    // Additional logic for submitting the event can be added here
+  // Handle form submission
+  const handleSubmit = useCallback(() => {
+    if (!formData.imageURL) {
+      console.warn('Please upload an image before submitting.');
+      return;
+    }
+
+    const { eventName, description, imageURL } = formData;
+    console.log('Event Name:', eventName);
+    console.log('Description:', description);
+    console.log('Image URL:', imageURL);
+
+    // TODO: Implement actual submission logic (e.g., API call)
+
     handleClose();
-  };
+  }, [formData, handleClose]);
 
   return (
     <Box sx={{ p: '2rem' }}>
       <Container maxWidth="lg">
-        <Typography variant="h4" fontWeight="600">
+        <Typography variant="h4" fontWeight="600" gutterBottom>
           Events
         </Typography>
 
-        {/* Tabs for switching between Live and Past events */}
+        {/* Tabs for Live and Past Events */}
         <Tabs
           value={tabValue}
           onChange={handleTabChange}
-          aria-label="Hackathon Tabs"
+          aria-label="Events Tabs"
           sx={{ mb: 3 }}
         >
           <Tab
@@ -117,7 +152,7 @@ function Dashboard() {
             sx={{
               textTransform: 'none',
               fontSize: '1.2rem',
-              color: tabValue === 0 ? 'color.primary' : 'text.secondary',
+              color: tabValue === 0 ? 'primary.main' : 'text.secondary',
             }}
           />
           <Tab
@@ -125,23 +160,22 @@ function Dashboard() {
             sx={{
               textTransform: 'none',
               fontSize: '1.2rem',
-              color: tabValue === 1 ? 'color.primary' : 'text.secondary',
+              color: tabValue === 1 ? 'primary.main' : 'text.secondary',
             }}
           />
         </Tabs>
 
-        {/* Main content card */}
-        <GradientCard style={{ minHeight: '70vh' }}>
-          {/* Add New Event button - visible outside the modal */}
+        <GradientCard style={{ minHeight: '70vh', p: 2 }}>
           <Button
             variant="outlined"
-            fullWidth
             startIcon={<Add />}
             onClick={handleOpen}
             sx={{ textTransform: 'none', padding: 1.5, mb: 2 }}
+            fullWidth
           >
             Add New Event
           </Button>
+
           {tabValue === 0 && <LiveEvents />}
           {tabValue === 1 && <PastEvents />}
         </GradientCard>
@@ -161,6 +195,6 @@ function Dashboard() {
       <Bg />
     </Box>
   );
-}
+};
 
 export default Dashboard;
