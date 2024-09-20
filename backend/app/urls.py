@@ -12,6 +12,7 @@ urlpatterns = [
     path('event/', events.create_event, name='create_event'),
     path('get-event/', events.get_all_events_with_status, name='get_event'),
     path('get-event-noauth/', events.get_all_events_noauth, name='get_event'),
+    path('get-event-admin/', events.get_all_events_admin, name='get_event'),
 
     # apply
     path('voter-apply-event/', apply.apply_event, name='apply_event'),

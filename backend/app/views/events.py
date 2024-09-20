@@ -35,6 +35,17 @@ def get_all_events_noauth(request):
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_all_events_admin(request):
+    user = request.user  # Get the authenticated user
+    events = Event.objects.filter(creator=user)
+    serializer = EventCreateSerializer(events, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def get_all_events_with_status(request):
