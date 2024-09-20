@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import hello
 from .views import auth
-from .views import events, vote, leaderboard, apply
+from .views import events, vote, leaderboard, apply, voters
 
 urlpatterns = [
     path("", hello.index, name="index"),
@@ -15,9 +15,11 @@ urlpatterns = [
 
     # apply
     path('voter-apply-event/', apply.apply_event, name='apply_event'),
-    path('voter-apply-status/<event_id>', apply.apply_status, name='apply_event'),
+    path('voter-apply-status/<event_id>',
+         apply.apply_status, name='apply_event'),
 
-    # applications
+    # voters
+    path('voters/<int:event_id>/', voters.get_voters, name='get_voters'),
 
     path('vote/', vote.create_vote, name="create_vote"),
     path('leaderboard/', leaderboard.get_leaderboard, name="get_leaderboard")
