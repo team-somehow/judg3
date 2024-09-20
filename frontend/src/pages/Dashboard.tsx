@@ -1,21 +1,13 @@
 import React, { useState } from 'react';
-import {
-  Box,
-  Button,
-  TextField,
-  Typography,
-  Container,
-  Tabs,
-  Tab,
-} from '@mui/material';
+import { Box, Button, Typography, Container, Tabs, Tab } from '@mui/material';
 import { Add } from '@mui/icons-material';
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import LiveEvents from '../components/dashboard/LiveEvents';
 import PastEvents from '../components/dashboard/PastEvents';
 import GradientCard from '../components/ui/GradientCard';
-import CustomModal from '../components/shared/CustomModal';
 import Bg from '../components/ui/Bg';
 import { storage } from '../config/firebase';
+import AdminCreateEventModal from '../components/dashboard/AdminCreateEventModal';
 
 function Dashboard() {
   const [tabValue, setTabValue] = useState(0);
@@ -155,70 +147,17 @@ function Dashboard() {
         </GradientCard>
       </Container>
 
-      <CustomModal
-        title="Add New Event"
-        description="Complete the following fields to create a voting event where participants can cast their votes. Specify details such as the event name, description, voting period, and criteria for eligible voters. This form streamlines event setup and ensures a smooth voting process."
-        content={
-          <Box>
-            {!formData.imageURL ? (
-              <>
-                <Button
-                  variant="outlined"
-                  component="label"
-                  fullWidth
-                  sx={{ mb: 2 }}
-                >
-                  Upload Photo
-                  <input
-                    type="file"
-                    hidden
-                    onChange={(e) => {
-                      handleImageChange(e);
-                      handleUpload();
-                    }}
-                  />
-                </Button>
-              </>
-            ) : (
-              <Box>
-                <Box
-                  component="img"
-                  src={formData.imageURL}
-                  alt="Uploaded Image Preview"
-                  sx={{ width: '100%', height: 'auto', borderRadius: '5px' }}
-                />
-                <Typography variant="body2" color="text.secondary" mb={2}>
-                  Image uploaded successfully.
-                </Typography>
-              </Box>
-            )}
-
-            <TextField
-              variant="filled"
-              label="Event Name"
-              name="eventName"
-              fullWidth
-              value={formData.eventName}
-              onChange={handleInputChange}
-              sx={{ mb: 2 }}
-            />
-            <TextField
-              variant="filled"
-              label="Description"
-              name="description"
-              fullWidth
-              multiline
-              rows={4}
-              value={formData.description}
-              onChange={handleInputChange}
-              sx={{ mb: 2 }}
-            />
-          </Box>
-        }
+      <AdminCreateEventModal
         open={open}
         handleClose={handleClose}
-        onSubmit={handleSubmit}
+        formData={formData}
+        setFormData={setFormData}
+        handleInputChange={handleInputChange}
+        handleImageChange={handleImageChange}
+        handleUpload={handleUpload}
+        handleSubmit={handleSubmit}
       />
+
       <Bg />
     </Box>
   );
