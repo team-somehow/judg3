@@ -11,6 +11,7 @@ import LoginWithWorldCoin from '../pages/Login/LoginWithWorldCoin';
 import Dashboard from '../pages/Dashboard';
 import VoterDashboard from '../pages/VoterDashboard';
 import Applications from '../pages/Applications';
+import VotingSystem from '../components/voter/Voting';
 
 const router = createBrowserRouter([
   {
@@ -61,7 +62,16 @@ const router = createBrowserRouter([
       // VOTER ROUTES
       {
         path: '/voter-dashboard',
-        element: <VoterDashboard />,
+        children: [
+          {
+            path: '',
+            element: <VoterDashboard />,
+          },
+          {
+            path: 'voting',
+            element: <VotingSystem />,
+          },
+        ],
       },
     ],
   },
