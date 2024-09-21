@@ -1,20 +1,19 @@
-# Use an official Python runtime as a parent image
-FROM python:3.11-slim
+# Use the official Python image from the Docker Hub
+FROM python:3.10-slim
 
-# Set the working directory in the container
-WORKDIR /app
+# Set environment variables
+ENV PYTHONUNBUFFERED 1
 
-# Copy the requirements file into the container
-COPY requirements.txt /app/
+# Create a directory in the container for the app
+RUN mkdir /code
+WORKDIR /code
 
-# Install any necessary dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+# Install dependencies
+COPY requirements.txt /code/
+RUN pip install -r requirements.txt
 
-# Copy the current directory contents into the container at /app
-COPY . /app/
+# Copy the project code
+COPY . /code/ 
 
-# Expose port 8000 to the outside world
-EXPOSE 8000
-
-# Run the command to start the Django server
-CMD ["python", "manage.py", "runserver", "0.0.0.0:9500"]
+# Run the server
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
