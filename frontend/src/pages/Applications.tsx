@@ -2,10 +2,12 @@ import Layout from '../components/dashboard/Layout';
 import { Box, Button, Divider, Typography } from '@mui/material';
 import CustomStepper from '../components/shared/CustomStepper';
 import VoterDetails from '../components/voter/VoterDetails';
+import { useParams } from 'react-router-dom';
 
-type Props = {};
+// type Props = {};
 
-function Applications({}: Props) {
+function Applications() {
+  const { id } = useParams();
   return (
     <Box>
       <Layout
@@ -19,7 +21,7 @@ function Applications({}: Props) {
               height: '100%',
             }}
           >
-            <VoterDetails />
+            <VoterDetails eventId={id} />
           </Box>
         }
         right={

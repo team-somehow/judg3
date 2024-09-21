@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Box,
   Typography,
@@ -7,49 +7,48 @@ import {
   Container,
   Grid,
   Divider,
+  IconButton,
+  Button,
 } from '@mui/material';
 import Bg from '../components/ui/Bg';
 import GradientCard from '../components/ui/GradientCard';
+import { useParams } from 'react-router-dom';
+import axiosInstance from '../config/axios';
+import { Link } from '@mui/icons-material';
 
 interface LeaderboardRow {
-  rank: number;
-  teamName: string;
-  teamLogo: string;
-  score: number;
-  team: string;
+  project: {
+    id: number;
+    name: string;
+    description: string;
+    photo: string;
+    url: string;
+    created_at: string;
+  };
+  score: string;
 }
 
 const Leaderboard: React.FC = () => {
-  const leaderboardData: LeaderboardRow[] = [
-    {
-      rank: 1,
-      teamName: '3-Transform',
-      teamLogo: '/static/images/avatar/1.jpg', // sample logo path
-      score: 1500,
-      team: 'Team Somehow',
-    },
-    {
-      rank: 2,
-      teamName: 'Somewhere Else',
-      teamLogo: '/static/images/avatar/2.jpg', // sample logo path
-      score: 1300,
-      team: 'Team Elsewhere',
-    },
-    {
-      rank: 3,
-      teamName: 'Another Team',
-      teamLogo: '/static/images/avatar/3.jpg', // sample logo path
-      score: 1200,
-      team: 'Team Anywhere',
-    },
-    {
-      rank: 4,
-      teamName: 'Team Awesome',
-      teamLogo: '/static/images/avatar/4.jpg', // sample logo path
-      score: 1100,
-      team: 'Team Everywhere',
-    },
-  ];
+  const { id } = useParams<{ id: string }>();
+
+  const [leaderboardData, setLeaderboardData] = React.useState<
+    LeaderboardRow[]
+  >([]);
+
+  useEffect(() => {
+    const postData = async () => {
+      try {
+        const response = await axiosInstance.post(`/leaderboard`, {
+          event: id,
+        });
+        console.log('Response:', response.data);
+        setLeaderboardData(response.data);
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+    postData();
+  }, [id]);
 
   return (
     <Box sx={{ padding: 4 }}>
@@ -66,9 +65,9 @@ const Leaderboard: React.FC = () => {
           marginBottom: 4,
         }}
       >
-        {leaderboardData.slice(0, 3).map((entry) => (
+        {leaderboardData.slice(0, 3).map((entry, rank) => (
           <GradientCard
-            key={entry.rank}
+            key={rank}
             style={{
               width: '100%',
               height: 200,
@@ -88,7 +87,7 @@ const Leaderboard: React.FC = () => {
                 mt: 2,
               }}
             >
-              {entry.rank}
+              {rank + 1}
             </Avatar>
             <Card
               sx={{
@@ -101,25 +100,37 @@ const Leaderboard: React.FC = () => {
                 p: 1,
               }}
             >
-              <Avatar alt={entry.teamName} src={entry.teamLogo} />
+              <Avatar
+                sx={{
+                  bgcolor: 'primary.main',
+                  color: 'white',
+                  fontWeight: '900',
+                }}
+                src={entry.project.photo}
+              />
               <Box
                 sx={{
                   width: '100%',
                 }}
               >
-                <Typography variant="body1" marginTop={1}>
-                  {entry.teamName}
+                <Typography variant="subtitle2">
+                  {entry.project.name}
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  {entry.team}
-                </Typography>
+                <Button
+                  color="primary"
+                  onClick={() => {
+                    window.open(entry.project.url, '_blank');
+                  }}
+                  startIcon={<Link />}
+                >
+                  Project Link
+                </Button>
               </Box>
             </Card>
           </GradientCard>
         ))}
       </Container>
 
-      {/* Rest of the leaderboard */}
       <GradientCard
         style={{
           width: '100%',
@@ -129,8 +140,8 @@ const Leaderboard: React.FC = () => {
         }}
       >
         <Grid container spacing={2}>
-          {leaderboardData.map((entry) => (
-            <Grid item xs={12} key={entry.rank}>
+          {leaderboardData.map((entry, rank) => (
+            <Grid item xs={12} key={rank}>
               <Card
                 sx={{
                   display: 'flex',
@@ -149,22 +160,32 @@ const Leaderboard: React.FC = () => {
                       marginRight: 2,
                     }}
                   >
-                    {entry.rank}
+                    {rank + 1}
                   </Avatar>
                   <Divider orientation="vertical" flexItem />
                   <Avatar
-                    alt={entry.teamName}
-                    src={entry.teamLogo}
+                    alt={entry.project.name[0]}
+                    src={entry.project.photo}
                     sx={{ mx: 2 }}
                   />
                   <Box>
-                    <Typography variant="body1">{entry.teamName}</Typography>
+                    <Typography variant="body1">
+                      {entry.project.name}
+                    </Typography>
                     <Typography variant="body2" color="text.secondary">
-                      {entry.team}
+                      {entry.project.description.trim().slice(0, 100)}...
                     </Typography>
                   </Box>
                 </Box>
-                <Typography variant="h6">{entry.score}</Typography>
+                <Button
+                  color="primary"
+                  startIcon={<Link />}
+                  onClick={() => {
+                    window.open(entry.project.url, '_blank');
+                  }}
+                >
+                  Project Link
+                </Button>
               </Card>
             </Grid>
           ))}

@@ -84,7 +84,7 @@ const router = createBrowserRouter([
             element: <VotingSystem />,
           },
           {
-            path: "leaderboard",
+            path: 'leaderboard/:id',
             element: <VoterLeaderboard />,
           },
         ],

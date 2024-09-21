@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Box,
   Avatar,
@@ -11,16 +11,33 @@ import {
 } from '@mui/material';
 import { Link, Share } from '@mui/icons-material';
 import { enqueueSnackbar } from 'notistack';
+import axiosInstance from '../../config/axios';
 
 // Sample JSON data (you can replace this with data fetched from an API)
-const votersData = [
-  { id: 1, name: 'Pargat Singh', username: '@Pargat-Dhanjal', accepted: null },
-  { id: 2, name: 'Pargat Singh', username: '@Pargat-Dhanjal', accepted: null },
-  { id: 3, name: 'Pargat Singh', username: '@Pargat-Dhanjal', accepted: null },
-];
 
-const VoterDetails: React.FC = () => {
-  const [voters, setVoters] = useState(votersData);
+type Props = {
+  eventId: string;
+};
+
+interface Voter {
+  voterId: number;
+  status: string;
+}
+
+const VoterDetails: React.FC<Props> = ({ eventId }) => {
+  const [voters, setVoters] = useState<Voter>();
+
+  useEffect(() => {
+    const getVoters = async () => {
+      try {
+        const response = await axiosInstance.get(`voters/${eventId}`);
+        setVoters(response.data);
+      } catch (error) {
+        console.error('Error fetching voters:', error);
+      }
+    };
+    getVoters();
+  }, [eventId]);
 
   // Handle accept
   const handleAccept = (id: number) => {
