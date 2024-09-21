@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import {
   Box,
   Button,
@@ -8,51 +8,52 @@ import {
 } from '@mui/material';
 import CustomModal from '../shared/CustomModal';
 import { uploadFileToFirebase } from '../../utils/uploadFile';
+import axiosInstance from '../../config/axios';
+import { enqueueSnackbar } from 'notistack';
 
 interface AdminCreateEventModalProps {
   open: boolean;
   handleClose: () => void;
-  formData: {
-    eventName: string;
-    description: string;
-    image: File | null;
-    imageURL: string | null;
-    uploading: boolean;
-  };
-  setFormData: React.Dispatch<
-    React.SetStateAction<{
-      eventName: string;
-      description: string;
-      image: File | null;
-      imageURL: string | null;
-      uploading: boolean;
-    }>
-  >;
-  handleInputChange: (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => void;
-  handleSubmit: () => void;
 }
 
 const AdminCreateEventModal: React.FC<AdminCreateEventModalProps> = ({
   open,
   handleClose,
-  formData,
-  setFormData,
-  handleInputChange,
-  handleSubmit,
 }) => {
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      setFormData((prevData) => ({
-        ...prevData,
-        image: e.target.files![0],
-        uploading: true,
-      }));
-      handleUpload(e.target.files[0]);
-    }
-  };
+  const [formData, setFormData] = useState({
+    eventName: '',
+    description: '',
+    image: null as File | null,
+    imageURL: null as string | null,
+    uploading: false,
+  });
 
+  // Handle input changes for text fields
+  const handleInputChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      const { name, value } = e.target;
+      setFormData((prevData) => ({ ...prevData, [name]: value }));
+    },
+    []
+  );
+
+  // Handle image file selection
+  const handleImageChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const file = e.target.files?.[0];
+      if (file) {
+        setFormData((prevData) => ({
+          ...prevData,
+          image: file,
+          uploading: true,
+        }));
+        handleUpload(file);
+      }
+    },
+    []
+  );
+
+  // Handle file upload to Firebase
   const handleUpload = async (file: File) => {
     try {
       const path = `events/${file.name}`;
@@ -75,28 +76,35 @@ const AdminCreateEventModal: React.FC<AdminCreateEventModalProps> = ({
     }
   };
 
+  // Handle form submission
   const handleFormSubmit = async () => {
+    if (!formData.eventName || !formData.description || !formData.imageURL) {
+      enqueueSnackbar('Please fill in all fields.', { variant: 'error' });
+      return;
+    }
+    console.log("trg", formData);
+    
     try {
-      if (!formData.eventName || !formData.description) {
-        throw new Error('Event name and description are required.');
-      }
+      const response = await axiosInstance.post('/event/', {
+        name: formData.eventName,
+        description: formData.description,
+        photo: formData.imageURL,
+      });
 
-      await handleSubmit();
-      handleClose();
-    } catch (error) {
-      console.error('Error submitting form:', error);
-      if (error instanceof Error) {
-        alert(`Error: ${error.message}`);
-      } else {
-        alert('An unknown error occurred.');
+      if (response.status === 201) {
+        enqueueSnackbar('Event created successfully.', { variant: 'success' });
+        handleClose();
       }
+    } catch (error) {
+      console.error('Error creating event:', error);
+      enqueueSnackbar('Failed to create event.', { variant: 'error' });
     }
   };
 
   return (
     <CustomModal
       title="Add New Event"
-      description="Complete the following fields to create a voting event where participants can cast their votes. Specify details such as the event name, description, voting period, and criteria for eligible voters. This form streamlines event setup and ensures a smooth voting process."
+      description="Complete the following fields to create a voting event where participants can cast their votes."
       content={
         <Box>
           {!formData.imageURL ? (

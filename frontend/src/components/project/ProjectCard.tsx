@@ -10,25 +10,26 @@ import {
   Chip,
   Grid,
 } from '@mui/material';
-import { GitHub, Language } from '@mui/icons-material';
+import { GitHub, Language, YouTube } from '@mui/icons-material';
 
 interface ProjectCardProps {
-  project: {
-    id: number;
-    title: string;
-    description: string;
-    tags: string[];
-    demoLink: string;
-    image: string;
-  };
+  id: number;
+  name: string;
+  description: string;
+  photo: string;
+  url: string;
   onVote: (projectId: number) => void;
-  onViewSource: (projectId: number) => void;
+  // onViewSource: (projectId: number) => void;
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
-  project,
+  id,
+  name,
+  description,
+  photo,
+  url,
   onVote,
-  onViewSource,
+  // onViewSource,
 }) => {
   return (
     <Box
@@ -56,18 +57,18 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
                 borderRadius: '10px',
               }}
             >
-              {project.id}
+              {name[0]}
             </Avatar>
             <Box>
               <Typography variant="h5" fontWeight="600">
-                {project.title}
+                {name}
               </Typography>
-              <Typography variant="subtitle2" color="text.secondary">
-                {project.description}
-              </Typography>
+              {/* <Typography variant="subtitle2" color="text.secondary">
+                {description}
+              </Typography> */}
             </Box>
           </Box>
-          <Grid container spacing={1} mb={2}>
+          {/* <Grid container spacing={1} mb={2}>
             {project.tags.map((tag) => (
               <Grid item key={tag}>
                 <Chip
@@ -85,11 +86,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
                 />
               </Grid>
             ))}
-          </Grid>
+          </Grid> */}
           <Box
             component="img"
-            src={project.image}
-            alt={project.title}
+            src={photo}
+            alt={'Image'}
             sx={{
               width: '100%',
               height: 'auto',
@@ -110,14 +111,14 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             <Button
               variant="contained"
               color="primary"
-              href={project.demoLink}
+              href={url}
               target="_blank"
               fullWidth
-              startIcon={<Language />}
+              startIcon={<YouTube />}
             >
               Live Demo
             </Button>
-            <Button
+            {/* <Button
               variant="outlined"
               color="primary"
               onClick={() => onViewSource(project.id)}
@@ -125,19 +126,19 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
               startIcon={<GitHub />}
             >
               Source Code
-            </Button>
+            </Button> */}
           </Box>
 
           <Typography variant="h6" gutterBottom>
             Project Description
           </Typography>
-          <Typography variant="subtitle2">{project.description}</Typography>
+          <Typography variant="subtitle2">{description}</Typography>
         </CardContent>
         <CardActions>
           <Button
             variant="contained"
             color="primary"
-            onClick={() => onVote(project.id)}
+            onClick={() => onVote(id)}
             fullWidth
           >
             Vote this Project

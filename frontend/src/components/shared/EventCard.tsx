@@ -8,22 +8,32 @@ import Typography from '@mui/material/Typography';
 import { Avatar, Button } from '@mui/material';
 
 interface EventCardProps {
-  avatar: string;
-  title: string;
-  subheader: string;
-  image: string;
+  id: number;
+  // avatar: string;
+  // title: string;
+  // subheader: string;
+  // image: string;
+  // description: string;
+  name: string;
   description: string;
+  photo: string;
 }
 
 const EventCard: React.FC<EventCardProps> = ({
-  avatar,
-  title,
-  subheader,
-  image,
+  // avatar,
+  // title,
+  // subheader,
+  // image,
+  // description,
+  id,
+  name,
   description,
+  photo,
 }) => {
-  const handleButtonClick = () => {
-    console.log('Button clicked');
+  const handleButtonClick = (id) => {
+    console.log('Button clicked', id);
+    // redirect to the login
+    window.location.href = '/login';
   };
 
   return (
@@ -36,25 +46,42 @@ const EventCard: React.FC<EventCardProps> = ({
     >
       <CardHeader
         avatar={
-          <Avatar aria-label="logo">
-            <img
+          <Avatar
+            aria-label="logo"
+            sx={{
+              bgcolor: 'primary.main',
+              width: 40,
+              height: 40,
+            }}
+          >
+            {/* <img
               src={avatar}
               alt="E"
               style={{ width: '40px', height: '40px' }}
-            />
+            /> */}
+            {name[0]}
           </Avatar>
         }
-        title={title}
-        subheader={subheader}
+        title={name}
+        // subheader={subheader}
       />
-      <CardMedia component="img" height="194" image={image} alt={title} />
+      <CardMedia component="img" height="194" image={photo} alt={'Image'} />
       <CardContent>
-        <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+        <Typography
+          variant="body2"
+          sx={{ color: 'text.secondary', whiteSpace: 'pre-wrap' }}
+        >
           {description}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <Button variant="outlined" fullWidth onClick={handleButtonClick}>
+        <Button
+          variant="outlined"
+          fullWidth
+          onClick={() => {
+            handleButtonClick(id);
+          }}
+        >
           Start Voting
         </Button>
       </CardActions>

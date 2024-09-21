@@ -1,58 +1,43 @@
 import React, { useEffect, useState } from 'react';
 import { Box, CircularProgress } from '@mui/material';
 import StatusCard from '../dashboard/StatusCard';
+import axiosInstance from '../../config/axios';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
-interface EventStatus {
-  image: string;
-  logo: string;
-  eventName: string;
-  eventHost: string;
+interface Hackathon {
+  id: number;
+  name: string;
   description: string;
-  approvalStatus: string;
-  buttonText: string;
+  photo: string;
+  status: string;
 }
 
 const AppliedEvents: React.FC = () => {
-  const [events, setEvents] = useState<EventStatus[]>([]);
+  const [hackathons, setHackathons] = useState<Hackathon[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const navigate = useNavigate(); // Initialize the useNavigate hook
 
   useEffect(() => {
-    // Simulating an API call
-    const fetchEvents = async () => {
-      const response = await new Promise((resolve) =>
-        setTimeout(() => {
-          resolve([
-            {
-              image: '/ethsingapore.png',
-              logo: '/ethglobal.png',
-              eventName: 'ETH Singapore',
-              eventHost: 'ETHGlobal',
-              description:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-              approvalStatus: 'Voting Open',
-              buttonText: 'Start Voting',
-            },
-            {
-              image: '/ethsingapore.png',
-              logo: '/ethglobal.png',
-              eventName: 'ETH India',
-              eventHost: 'ETHGlobal',
-              description:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-              approvalStatus: 'Approval Pending',
-              buttonText: 'Start Voting',
-            },
-          ]);
-        }, 1000)
-      );
-
-      setEvents(response as EventStatus[]);
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const response = await axiosInstance.get('/get-event/');
+        const temp = response.data.filter(
+          (hackathon: Hackathon) => hackathon.status !== 'not_applied'
+        );
+        setHackathons(temp);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching hackathons:', error);
+        setLoading(false);
+      }
     };
 
-    fetchEvents();
+    fetchData();
   }, []);
 
-  const handleButtonClick = () => {
-    console.log('Go to Event clicked');
+  const handleButtonClick = (id: number) => {
+    navigate(`/voter-dashboard/voting/${id}`); // Navigate to the voting page with the event id
   };
 
   return (
@@ -65,20 +50,19 @@ const AppliedEvents: React.FC = () => {
         alignItems: 'center',
       }}
     >
-      {events.length === 0 ? (
+      {loading ? (
         <CircularProgress />
       ) : (
-        events.map((event, index) => (
+        hackathons.map((hackathon) => (
           <StatusCard
-            key={index}
-            image={event.image}
-            logo={event.logo}
-            eventName={event.eventName}
-            eventHost={event.eventHost}
-            description={event.description}
-            approvalStatus={event.approvalStatus}
-            buttonText={event.buttonText}
-            onButtonClick={handleButtonClick}
+            key={hackathon.id}
+            id={hackathon.id}
+            name={hackathon.name}
+            description={hackathon.description}
+            photo={hackathon.photo}
+            status={hackathon.status}
+            buttonText="Start Voting"
+            onButtonClick={() => handleButtonClick(hackathon.id)} // Pass the hackathon id to the function
           />
         ))
       )}

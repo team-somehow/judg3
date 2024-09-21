@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import StatusCard from './StatusCard';
 import { Box, CircularProgress } from '@mui/material';
+import axiosInstance from '../../config/axios';
 
 interface EventStatus {
   image: string;
@@ -16,36 +17,13 @@ const LiveEvents: React.FC = () => {
   const [events, setEvents] = useState<EventStatus[]>([]);
 
   useEffect(() => {
-    // Simulating an API call
     const fetchEvents = async () => {
-      const response = await new Promise((resolve) =>
-        setTimeout(() => {
-          resolve([
-            {
-              image: '/ethsingapore.png',
-              logo: '/ethglobal.png',
-              eventName: 'ETH Singapore',
-              eventHost: 'ETHGlobal',
-              description:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-              approvalStatus: 'Open Applications',
-              buttonText: 'Go to Event',
-            },
-            {
-              image: '/ethsingapore.png',
-              logo: '/ethglobal.png',
-              eventName: 'ETH India',
-              eventHost: 'ETHGlobal',
-              description:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-              approvalStatus: 'Project Uploads',
-              buttonText: 'Go to Event',
-            },
-          ]);
-        }, 1000)
-      );
-
-      setEvents(response as EventStatus[]);
+      try {
+        const response = await axiosInstance.get('/get-event-admin');
+        setEvents(response.data as EventStatus[]);
+      } catch (error) {
+        console.error('Error fetching events:', error);
+      }
     };
 
     fetchEvents();

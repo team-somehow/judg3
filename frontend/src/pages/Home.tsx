@@ -1,63 +1,71 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import {
   Box,
   Typography,
   Button,
   CircularProgress,
   Container,
-} from "@mui/material";
-import Bg from "../components/ui/Bg";
-import EventCard from "../components/shared/EventCard";
-import GradientCard from "../components/ui/GradientCard";
+} from '@mui/material';
+import Bg from '../components/ui/Bg';
+import EventCard from '../components/shared/EventCard';
+import GradientCard from '../components/ui/GradientCard';
+import { useMagic } from '../components/auth/magic/MagicContext';
+import { useAuth } from '../context/AuthContext';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 interface Hackathon {
   id: number;
-  avatar: string;
   name: string;
   description: string;
-  imgUrl: string;
+  photo: string;
 }
 
 const Home: React.FC = () => {
   const [hackathons, setHackathons] = useState<Hackathon[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  // const { getEvents, handleCreateEvent } = useFlowInteraction();
+  const { setAddress, setToken } = useAuth();
+  const navigate = useNavigate();
+  const { magic } = useMagic();
 
-  // Simulate fetching data from JSON file
   useEffect(() => {
     const fetchData = async () => {
-      setLoading(true);
-      // Mock data simulating the JSON file
-      const data = [
-        {
-          id: 1,
-          avatar: "/ethglobal.png",
-          name: "ETH Singapore",
-          description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
-          imgUrl: "/ethsingapore.png",
-        },
-        {
-          id: 2,
-          avatar: "/ethglobal.png",
-          name: "ETH Global",
-          description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
-          imgUrl: "/ethsingapore.png",
-        },
-        {
-          id: 3,
-          avatar: "/ethglobal.png",
-          name: "ETH India",
-          description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
-          imgUrl: "/ethsingapore.png",
-        },
-      ];
-      setHackathons(data);
-      setLoading(false);
+      if (!magic) return console.error('Magic not initialized');
+      try {
+        console.log('Fetching user metadata');
+
+        setLoading(true);
+        const m = await magic.user.getMetadata();
+        setAddress(m.publicAddress!);
+        setToken(localStorage.getItem('token')!);
+
+        setLoading(false);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
     };
     fetchData();
+  }, [magic, setAddress, setToken]);
+
+  useEffect(() => {
+    const fetchHackathons = async () => {
+      setLoading(true);
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_BACKEND_BASE_URL}get-event-noauth/`
+        );
+        console.log('Hackathons:', response.data);
+        setHackathons(response.data);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching hackathons:', error);
+        setLoading(false);
+      }
+    };
+
+    fetchHackathons();
   }, []);
 
   if (loading) {
@@ -65,11 +73,9 @@ const Home: React.FC = () => {
   }
 
   return (
-    <Box sx={{ textAlign: "center", padding: "1rem" }}>
-      {/* <Button onClick={handleCreateEvent}>Create Event</Button>
-      <Button onClick={getEvents}>Get Events</Button> */}
+    <Box sx={{ textAlign: 'center', padding: '1rem' }}>
       <Container maxWidth="lg">
-        <Typography variant="h3" sx={{ fontWeight: "900", my: 2 }}>
+        <Typography variant="h3" sx={{ fontWeight: '900', my: 2 }}>
           Revolutionizing Voting with 3-Cast
         </Typography>
         <Typography variant="h6" color="text.secondary" sx={{ mb: 4 }}>
@@ -87,10 +93,13 @@ const Home: React.FC = () => {
         startIcon={
           <img
             src="/logo-black.svg"
-            style={{ height: "20px", color: "black" }}
+            style={{ height: '20px', color: 'black' }}
           />
         }
-        onClick={() => console.log("Organise Voting")}
+        onClick={() => {
+          console.log('Organise Voting');
+          navigate('/login');
+        }}
       >
         Organise Voting
       </Button>
@@ -103,7 +112,7 @@ const Home: React.FC = () => {
       >
         <Typography
           variant="h4"
-          sx={{ mb: 3, color: "#fff" }}
+          sx={{ mb: 3, color: '#fff' }}
           textAlign="start"
           fontWeight="bold"
         >
@@ -111,20 +120,19 @@ const Home: React.FC = () => {
         </Typography>
         <Box
           sx={{
-            display: "flex",
-            justifyContent: "center",
-            gap: "2rem",
-            flexWrap: "wrap",
+            display: 'flex',
+            justifyContent: 'center',
+            gap: '2rem',
+            flexWrap: 'wrap',
           }}
         >
           {hackathons.map((hackathon) => (
             <EventCard
               key={hackathon.id}
-              avatar={hackathon.avatar}
-              title={hackathon.name}
-              subheader="EthGlobal"
-              image={hackathon.imgUrl}
+              id={hackathon.id}
+              name={hackathon.name}
               description={hackathon.description}
+              photo={hackathon.photo}
             />
           ))}
         </Box>

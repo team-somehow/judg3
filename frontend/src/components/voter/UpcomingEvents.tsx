@@ -1,56 +1,36 @@
 import React, { useEffect, useState } from 'react';
 import EventCard from '../shared/EventCard';
 import { Box } from '@mui/material';
+import axiosInstance from '../../config/axios';
 
 interface Hackathon {
   id: number;
-  avatar: string;
   name: string;
   description: string;
-  imgUrl: string;
+  photo: string;
+  status: string;
 }
+
 const UpcomingEvents: React.FC = () => {
   const [hackathons, setHackathons] = useState<Hackathon[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchData = async () => {
-      // Mock data simulating the JSON file
-      const data = [
-        {
-          id: 1,
-          avatar: '/ethglobal.png',
-          name: 'ETH Singapore',
-          description:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
-          imgUrl: '/ethsingapore.png',
-        },
-        {
-          id: 2,
-          avatar: '/ethglobal.png',
-          name: 'ETH Global',
-          description:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
-          imgUrl: '/ethsingapore.png',
-        },
-        {
-          id: 3,
-          avatar: '/ethglobal.png',
-          name: 'ETH India',
-          description:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
-          imgUrl: '/ethsingapore.png',
-        },
-        {
-          id: 4,
-          avatar: '/ethglobal.png',
-          name: 'ETH India',
-          description:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
-          imgUrl: '/ethsingapore.png',
-        },
-      ];
-      setHackathons(data);
+      try {
+        setLoading(true);
+        const response = await axiosInstance.get('/get-event/');
+        const temp = response.data.filter(
+          (hackathon: Hackathon) => hackathon.status === 'not_applied'
+        );
+        setHackathons(temp);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching hackathons:', error);
+        setLoading(false);
+      }
     };
+
     fetchData();
   }, []);
 
@@ -67,11 +47,10 @@ const UpcomingEvents: React.FC = () => {
       {hackathons.map((hackathon) => (
         <EventCard
           key={hackathon.id}
-          avatar={hackathon.avatar}
-          title={hackathon.name}
-          subheader="EthGlobal"
-          image={hackathon.imgUrl}
+          id={hackathon.id}
+          name={hackathon.name}
           description={hackathon.description}
+          photo={hackathon.photo}
         />
       ))}
     </Box>

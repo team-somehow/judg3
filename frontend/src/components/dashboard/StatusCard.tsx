@@ -11,24 +11,22 @@ import { OpenInNew } from '@mui/icons-material';
 import CustomStepper from '../shared/CustomStepper';
 
 interface StatusCardProps {
-  image: string;
-  logo: string;
-  eventName: string;
-  eventHost: string;
+  id: number;
+  name: string;
   description: string;
-  approvalStatus: string;
+  photo: string;
+  status: string;
   buttonText: string;
   onButtonClick: () => void;
   isAdmin?: boolean;
 }
 
 const StatusCard: React.FC<StatusCardProps> = ({
-  image,
-  logo,
-  eventName,
-  eventHost,
+  id,
+  name,
   description,
-  approvalStatus,
+  photo,
+  status,
   buttonText,
   onButtonClick,
   isAdmin = false,
@@ -39,6 +37,7 @@ const StatusCard: React.FC<StatusCardProps> = ({
         p: 1.5,
         borderRadius: '10px',
         cursor: 'pointer',
+        width: '100%',
         transition: '0.3s all ease-in-out',
         '&:hover': {
           bgcolor: 'rgba(255, 255, 255, 0.30)',
@@ -58,8 +57,8 @@ const StatusCard: React.FC<StatusCardProps> = ({
       >
         <Box sx={{ width: '40%', height: '100%' }}>
           <img
-            src={image}
-            alt={eventName}
+            src={photo}
+            alt={'image'}
             style={{
               width: '100%',
               borderRadius: '5px',
@@ -76,26 +75,30 @@ const StatusCard: React.FC<StatusCardProps> = ({
                 py: 0.5,
               }}
               avatar={
-                <Avatar aria-label="logo">
-                  <img
-                    src={logo}
-                    alt="E"
-                    style={{ width: '40px', height: '40px' }}
-                  />
+                <Avatar
+                  aria-label="logo"
+                  sx={{
+                    bgcolor: 'primary.main',
+                    width: 40,
+                    height: 40,
+                  }}
+                >
+                  {name[0]}
                 </Avatar>
               }
-              title={eventName}
-              subheader={eventHost}
+              title={name}
             />
           </Box>
-          <Typography variant="subtitle2" mb={2} color="text.secondary">
+          <Typography variant="subtitle2" mb={2} color="text.secondary" sx={{
+            whiteSpace: 'pre-wrap',
+          }}>
             {description}
           </Typography>
           <Box sx={{ mb: 2 }}>
             <Typography variant="subtitle1" fontWeight="bold">
               Approval Status
             </Typography>
-            <CustomStepper status={approvalStatus} isAdmin={isAdmin} />
+            <CustomStepper status={status} isAdmin={isAdmin} />
           </Box>
 
           <Button
@@ -103,7 +106,7 @@ const StatusCard: React.FC<StatusCardProps> = ({
             fullWidth
             onClick={onButtonClick}
             startIcon={<OpenInNew />}
-            disabled={!isAdmin && approvalStatus !== 'Voting Open'}
+            // disabled={!isAdmin && status !== 'Voting Open'}
           >
             {buttonText}
           </Button>
