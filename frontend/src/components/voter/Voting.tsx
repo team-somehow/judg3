@@ -47,7 +47,7 @@ const VotingSystem: React.FC = () => {
 
   const handleCloseModal = () => {
     setMarkComplete(false);
-    navigate(`/leaderboard/${id}`);
+    navigate(`/voter-dashboard/leaderboard/${id}`);
   };
 
   const fetchProjects = async () => {

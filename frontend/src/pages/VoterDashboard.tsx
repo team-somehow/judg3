@@ -1,28 +1,40 @@
-import React, { useEffect, useState } from 'react';
-import { Box, Typography, Container, Tabs, Tab } from '@mui/material';
-import GradientCard from '../components/ui/GradientCard';
-import Bg from '../components/ui/Bg';
-import UpcomingEvents from '../components/voter/UpcomingEvents';
-import AppliedEvents from '../components/voter/AppliedEvents';
+import React, { useEffect, useState } from "react";
+import { Box, Typography, Container, Tabs, Tab } from "@mui/material";
+import GradientCard from "../components/ui/GradientCard";
+import Bg from "../components/ui/Bg";
+import UpcomingEvents from "../components/voter/UpcomingEvents";
+import AppliedEvents from "../components/voter/AppliedEvents";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function VoterDashboard() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const tab = urlParams.get('tab');
+  const location = useLocation(); // React Router hook to get current location
+  const navigate = useNavigate(); // React Router hook to navigate programmatically
 
-  const [tabValue, setTabValue] = useState(tab === 'applied' ? 1 : 0);
+  // Extract 'tab' parameter from the URL
+  const urlParams = new URLSearchParams(location.search);
+  const tab = urlParams.get("tab");
 
+  // Set the initial tab based on the query parameter
+  const [tabValue, setTabValue] = useState(tab === "applied" ? 1 : 0);
+
+  // Handle tab change
   const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
     setTabValue(newValue);
+
+    // Update URL query parameters
+    const newTab = newValue === 1 ? "applied" : "upcoming";
+    navigate(`?tab=${newTab}`, { replace: true });
   };
 
+  // Update the URL whenever the tabValue changes
   useEffect(() => {
     const url = new URL(window.location.href);
-    url.searchParams.set('tab', tabValue === 1 ? 'applied' : 'upcoming');
-    window.history.pushState({}, '', url.toString());
+    url.searchParams.set("tab", tabValue === 1 ? "applied" : "upcoming");
+    window.history.pushState({}, "", url.toString());
   }, [tabValue]);
 
   return (
-    <Box sx={{ p: '2rem' }}>
+    <Box sx={{ p: "2rem" }}>
       <Container maxWidth="lg">
         <Typography variant="h4" fontWeight="600" gutterBottom>
           Voter Events
@@ -38,23 +50,23 @@ function VoterDashboard() {
           <Tab
             label="Upcoming"
             sx={{
-              textTransform: 'none',
-              fontSize: '1.2rem',
-              color: tabValue === 0 ? 'color.primary' : 'text.secondary',
+              textTransform: "none",
+              fontSize: "1.2rem",
+              color: tabValue === 0 ? "color.primary" : "text.secondary",
             }}
           />
           <Tab
             label="Applied"
             sx={{
-              textTransform: 'none',
-              fontSize: '1.2rem',
-              color: tabValue === 1 ? 'color.primary' : 'text.secondary',
+              textTransform: "none",
+              fontSize: "1.2rem",
+              color: tabValue === 1 ? "color.primary" : "text.secondary",
             }}
           />
         </Tabs>
 
-        <GradientCard style={{ minHeight: '70vh' }}>
-          {tabValue === 0 && <UpcomingEvents />}
+        <GradientCard style={{ minHeight: "70vh" }}>
+          {tabValue === 0 && <UpcomingEvents setTabValue={setTabValue} />}
           {tabValue === 1 && <AppliedEvents />}
         </GradientCard>
       </Container>

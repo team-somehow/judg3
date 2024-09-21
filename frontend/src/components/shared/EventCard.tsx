@@ -19,6 +19,7 @@ interface EventCardProps {
   photo: string;
   blockchain_event_id?: string;
   hideButton?: boolean;
+  setTabValue?: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const EventCard: React.FC<EventCardProps> = ({
@@ -28,6 +29,7 @@ const EventCard: React.FC<EventCardProps> = ({
   photo,
   blockchain_event_id,
   hideButton = false,
+  setTabValue,
 }) => {
   const { token } = useAuth();
   const navigate = useNavigate();
@@ -56,7 +58,8 @@ const EventCard: React.FC<EventCardProps> = ({
         console.log("Application successful:", response.data);
 
         // Navigate to the voting dashboard if the application was successful
-        navigate(`/voter-dashboard?tab=applied`);
+        navigate(`/voter-dashboard/?tab=applied`);
+        setTabValue && setTabValue(1);
       } catch (error) {
         console.error("Error applying to event:", error);
         // Handle any errors, such as showing a message to the user
@@ -91,7 +94,7 @@ const EventCard: React.FC<EventCardProps> = ({
         }
         title={name}
       />
-      <CardMedia component="img" height="180" image={photo} alt="Image" />
+      <CardMedia component="img" height="180" image={photo} alt={"Image"} />
       <CardContent sx={{ p: 1 }}>
         <Typography
           variant="subtitle2"
