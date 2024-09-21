@@ -12,7 +12,7 @@ This project is a decentralized system that allows users to vote on various proj
 - [User Journey Flow](#user-journey-flow)
 - [System Architecture](#system-architecture)
 - [Getting Started](#getting-started)
-
+- [About The Team](#about-the-team)
 ## Algorithmic System
 
 ### How the System Computes the Score
@@ -94,4 +94,13 @@ python manage.py makemigrations
 python manage.py migrate
 python manage.py runserver
 ```
+## About The Team
+Our team is composed of highly passionate developers, data scientists, and blockchain enthusiasts committed to building innovative solutions for decentralized voting systems. We bring expertise from various domains including machine learning, full-stack development, cryptography, and blockchain technologies. 
+
+## Team Members:- 
+  - **Hussain Pettiwala** - **Backend Development**
+  - **Gaurish Baliga** - **Backend Development**
+  - **PargatSingh Abadaba Dhanjal** - **Full Stack Development**
+  - **Rahul Dandona** - **Backend and Smart Contracts Devlopment**
+
 
