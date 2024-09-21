@@ -6,7 +6,8 @@
 				"testing": "0000000000000007"
 			}
 		},
-		"VotingSystem": "cadence/contracts/VotingSystem.cdc"
+		"VotingSystem": "cadence/contracts/VotingSystem.cdc",
+		"VotingSystem2": "./cadence/contracts/VotingSystem.cdc"
 	},
 	"networks": {
 		"emulator": "127.0.0.1:3569",
@@ -40,7 +41,8 @@
 		},
 		"testnet": {
 			"default": [
-				"VotingSystem"
+				"VotingSystem",
+				"VotingSystem2"
 			]
 		}
 	}

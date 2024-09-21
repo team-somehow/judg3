@@ -1,6 +1,6 @@
-// VotingSystem.cdc
+// VotingSystem2.cdc
 
-access(all) contract VotingSystem {
+access(all) contract VotingSystem2 {
 access(all) event VoteCast(
     eventId: UInt64,
     voter: Address,
@@ -32,46 +32,18 @@ access(all) struct VoterStatus {
         }
     }
 
-    access(all) struct Project {
-        access(all) let id: UInt64
-        access(all) let name: String
-        access(all) let description: String
-        access(all) let url: String
-        access(all) let photoUrl: String
-
-        init(id: UInt64, name: String, description: String, url: String, photoUrl: String) {
-            self.id = id
-            self.name = name
-            self.description = description
-            self.url = url
-            self.photoUrl = photoUrl
-        }
-    }
-
     access(all) struct EventData {
         access(all) let id: UInt64
-        access(all) let name: String
-        access(all) let description: String
-        access(all) let photoUrl: String
         access(all) let organizer: Address
-        access(all) var isActive: Bool
         access(all) var projectIds: [UInt64]
 
         init(
             id: UInt64,
-            name: String,
-            description: String,
-            photoUrl: String,
             organizer: Address,
-            isActive: Bool,
             projectIds: [UInt64]
         ) {
             self.id = id
-            self.name = name
-            self.description = description
-            self.photoUrl = photoUrl
             self.organizer = organizer
-            self.isActive = isActive
             self.projectIds = projectIds
         }
     }
@@ -121,37 +93,26 @@ access(all) struct Voter {
     }
 
     access(all) var events: {UInt64: EventData}
-    access(all) var projects: {UInt64: Project}
     access(all) var eventVoters: {UInt64: {Address: Voter}}
     access(all) var matchupResults: {UInt64: {String: MatchupResult}}
     access(all) var nextEventId: UInt64
-    access(all) var nextProjectId: UInt64
 
 
 init() {
         self.events = {}
-        self.projects = {}
         self.eventVoters = {}
         self.matchupResults = {}
         self.nextEventId = 1
-        self.nextProjectId = 1
     }
 
     // Function to create an event
     access(all) fun createEvent(
-        name: String,
-        description: String,
-        photoUrl: String,
         organizer: Address
     ) {
         let eventId = self.nextEventId
         let newEvent = EventData(
             id: eventId,
-            name: name,
-            description: description,
-            photoUrl: photoUrl,
             organizer: organizer,
-            isActive: true,
             projectIds: []
         )
         self.events[eventId] = newEvent
@@ -160,39 +121,23 @@ init() {
         // EventCreated event can be emitted here if needed
     }
     access(all) fun addProjectToEvent(
-    eventId: UInt64,
-    name: String,
-    description: String,
-    url: String,
-    photoUrl: String,
-    organizer: Address
-) {
-    let currentEvent = self.events[eventId] ?? panic("Event does not exist")
+        eventId: UInt64,
+        projectId: UInt64,
+        organizer: Address
+    ) {
+        let currentEvent: VotingSystem2.EventData = self.events[eventId] ?? panic("Event does not exist")
+        assert(currentEvent.organizer == organizer, message: "Only the event organizer can add projects")
 
-
-    let projectId = self.nextProjectId
-    let newProject = Project(
-        id: projectId,
-        name: name,
-        description: description,
-        url: url,
-        photoUrl: photoUrl
-    )
-    self.projects[projectId] = newProject
-    self.nextProjectId = self.nextProjectId + 1
-
-    self.events[eventId]!.projectIds.append(projectId)
-
-    // Emit the ProjectAdded event
-}
+        self.events[eventId]!.projectIds.append(projectId)
+    }
 
 access(all) fun approveVoter(
     eventId: UInt64,
     voter: Address,
 ){
-let currentEvent = self.events[eventId] ?? panic("Event does not exist")
+let currentEvent: VotingSystem2.EventData = self.events[eventId] ?? panic("Event does not exist")
 if let voterDict = self.eventVoters[eventId] {
-    if let voter = voterDict[voter] {
+    if let voter: VotingSystem2.Voter = voterDict[voter] {
         voter.setIsApproved(value: true)
     } else {
         panic("Voter not found")
