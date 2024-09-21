@@ -31,7 +31,7 @@ This project contains smart contracts designed to manage voting on projects usin
 - **Secure Vote Casting**: Voting is securely processed and recorded while maintaining user anonymity.
 - **On-chain Voting Integrity**: Despite privacy, the voting process remains transparent and verifiable.
 
-### 4. **Linea Verax **
+### 4. Linea Verax 
 - **Contract Address**: `0x35b037E8b52C0522aa0A0Ab87B724A52077C7300`
 - **Description**: This contract is deployed on the Linea Testnet and integrates the Verax SDK to provide attestations for each vote. The voting system uses the Linea network for transparency and integrity but excludes MetaMask integration, focusing solely on attestations and verifiable data.
 
