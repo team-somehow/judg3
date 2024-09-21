@@ -55,7 +55,7 @@ const AuthProvider = ({ children }: Props) => {
           setLoading(true);
           const m = await magic.user.getMetadata();
           setAddress(m.publicAddress!);
-          // setToken(localStorage.getItem("jwtToken")!);
+          setToken(localStorage.getItem("hussainToken")!);
 
           setAppChain("flow");
           setLoading(false);

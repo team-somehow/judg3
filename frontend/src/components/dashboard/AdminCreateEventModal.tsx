@@ -32,7 +32,7 @@ const AdminCreateEventModal: React.FC<AdminCreateEventModalProps> = ({
     imageURL: null as string | null,
     uploading: false,
   });
-  const { handleCreateEvent, getEvents } = useFlowInteraction();
+  const { handleCreateEvent, getNextEventId } = useFlowInteraction();
 
   // Handle input changes for text fields
   const handleInputChange = useCallback(
@@ -81,7 +81,6 @@ const AdminCreateEventModal: React.FC<AdminCreateEventModalProps> = ({
       }));
     }
   };
-  getEvents();
 
   // Handle form submission
   const handleFormSubmit = async () => {
@@ -92,10 +91,13 @@ const AdminCreateEventModal: React.FC<AdminCreateEventModalProps> = ({
     console.log("trg", formData);
 
     try {
+      const id = await getNextEventId();
       const response = await axiosInstance.post("/event/", {
         name: formData.eventName,
         description: formData.description,
         photo: formData.imageURL,
+        blockchain_event_id: id,
+        blockchain_transaction_hash: id,
       });
 
       if (response.status === 201) {
@@ -103,7 +105,7 @@ const AdminCreateEventModal: React.FC<AdminCreateEventModalProps> = ({
           currentAuthSupply === "magic" && (await handleCreateEvent());
         }
         {
-          currentAuthSupply === "morph" && (await handleCreateEventMorph());
+          currentAuthSupply === "dynamic" && (await handleCreateEventMorph());
         }
         enqueueSnackbar("Event created successfully.", { variant: "success" });
 

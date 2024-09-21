@@ -148,6 +148,8 @@ export const useFlowInteraction = () => {
     ]);
 
     await fcl.tx(txId).onceSealed();
+
+    console.log("Voter applied transaction: " + txId);
   };
 
   const approveVoter = async ({
@@ -187,6 +189,8 @@ export const useFlowInteraction = () => {
     ]);
 
     await fcl.tx(txId).onceSealed();
+
+    console.log("Voter " + voterAddress + " approved transaction: " + txId);
   };
 
   const castVote = async ({
@@ -238,6 +242,30 @@ export const useFlowInteraction = () => {
     ]);
 
     await fcl.tx(txId).onceSealed();
+
+    console.log("Vote casted transaction: " + txId);
+  };
+
+  const getNextEventId = async () => {
+    try {
+      const res = await fcl.query({
+        cadence: `
+        
+          import VotingSystem2 from 0xee884352e5d52524
+
+          access(all) fun main(): UInt64 {
+            return VotingSystem2.nextEventId
+          }
+        `,
+        args: [],
+        limit: 9999,
+      });
+      console.log("response", res);
+
+      return res;
+    } catch (error) {
+      console.error("Error fetching current block:", error);
+    }
   };
 
   return {
@@ -246,6 +274,7 @@ export const useFlowInteraction = () => {
     createProject,
     applyVoter,
     approveVoter,
+    getNextEventId,
     castVote,
   };
 };

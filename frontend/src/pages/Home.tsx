@@ -127,7 +127,7 @@ const Home: React.FC = () => {
       >
         Start Voting
       </Button>
-      <GradientCard
+      {/* <GradientCard
         style={{
           mt: 3,
           mx: 5,
@@ -160,7 +160,7 @@ const Home: React.FC = () => {
             />
           ))}
         </Box>
-      </GradientCard>
+      </GradientCard> */}
       <Bg />
     </Box>
   );
