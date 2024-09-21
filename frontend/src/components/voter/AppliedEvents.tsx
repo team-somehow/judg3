@@ -60,7 +60,6 @@ const AppliedEvents: React.FC = () => {
             name={hackathon.name}
             description={hackathon.description}
             photo={hackathon.photo}
-            status={hackathon.status}
             buttonText="Start Voting"
             onButtonClick={() => handleButtonClick(hackathon.id)} // Pass the hackathon id to the function
           />
