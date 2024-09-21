@@ -5,7 +5,6 @@ import {
   TextField,
   Typography,
   CircularProgress,
-<<<<<<< Updated upstream
   Backdrop,
 } from '@mui/material';
 import CustomModal from '../shared/CustomModal';
@@ -13,18 +12,8 @@ import { uploadFileToFirebase } from '../../utils/uploadFile';
 import axiosInstance from '../../config/axios';
 import { enqueueSnackbar } from 'notistack';
 import { useFlowInteraction } from '../../hooks/useFlowInteraction';
-import useMorphInteractions from '../../hooks/morph/useMorphInteractions';
+import useMorphInteractions from '../../hooks/morph/useInteractions';
 import { useAuth } from '../../context/AuthContext';
-=======
-} from "@mui/material";
-import CustomModal from "../shared/CustomModal";
-import { uploadFileToFirebase } from "../../utils/uploadFile";
-import axiosInstance from "../../config/axios";
-import { enqueueSnackbar } from "notistack";
-import { useFlowInteraction } from "../../hooks/useFlowInteraction";
-import useMorphInteractions from "../../hooks/morph/useInteractions";
-import { useAuth } from "../../context/AuthContext";
->>>>>>> Stashed changes
 
 interface AdminCreateEventModalProps {
   open: boolean;

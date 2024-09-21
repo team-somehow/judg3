@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import EventCard from "../shared/EventCard";
-import { Box, Skeleton, Typography } from "@mui/material";
-import axiosInstance from "../../config/axios";
+import React, { useEffect, useState } from 'react';
+import EventCard from '../shared/EventCard';
+import { Box, Skeleton, Typography } from '@mui/material';
+import axiosInstance from '../../config/axios';
 
 interface Hackathon {
   id: number;
@@ -19,14 +19,14 @@ const UpcomingEvents: React.FC = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const response = await axiosInstance.get("/get-event/");
+        const response = await axiosInstance.get('/get-event/');
         const temp = response.data.filter(
-          (hackathon: Hackathon) => hackathon.status === "not_applied"
+          (hackathon: Hackathon) => hackathon.status === 'not_applied'
         );
         setHackathons(temp);
         setLoading(false);
       } catch (error) {
-        console.error("Error fetching hackathons:", error);
+        console.error('Error fetching hackathons:', error);
       } finally {
         setLoading(false);
       }
@@ -38,12 +38,12 @@ const UpcomingEvents: React.FC = () => {
   return (
     <Box
       sx={{
-        display: "flex",
-        gap: "1rem",
-        flexWrap: "wrap",
-        justifyContent: "center",
-        height: "100%",
-        minHeight: "60vh",
+        display: 'flex',
+        gap: '1rem',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        height: '100%',
+        minHeight: '60vh',
       }}
     >
       {loading ? (
