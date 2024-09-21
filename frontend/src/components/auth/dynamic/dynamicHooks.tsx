@@ -34,7 +34,7 @@ export const useDynamicWallet = () => {
       // setSignerAddress(address);
       console.log("zerodev aa account:", response);
       setAddress(response!);
-      setToken("DYNAMIC");
+      // setToken("DYNAMIC");
       saveToken(response!, "DYNAMIC");
       localStorage.setItem("address", response!);
     };

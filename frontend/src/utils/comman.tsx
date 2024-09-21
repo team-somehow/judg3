@@ -9,6 +9,7 @@ export const logout = async (magic: Magic | null) => {
   localStorage.removeItem("isAuthLoading");
   localStorage.removeItem("loginMethod");
   localStorage.removeItem("jwtToken");
+  localStorage.removeItem("hussainToken");
 };
 
 export const saveToken = (token: string, loginMethod: LoginMethod) => {
