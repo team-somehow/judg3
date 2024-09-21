@@ -1,37 +1,16 @@
-import React, { useEffect } from "react";
-import { useAuth } from "../../context/AuthContext";
+import React from "react";
 import { Box } from "@mui/material";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
   children: React.ReactNode;
 };
 
 const AuthWrapper = ({ children }: Props) => {
-  // const { setAddress, setToken } = useAuth();
   const navigate = useNavigate();
-  // const { pathname } = useLocation();
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     // console.log(
-  //     //   "address, token",
-  //     //   localStorage.getItem("address"),
-  //     //   localStorage.getItem("token")
-  //     // );
-
-  //     if (
-  //       !localStorage.getItem("address") ||
-  //       (!localStorage.getItem("token") && pathname !== "/")
-  //     )
-  //       return navigate("/login");
-  //     setAddress(localStorage.getItem("address")!);
-  //     setToken(localStorage.getItem("token")!);
-  //   };
-  //   fetchData();
-  // }, [navigate, pathname, setAddress, setToken]);
   React.useEffect(() => {
-    if (!localStorage.getItem("token")) {
+    if (!localStorage.getItem("hussainToken")) {
       return navigate("/login");
     }
   });

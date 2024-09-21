@@ -16,7 +16,7 @@ const useMagicLogin = () => {
       console.log("Magic Connect Token", token);
 
       saveToken(token!, "EMAIL");
-      setToken && setToken(token!);
+      // setToken && setToken(token!);
       return magic;
     } catch (error) {
       console.log("error", error);
