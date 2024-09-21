@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import StatusCard from "./StatusCard";
-import { Box, CircularProgress } from "@mui/material";
-import axiosInstance from "../../config/axios";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import StatusCard from './StatusCard';
+import { Box, Typography } from '@mui/material';
+import axiosInstance from '../../config/axios';
+import { useNavigate } from 'react-router-dom';
 
 export interface EventStatus {
   id: number;
@@ -19,13 +19,13 @@ const LiveEvents: React.FC = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await axiosInstance.get("/get-event-admin");
+        const response = await axiosInstance.get('/get-event-admin');
         const temp = response.data.filter(
-          (event: EventStatus) => event.status !== "complete"
+          (event: EventStatus) => event.status !== 'complete'
         );
         setEvents(temp);
       } catch (error) {
-        console.error("Error fetching events:", error);
+        console.error('Error fetching events:', error);
       }
     };
 
@@ -33,22 +33,22 @@ const LiveEvents: React.FC = () => {
   }, []);
 
   const handleButtonClick = (id: number) => {
-    console.log("Go to Event clicked");
+    console.log('Go to Event clicked');
     navigate(`/dashboard/event/${id}`);
   };
 
   return (
     <Box
       sx={{
-        display: "flex",
-        gap: "1rem",
-        flexWrap: "wrap",
-        justifyContent: "center",
-        alignItems: "center",
+        display: 'flex',
+        gap: '1rem',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        alignItems: 'center',
       }}
     >
       {events.length === 0 ? (
-        <CircularProgress />
+        <Typography variant="h6">No live events</Typography>
       ) : (
         events.map((event, index) => (
           <StatusCard
