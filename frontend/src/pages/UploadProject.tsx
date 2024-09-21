@@ -49,7 +49,10 @@ function UploadProject() {
               height: "100%",
             }}
           >
-            <Upload eventId={id} />
+            <Upload
+              eventId={id}
+              blockchainEventId={event?.blockchain_event_id}
+            />
           </Box>
         }
         right={

@@ -138,10 +138,14 @@ init() {
         let currentEvent: VotingSystem2.EventData = self.events[eventId] ?? panic("Event does not exist")
         if let voterDict: {Address: VotingSystem2.Voter} = self.eventVoters[eventId] {
             voterDict[voter] = VotingSystem2.Voter(isApproved: false, hasVoted: false)
+
+            self.eventVoters[eventId] = voterDict
         } else {
             panic("Event not found")
         }
     }
+
+    
 
 access(all) fun approveVoter(
     eventId: UInt64,

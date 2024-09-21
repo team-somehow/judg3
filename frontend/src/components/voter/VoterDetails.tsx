@@ -106,6 +106,8 @@ const VoterDetails: React.FC<Props> = ({ eventId, blockChainId }) => {
     }
   };
 
+  console.log(voters);
+
   return (
     <Box>
       <Box

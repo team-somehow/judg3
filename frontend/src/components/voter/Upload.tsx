@@ -9,6 +9,7 @@ import { useAuth } from "../../context/AuthContext";
 
 type Props = {
   eventId: string;
+  blockchainEventId: string;
 };
 
 // interface Voter {
@@ -16,10 +17,10 @@ type Props = {
 //   status: string;
 // }
 
-const Upload: React.FC<Props> = ({ eventId }) => {
+const Upload: React.FC<Props> = ({ eventId, blockchainEventId }) => {
   // const [voters, setVoters] = useState<Voter[]>();
   const [jsonField, setJsonField] = useState(""); // State to track TextField value
-  const { createProject } = useFlowInteraction();
+  const { createProject, getEvents } = useFlowInteraction();
   const { currentAuthSupply } = useAuth();
   const { handleAddProject } = useMorphInteractions();
   // useEffect(() => {
@@ -54,12 +55,12 @@ const Upload: React.FC<Props> = ({ eventId }) => {
       for (const project of parsedJson) {
         try {
           const response = await axiosInstance.post("/project", project); // Post each project
-
+          // TODO: Fix later
           console.log("system", eventId, response.data["project_id"]);
           {
             currentAuthSupply === "magic" &&
               (await createProject({
-                eventId: eventId,
+                eventId: blockchainEventId,
                 projectId: response.data["project_id"].toString(),
               }));
           }

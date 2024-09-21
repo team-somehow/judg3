@@ -155,7 +155,7 @@ export const useFlowInteraction = () => {
 
     await fcl.tx(txId).onceSealed();
 
-    console.log("Voter applied transaction: " + txId);
+    console.log("Voter applied transaction: ", txId);
   };
 
   const approveVoter = async ({
