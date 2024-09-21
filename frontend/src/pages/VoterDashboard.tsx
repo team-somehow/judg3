@@ -6,7 +6,10 @@ import UpcomingEvents from '../components/voter/UpcomingEvents';
 import AppliedEvents from '../components/voter/AppliedEvents';
 
 function VoterDashboard() {
-  const [tabValue, setTabValue] = useState(0);
+  const urlParams = new URLSearchParams(window.location.search);
+  const tab = urlParams.get('tab');
+
+  const [tabValue, setTabValue] = useState(tab === 'applied' ? 1 : 0);
 
   const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
     setTabValue(newValue);

@@ -32,12 +32,7 @@ SECRET_KEY = 'django-insecure-tdqr4%er*0l8s%uz%691ziy=mk!(h!cmz%4)4*wws4%!ipa6(y
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    "*"
-]
-
-CSRF_TRUSTED_ORIGINS = ['https://eth-singapore.centralindia.cloudapp.azure.com',
-                        'http://eth-singapore.centralindia.cloudapp.azure.com', 'http://127.0.0.1:8000']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition

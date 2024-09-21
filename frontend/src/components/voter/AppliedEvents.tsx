@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Box, CircularProgress } from '@mui/material';
+import { Box, CircularProgress, Skeleton, Typography } from '@mui/material';
 import StatusCard from '../dashboard/StatusCard';
 import axiosInstance from '../../config/axios';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
@@ -47,11 +47,20 @@ const AppliedEvents: React.FC = () => {
         gap: '1rem',
         flexWrap: 'wrap',
         justifyContent: 'center',
-        alignItems: 'center',
+        // alignItems: 'center',
+        height: '100%',
+        minHeight: '60vh',
       }}
     >
       {loading ? (
-        <CircularProgress />
+        <>
+          <Skeleton variant="rounded" width="100%" height={250} />
+          <Skeleton variant="rounded" width="100%" height={250} />
+        </>
+      ) : hackathons.length === 0 ? (
+        <Typography variant="h6" mt={10}>
+          No live events
+        </Typography>
       ) : (
         hackathons.map((hackathon) => (
           <StatusCard
@@ -61,7 +70,7 @@ const AppliedEvents: React.FC = () => {
             description={hackathon.description}
             photo={hackathon.photo}
             buttonText="Start Voting"
-            onButtonClick={() => handleButtonClick(hackathon.id)} // Pass the hackathon id to the function
+            onButtonClick={() => handleButtonClick(hackathon.id)}
           />
         ))
       )}

@@ -8,10 +8,12 @@ import LiveEvents from '../components/dashboard/LiveEvents';
 import PastEvents from '../components/dashboard/PastEvents';
 
 const Dashboard: React.FC = () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const tab = urlParams.get('tab');
   const [open, setOpen] = useState<boolean>(false);
   const handleOpen = useCallback(() => setOpen(true), []);
   const handleClose = useCallback(() => setOpen(false), []);
-  const [tabValue, setTabValue] = useState(0);
+  const [tabValue, setTabValue] = useState(tab === 'past' ? 1 : 0);
 
   const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
     setTabValue(newValue);

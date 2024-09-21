@@ -1,1 +1,2 @@
-export const WORLDCOIN_VERIFICATION_ROUTE = "http://127.0.0.1:8000/auth/login/";
+export const WORLDCOIN_VERIFICATION_ROUTE =
+  import.meta.env.VITE_BACKEND_BASE_URL + 'auth/login/';

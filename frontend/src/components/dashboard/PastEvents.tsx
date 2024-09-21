@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import StatusCard from './StatusCard';
-import { Box, Typography } from '@mui/material';
+import { Box, Skeleton, Typography } from '@mui/material';
 import axiosInstance from '../../config/axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -14,12 +14,13 @@ export interface EventStatus {
 
 const PastEvents: React.FC = () => {
   const [events, setEvents] = useState<EventStatus[]>([]);
-
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchEvents = async () => {
       try {
+        setLoading(true);
         const response = await axiosInstance.get('/get-event-admin');
         const temp = response.data.filter(
           (event: EventStatus) => event.status === 'complete'
@@ -27,6 +28,8 @@ const PastEvents: React.FC = () => {
         setEvents(temp);
       } catch (error) {
         console.error('Error fetching events:', error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -48,8 +51,15 @@ const PastEvents: React.FC = () => {
         alignItems: 'center',
       }}
     >
-      {events.length === 0 ? (
-        <Typography variant="h6">No past events</Typography>
+      {loading ? (
+        <>
+          <Skeleton variant="rounded" width="100%" height={250} />
+          <Skeleton variant="rounded" width="100%" height={250} />
+        </>
+      ) : events.length === 0 ? (
+        <Typography variant="h6" mt={10}>
+          No past events
+        </Typography>
       ) : (
         events.map((event, index) => (
           <StatusCard
@@ -58,7 +68,6 @@ const PastEvents: React.FC = () => {
             name={event.name}
             description={event.description}
             photo={event.photo}
-            status={event.status}
             buttonText="Go to Event"
             onButtonClick={() => handleButtonClick(event.id)}
             isAdmin
