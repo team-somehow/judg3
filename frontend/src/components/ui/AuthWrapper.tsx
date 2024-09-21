@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useAuth } from "../../context/AuthContext";
-import { useMagic } from "../auth/magic/MagicContext";
 import { Box } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -10,20 +9,16 @@ type Props = {
 
 const AuthWrapper = ({ children }: Props) => {
   const { setAddress, setToken } = useAuth();
-  const { magic } = useMagic();
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  console.log(pathname);
 
   useEffect(() => {
     const fetchData = async () => {
-      console.log(
-        "address, token",
-        localStorage.getItem("address"),
-        localStorage.getItem("token")
-      );
-
-      if (!magic) return console.error("Magic not initialized");
+      // console.log(
+      //   "address, token",
+      //   localStorage.getItem("address"),
+      //   localStorage.getItem("token")
+      // );
 
       if (
         !localStorage.getItem("address") ||
@@ -34,7 +29,7 @@ const AuthWrapper = ({ children }: Props) => {
       setToken(localStorage.getItem("token")!);
     };
     fetchData();
-  }, [magic, navigate, pathname, setAddress, setToken]);
+  }, [navigate, pathname, setAddress, setToken]);
 
   return <Box>{children}</Box>;
 };

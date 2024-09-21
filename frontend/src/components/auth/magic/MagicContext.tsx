@@ -52,7 +52,6 @@ const MagicProvider = ({ children }: { children: ReactNode }) => {
       fcl.config().put("discovery.wallet.method", "IFRAME/RPC");
     }
   }, []);
-  console.log(magic);
 
   return (
     <MagicContext.Provider
