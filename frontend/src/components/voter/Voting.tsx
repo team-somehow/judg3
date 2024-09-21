@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import ProjectCard from '../project/ProjectCard';
-import { Grid, LinearProgress, Box, Typography } from '@mui/material';
-import { useParams } from 'react-router-dom';
-import axiosInstance from '../../config/axios';
+import React, { useEffect, useState } from "react";
+import ProjectCard from "../project/ProjectCard";
+import { Grid, LinearProgress, Box } from "@mui/material";
+import { useParams } from "react-router-dom";
+import axiosInstance from "../../config/axios";
 
 interface Project {
   photo: string;
@@ -24,28 +24,48 @@ const VotingSystem: React.FC = () => {
   const [leftProject, setLeftProject] = useState<Project>();
   const [rightProject, setRightProject] = useState<Project>();
 
+  const fetchProjects = async () => {
+    try {
+      const response = await axiosInstance.get(`/suggest/${id}`);
+      setData(response.data);
+
+      const { left_proj_id, right_proj_id } = response.data;
+
+      const [leftResponse, rightResponse] = await Promise.all([
+        axiosInstance.get(`/project/${left_proj_id}`),
+        axiosInstance.get(`/project/${right_proj_id}`),
+      ]);
+
+      setLeftProject(leftResponse.data);
+      setRightProject(rightResponse.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axiosInstance.get(`/suggest/${id}`);
-        setData(response.data);
+    fetchProjects();
+  }, [id]);
 
-        const { left_proj_id, right_proj_id } = response.data;
+  const handleVote = async (winnerId: number) => {
+    if (!data) return;
 
-        const [leftResponse, rightResponse] = await Promise.all([
-          axiosInstance.get(`/project/${left_proj_id}`),
-          axiosInstance.get(`/project/${right_proj_id}`),
-        ]);
-
-        setLeftProject(leftResponse.data);
-        setRightProject(rightResponse.data);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
+    const votePayload = {
+      event: id,
+      project1: String(data.left_proj_id),
+      project2: String(data.right_proj_id),
+      winner: String(winnerId),
     };
 
-    fetchData();
-  }, [id]);
+    try {
+      const response = await axiosInstance.post("/vote", votePayload);
+      console.log("Vote successful:", response.data);
+      // Fetch the next set of projects to vote on
+      fetchProjects();
+    } catch (error) {
+      console.error("Error submitting vote:", error);
+    }
+  };
 
   if (!data || !leftProject || !rightProject) {
     return <div>Loading...</div>;
@@ -53,7 +73,7 @@ const VotingSystem: React.FC = () => {
 
   return (
     <div>
-      <Box sx={{ width: '100%' }}>
+      <Box sx={{ width: "100%" }}>
         <LinearProgress
           variant="determinate"
           value={(data.curr_vote_count / data.total_available_vote_count) * 100}
@@ -64,8 +84,8 @@ const VotingSystem: React.FC = () => {
         container
         spacing={2}
         sx={{
-          height: 'calc(100vh - 150px)', // Adjusted for progress bar height
-          width: '100vw',
+          height: "calc(100vh - 150px)", // Adjusted for progress bar height
+          width: "100vw",
           padding: 2,
         }}
       >
@@ -76,10 +96,7 @@ const VotingSystem: React.FC = () => {
             description={leftProject.description}
             photo={leftProject.photo}
             url={leftProject.url}
-            onVote={(id) => console.log('Voted for left project', id)}
-            // onViewSource={() =>
-            //   console.log('Viewed source for left project', data.left_proj_id)
-            // }
+            onVote={() => handleVote(data.left_proj_id)} // Pass left project ID as winner
           />
         </Grid>
         <Grid item xs={12} md={6}>
@@ -89,10 +106,7 @@ const VotingSystem: React.FC = () => {
             description={rightProject.description}
             photo={rightProject.photo}
             url={rightProject.url}
-            onVote={(id) => console.log('Voted for left project', id)}
-            // onViewSource={() =>
-            //   console.log('Viewed source for left project', data.right_proj_id)
-            // }
+            onVote={() => handleVote(data.right_proj_id)} // Pass right project ID as winner
           />
         </Grid>
       </Grid>

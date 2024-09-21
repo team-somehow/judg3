@@ -19,7 +19,7 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: (
-      <Box sx={{ minHeight: '100svh' }}>
+      <Box sx={{ minHeight: "100svh" }}>
         {/* <AuthWrapper> */}
         <Navbar />
         <Outlet />
@@ -72,7 +72,7 @@ const router = createBrowserRouter([
             element: <VoterDashboard />,
           },
           {
-            path: 'voting/:id',
+            path: "voting/:id",
             element: <VotingSystem />,
           },
           {
