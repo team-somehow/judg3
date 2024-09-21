@@ -1,5 +1,7 @@
 import "@nomicfoundation/hardhat-toolbox";
+
 import { HardhatUserConfig } from "hardhat/config";
+
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -13,8 +15,15 @@ dotenv.config();
 const config: HardhatUserConfig = {
   solidity: "0.8.24",
   networks: {
+    polygon_amoy: {
+      url: process.env.MUMBAI_RPC_URL,
+      accounts: [process.env.PRIVATE_KEY || ""],
+      chainId: 80002,
+    },
     hederaTestnet: {
-      url: process.env.HEDERA_TESTNET_ENDPOINT || "https://default-hedera-testnet-url.com",
+      url:
+        process.env.HEDERA_TESTNET_ENDPOINT ||
+        "https://default-hedera-testnet-url.com",
       accounts: process.env.TESTNET_OPERATOR_PRIVATE_KEY
         ? [process.env.TESTNET_OPERATOR_PRIVATE_KEY]
         : [],
@@ -22,9 +31,7 @@ const config: HardhatUserConfig = {
     morphTestnet: {
       url: process.env.MORPH_TESTNET_URL || "",
       accounts:
-        process.env.PRIVATE_KEY !== undefined
-          ? [process.env.PRIVATE_KEY]
-          : [],
+        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
     },
     lineaTestnet: {
       url: process.env.LINEA_TESTNET_URL || "",
@@ -32,9 +39,7 @@ const config: HardhatUserConfig = {
     },
     oasisTestnet: {
       url: process.env.OASIS_TESTNET_URL || "https://testnet.emerald.oasis.dev",
-      accounts: process.env.PRIVATE_KEY
-        ? [process.env.PRIVATE_KEY]
-        : [],
+      accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
     },
     polygonAmoy: {
       url: process.env.POLYGON_AMOY_TESTNET_URL || "",

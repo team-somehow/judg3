@@ -8,7 +8,7 @@
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "deploy" : "vite build && firebase deploy"
+    "deploy": "vite build && firebase deploy"
   },
   "dependencies": {
     "@dynamic-labs/ethereum": "^3.1.0",
@@ -26,6 +26,7 @@
     "@tanstack/react-query": "^5.56.2",
     "@worldcoin/idkit": "^1.3.0",
     "axios": "^1.7.7",
+    "ethers": "^6.13.2",
     "firebase": "^10.13.2",
     "magic-sdk": "^28.10.0",
     "notistack": "^3.0.1",

@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
@@ -11,6 +12,21 @@ import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../../config/axios'; // Import your axios instance
 import useMorphInteractions from '../../hooks/morph/useMorphInteractions';
 import { useFlowInteraction } from '../../hooks/useFlowInteraction';
+=======
+import * as React from "react";
+import Card from "@mui/material/Card";
+import CardHeader from "@mui/material/CardHeader";
+import CardMedia from "@mui/material/CardMedia";
+import CardContent from "@mui/material/CardContent";
+import CardActions from "@mui/material/CardActions";
+import Typography from "@mui/material/Typography";
+import { Avatar, Button } from "@mui/material";
+import { useAuth } from "../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
+import axiosInstance from "../../config/axios"; // Import your axios instance
+import useMorphInteractions from "../../hooks/morph/useInteractions";
+import { useFlowInteraction } from "../../hooks/useFlowInteraction";
+>>>>>>> Stashed changes
 
 interface EventCardProps {
   id: number;

@@ -7,6 +7,7 @@ import router from "./config/router";
 import StyleThemeProvider from "./theme/ThemeProvider";
 import AuthProvider from "./context/AuthContext";
 import DynamicAuthProvider from "./components/auth/dynamic/DynamicAuthProvider";
+import DataProvider from "./context/DataContext";
 
 const App: React.FC = () => {
   return (
@@ -16,7 +17,9 @@ const App: React.FC = () => {
           <MagicProvider>
             <AuthProvider>
               {/* <AppKitProvider> */}
-              <RouterProvider router={router} />
+              <DataProvider>
+                <RouterProvider router={router} />
+              </DataProvider>
               {/* </AppKitProvider> */}
             </AuthProvider>
           </MagicProvider>

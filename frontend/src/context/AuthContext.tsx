@@ -31,7 +31,7 @@ const AuthProvider = ({ children }: Props) => {
   const [appChain, setAppChain] = useState<string | null>(null);
 
   const [currentAuthSupply, setCurrentSupply] = useState<"magic" | "dynamic">(
-    "magic"
+    "dynamic"
   );
 
   const [token, setToken] = useState<string | null>(null);

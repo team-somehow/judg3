@@ -6,7 +6,7 @@ import axiosInstance from "../../config/axios";
 import Loading from "../ui/Loading";
 import { useAuth } from "../../context/AuthContext";
 import { useFlowInteraction } from "../../hooks/useFlowInteraction";
-import useMorphInteractions from "../../hooks/morph/useMorphInteractions";
+import useMorphInteractions from "../../hooks/morph/useInteractions";
 
 interface Project {
   photo: string;
