@@ -6,6 +6,7 @@ import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Typography from '@mui/material/Typography';
 import { Avatar, Button } from '@mui/material';
+import { useAuth } from '../../context/AuthContext';
 
 interface EventCardProps {
   id: number;
@@ -30,10 +31,14 @@ const EventCard: React.FC<EventCardProps> = ({
   description,
   photo,
 }) => {
+  const { token } = useAuth();
+
   const handleButtonClick = (id) => {
     console.log('Button clicked', id);
     // redirect to the login
-    window.location.href = '/login';
+    if (token) {
+      window.location.href = `/voter-dashboard/voting/${id}`;
+    } else window.location.href = '/login';
   };
 
   return (

@@ -8,6 +8,11 @@ import { useParams } from 'react-router-dom';
 
 function Applications() {
   const { id } = useParams();
+
+  if (!id) {
+    return <Typography variant="h6">Please select an event</Typography>;
+  }
+
   return (
     <Box>
       <Layout

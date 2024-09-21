@@ -21,6 +21,7 @@ type Props = {
 
 interface Voter {
   voterId: number;
+  worldId: string;
   status: string;
 }
 
@@ -41,27 +42,31 @@ const VoterDetails: React.FC<Props> = ({ eventId }) => {
 
   // Handle accept
   const handleAccept = (id: number) => {
-    const updatedVoters = voters.map((voter) =>
-      voter.id === id ? { ...voter, accepted: true } : voter
-    );
-    setVoters(updatedVoters);
-    console.log(
-      'Accepted Voter:',
-      updatedVoters.find((voter) => voter.id === id)
-    );
+    // const updatedVoters = voters.map((voter) =>
+    //   voter.id === id ? { ...voter, accepted: true } : voter
+    // );
+    // setVoters(updatedVoters);
+    // console.log(
+    //   'Accepted Voter:',
+    //   updatedVoters.find((voter) => voter.id === id)
+    // );
   };
 
   // Handle reject
   const handleReject = (id: number) => {
-    const updatedVoters = voters.map((voter) =>
-      voter.id === id ? { ...voter, accepted: false } : voter
-    );
-    setVoters(updatedVoters);
-    console.log(
-      'Rejected Voter:',
-      updatedVoters.find((voter) => voter.id === id)
-    );
+    // const updatedVoters = voters.map((voter) =>
+    //   voter.id === id ? { ...voter, accepted: false } : voter
+    // );
+    // setVoters(updatedVoters);
+    // console.log(
+    //   'Rejected Voter:',
+    //   updatedVoters.find((voter) => voter.id === id)
+    // );
   };
+
+  if (!voters) {
+    return <Box>Loading...</Box>;
+  }
 
   return (
     <Box>
@@ -87,13 +92,13 @@ const VoterDetails: React.FC<Props> = ({ eventId }) => {
         >
           <Link sx={{ mx: 1 }} />
           <Typography variant="body1" sx={{ mr: 2 }}>
-            https://share.url.com
+            https://3-cast.web.app
           </Typography>
           <Button
             variant="contained"
             startIcon={<Share />}
             onClick={(e) => {
-              navigator.clipboard.writeText('https://share.url.com');
+              navigator.clipboard.writeText('https://3-cast.web.app');
               enqueueSnackbar('Link copied to clipboard', {
                 variant: 'success',
               });
@@ -107,7 +112,7 @@ const VoterDetails: React.FC<Props> = ({ eventId }) => {
 
       <Grid container spacing={2} sx={{ mt: 2 }}>
         {voters.map((voter) => (
-          <Grid item xs={12} key={voter.id}>
+          <Grid item xs={12} key={voter}>
             <Card sx={{ display: 'flex', alignItems: 'center' }}>
               <CardContent
                 sx={{ display: 'flex', alignItems: 'center', width: '100%' }}
