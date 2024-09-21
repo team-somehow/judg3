@@ -1,0 +1,122 @@
+[
+    {
+      "name": "Pizza",
+      "description": "A savory dish of Italian origin consisting of a flat, round base of dough baked with a topping of tomatoes and cheese, often with added meat, vegetables, or other ingredients.",
+      "url": "https://en.wikipedia.org/wiki/Pizza",
+      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/d/d3/Supreme_pizza.jpg"
+    },
+    {
+      "name": "Burger",
+      "description": "A sandwich consisting of one or more cooked patties of ground meat, placed inside a sliced bread roll or bun. Often served with lettuce, tomato, and condiments.",
+      "url": "https://en.wikipedia.org/wiki/Hamburger",
+      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/8/8a/Hamburger_sandwich.jpg"
+    },
+    {
+      "name": "Sushi",
+      "description": "A Japanese dish consisting of vinegared rice accompanied by various ingredients such as seafood, vegetables, and occasionally tropical fruits.",
+      "url": "https://en.wikipedia.org/wiki/Sushi",
+      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/6/60/Sushi_platter.jpg"
+    },
+    {
+      "name": "Pasta",
+      "description": "An Italian dish made from unleavened dough of wheat flour mixed with water, formed into sheets or other shapes, and cooked by boiling or baking.",
+      "url": "https://en.wikipedia.org/wiki/Pasta",
+      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/b/bc/Pasta_with_Meatballs.jpg"
+    },
+    {
+      "name": "Tacos",
+      "description": "A traditional Mexican dish consisting of a small hand-sized corn or wheat tortilla topped with a filling such as beef, chicken, vegetables, or seafood.",
+      "url": "https://en.wikipedia.org/wiki/Taco",
+      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/3/3f/Tacos_de_asada.jpg"
+    },
+    {
+      "name": "Ice Cream",
+      "description": "A sweetened frozen food typically eaten as a snack or dessert, made from dairy products such as milk and cream, combined with flavorings and sweeteners.",
+      "url": "https://en.wikipedia.org/wiki/Ice_cream",
+      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/7/72/Ice_Cream_Cones.jpg"
+    },
+    {
+      "name": "Ramen",
+      "description": "A Japanese noodle soup consisting of Chinese-style wheat noodles served in a meat- or fish-based broth, often flavored with soy sauce or miso.",
+      "url": "https://en.wikipedia.org/wiki/Ramen",
+      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/c/c6/Ramen_in_Tokyo.jpg"
+    },
+    {
+      "name": "Samosa",
+      "description": "A fried or baked pastry with a savory filling, such as spiced potatoes, onions, peas, or lentils. It is popular in South Asia, the Middle East, and Africa.",
+      "url": "https://en.wikipedia.org/wiki/Samosa",
+      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/5/55/Samosachutney.jpg"
+    },
+    {
+      "name": "Fried Chicken",
+      "description": "Chicken pieces that have been coated in seasoned batter and fried until crisp. It is a staple of Southern cuisine in the United States.",
+      "url": "https://en.wikipedia.org/wiki/Fried_chicken",
+      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/2/28/US_Navy_060713-N-5862D-003_Sailors_prepare_southern_fried_chicken.jpg"
+    },
+    {
+      "name": "Dosa",
+      "description": "A thin, crispy pancake originating from South India, made from a fermented batter of rice and black gram, often served with chutney and sambar.",
+      "url": "https://en.wikipedia.org/wiki/Dosa",
+      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/9/9f/Dosa_with_sambar.jpg"
+    },
+    {
+      "name": "Pav Bhaji",
+      "description": "A fast food dish from India consisting of a thick vegetable curry, served with a soft bread roll known as pav.",
+      "url": "https://en.wikipedia.org/wiki/Pav_bhaji",
+      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/4/4f/Pav_Bhaji.jpg"
+    },
+    {
+      "name": "Chow Mein",
+      "description": "A Chinese stir-fried noodle dish with vegetables and sometimes meat or tofu, often seasoned with soy sauce and garlic.",
+      "url": "https://en.wikipedia.org/wiki/Chow_mein",
+      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/7/77/Chicken_chow_mein_1.jpg"
+    },
+    {
+      "name": "Dim Sum",
+      "description": "A variety of bite-sized Cantonese dishes traditionally served in small steamer baskets or on small plates, typically enjoyed with tea.",
+      "url": "https://en.wikipedia.org/wiki/Dim_sum",
+      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/0/0b/Dim_Sum_at_Hong_Kong.jpg"
+    },
+    {
+      "name": "Falafel",
+      "description": "A Middle Eastern dish of deep-fried ball or patty made from ground chickpeas or fava beans, often served in a pita or flatbread.",
+      "url": "https://en.wikipedia.org/wiki/Falafel",
+      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/c/cf/Falafel_Israel.JPG"
+    },
+    {
+      "name": "Pad Thai",
+      "description": "A stir-fried rice noodle dish commonly served as street food in Thailand, often made with shrimp, chicken, or tofu, and flavored with tamarind.",
+      "url": "https://en.wikipedia.org/wiki/Pad_Thai",
+      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/0/0b/Pad_Thai_kung_Chang_Krung.jpg"
+    },
+    {
+      "name": "Poutine",
+      "description": "A Canadian dish consisting of French fries topped with cheese curds and gravy, originating from the province of Quebec.",
+      "url": "https://en.wikipedia.org/wiki/Poutine",
+      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/8/81/La_Banquise_Poutine.jpg"
+    },
+    {
+      "name": "Biryani",
+      "description": "A mixed rice dish originating among the Muslims of the Indian subcontinent, made with spices, rice, and meat, usually chicken or mutton.",
+      "url": "https://en.wikipedia.org/wiki/Biryani",
+      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/2/23/Hyderabadi_Chicken_Biryani.jpg"
+    },
+    {
+      "name": "Shawarma",
+      "description": "A Middle Eastern dish consisting of thinly sliced pieces of meat, typically lamb or chicken, stacked in a cone shape and roasted on a vertical rotisserie.",
+      "url": "https://en.wikipedia.org/wiki/Shawarma",
+      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/3/38/Shawarma.jpg"
+    },
+    {
+      "name": "Pho",
+      "description": "A Vietnamese soup consisting of broth, rice noodles, herbs, and meat, typically made with either beef or chicken.",
+      "url": "https://en.wikipedia.org/wiki/Pho",
+      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/3/33/Pho-Beef-Noodles-2008.jpg"
+    },
+    {
+      "name": "Churros",
+      "description": "A fried-dough pastry that originated in Spain and Portugal, often sprinkled with sugar and cinnamon, and sometimes served with hot chocolate for dipping.",
+      "url": "https://en.wikipedia.org/wiki/Churro",
+      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/d/d9/Churros.jpg"
+    }
+  ]
