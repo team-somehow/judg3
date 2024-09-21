@@ -125,6 +125,13 @@ const AdminCreateEventModal: React.FC<AdminCreateEventModalProps> = ({
       enqueueSnackbar('Failed to create event.', { variant: 'error' });
     } finally {
       setLoading(false);
+      setFormData({
+        eventName: '',
+        description: '',
+        image: null,
+        imageURL: null,
+        uploading: false,
+      });
     }
   };
 
