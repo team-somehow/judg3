@@ -32,18 +32,26 @@ class User(AbstractBaseUser):
 
 
 class Event(models.Model):
+    STATUS_CHOICES = [
+        ('voters', 'Voters'),
+        ('project', 'Project Submission'),
+        ('active', 'Voting Active'),
+        ('complete', 'Completed'),
+    ]
+
     name = models.CharField(max_length=255)
     description = models.TextField()
     photo = models.URLField()
     created_at = models.DateTimeField(auto_now_add=True)
-    status = models.CharField(max_length=50, default='voters')
+    status = models.CharField(
+        max_length=50, choices=STATUS_CHOICES, default='voters')
     creator = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
 
-
 # projects
+
 
 class Project(models.Model):
     name = models.CharField(max_length=255)

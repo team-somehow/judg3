@@ -1,3 +1,5 @@
+from rest_framework.exceptions import PermissionDenied
+from rest_framework.permissions import IsAdminUser
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -66,3 +68,28 @@ def get_all_events_with_status(request):
         events_data.append(event_data)
 
     return Response(events_data, status=status.HTTP_200_OK)
+
+
+class EventStatusUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Event
+        fields = ['status']
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def update_event_status(request, pk):
+    try:
+        event = Event.objects.get(pk=pk)
+    except Event.DoesNotExist:
+        return Response({"error": "Event not found"}, status=status.HTTP_404_NOT_FOUND)
+
+    if request.user != event.creator:
+        raise PermissionDenied(
+            "You do not have permission to update this event.")
+
+    serializer = EventStatusUpdateSerializer(event, data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
