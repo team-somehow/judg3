@@ -12,7 +12,11 @@ export interface EventStatus {
   status: string;
 }
 
-const LiveEvents: React.FC = () => {
+type LiveEventsProps = {
+  refetchApi?: number;
+};
+
+const LiveEvents: React.FC<LiveEventsProps> = ({ refetchApi }) => {
   const [events, setEvents] = useState<EventStatus[]>([]);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
@@ -25,7 +29,7 @@ const LiveEvents: React.FC = () => {
         const temp = response.data.filter(
           (event: EventStatus) => event.status !== 'complete'
         );
-        setEvents(temp);
+        setEvents(temp.reverse());
       } catch (error) {
         console.error('Error fetching events:', error);
       } finally {
@@ -34,7 +38,7 @@ const LiveEvents: React.FC = () => {
     };
 
     fetchEvents();
-  }, []);
+  }, [refetchApi]);
 
   const handleButtonClick = (id: number) => {
     console.log('Go to Event clicked');

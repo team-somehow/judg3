@@ -12,7 +12,10 @@ const Dashboard: React.FC = () => {
   const tab = urlParams.get('tab');
   const [open, setOpen] = useState<boolean>(false);
   const handleOpen = useCallback(() => setOpen(true), []);
-  const handleClose = useCallback(() => setOpen(false), []);
+  const [refetchApi, setRefetchApi] = useState(0);
+  const handleClose = useCallback(() => {
+    setOpen(false);
+  }, []);
   const [tabValue, setTabValue] = useState(tab === 'past' ? 1 : 0);
 
   const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -60,13 +63,17 @@ const Dashboard: React.FC = () => {
           >
             Add New Event
           </Button>
-          {tabValue === 0 && <LiveEvents />}
+          {tabValue === 0 && <LiveEvents refetchApi={refetchApi} />}
           {tabValue === 1 && <PastEvents />}
         </GradientCard>
       </Container>
 
       {/* Modal for creating a new event */}
-      <AdminCreateEventModal open={open} handleClose={handleClose} />
+      <AdminCreateEventModal
+        open={open}
+        handleClose={handleClose}
+        setRefetchApi={setRefetchApi}
+      />
 
       <Bg />
     </Box>
