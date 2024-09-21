@@ -1,4 +1,4 @@
-# Voting System - Deployed Contracts
+# Judg3 - Deployed Contracts
 
 This project contains smart contracts designed to manage voting on projects using a blockchain-based system. Below are the deployed contract addresses and their descriptions on various networks.
 
