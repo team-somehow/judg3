@@ -27,7 +27,7 @@ export const useAuth = () => useContext(AuthContext);
 
 const AuthProvider = ({ children }: Props) => {
   const [currentAuthSupply, setCurrentSupply] = useState<"magic" | "dynamic">(
-    "dynamic"
+    "magic"
   );
 
   const [token, setToken] = useState<string | null>(null);
@@ -35,7 +35,8 @@ const AuthProvider = ({ children }: Props) => {
   const [loading, setLoading] = useState<boolean>(true);
 
   const { magic } = useMagic();
-  const { address: dynamicAddress } = useDynamicWallet();
+  const { address: dynamicAddress, isConnecting: isConnectingDynamic } =
+    useDynamicWallet();
 
   useEffect(() => {
     if (currentAuthSupply === "magic") {
@@ -58,17 +59,20 @@ const AuthProvider = ({ children }: Props) => {
       };
       fetchData();
     }
-  }, [magic, setAddress, setToken]);
+  }, [currentAuthSupply, magic, setAddress, setToken]);
 
   useEffect(() => {
     if (currentAuthSupply === "dynamic") {
       setLoading(true);
-      if (!dynamicAddress) return;
+      if (dynamicAddress) {
+        setAddress(dynamicAddress);
+      }
 
-      setAddress(dynamicAddress);
-      setLoading(false);
+      if (!isConnectingDynamic) {
+        setLoading(false);
+      }
     }
-  }, [dynamicAddress, setAddress]);
+  }, [currentAuthSupply, dynamicAddress, isConnectingDynamic, setAddress]);
 
   if (loading) {
     return <Loading loading={true} />;

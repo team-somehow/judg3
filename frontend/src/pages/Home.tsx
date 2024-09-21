@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Typography,
   Button,
   CircularProgress,
   Container,
-} from '@mui/material';
-import Bg from '../components/ui/Bg';
-import EventCard from '../components/shared/EventCard';
-import GradientCard from '../components/ui/GradientCard';
-import { useMagic } from '../components/auth/magic/MagicContext';
-import { useAuth } from '../context/AuthContext';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+} from "@mui/material";
+import Bg from "../components/ui/Bg";
+import EventCard from "../components/shared/EventCard";
+import GradientCard from "../components/ui/GradientCard";
+import { useMagic } from "../components/auth/magic/MagicContext";
+import { useAuth } from "../context/AuthContext";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 interface Hackathon {
   id: number;
@@ -30,14 +30,14 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      if (!magic) return console.error('Magic not initialized');
+      if (!magic) return console.error("Magic not initialized");
       try {
-        console.log('Fetching user metadata');
+        console.log("Fetching user metadata");
 
         setLoading(true);
         const m = await magic.user.getMetadata();
         setAddress(m.publicAddress!);
-        setToken(localStorage.getItem('token')!);
+        setToken(localStorage.getItem("token")!);
 
         setLoading(false);
       } catch (error) {
@@ -56,11 +56,11 @@ const Home: React.FC = () => {
         const response = await axios.get(
           `${import.meta.env.VITE_BACKEND_BASE_URL}get-event-noauth/`
         );
-        console.log('Hackathons:', response.data);
+        console.log("Hackathons:", response.data);
         setHackathons(response.data);
         setLoading(false);
       } catch (error) {
-        console.error('Error fetching hackathons:', error);
+        console.error("Error fetching hackathons:", error);
         setLoading(false);
       }
     };
@@ -73,10 +73,10 @@ const Home: React.FC = () => {
   }
 
   return (
-    <Box sx={{ textAlign: 'center', padding: '1rem' }}>
+    <Box sx={{ textAlign: "center", padding: "1rem" }}>
       <Container maxWidth="lg">
-        <Typography variant="h3" sx={{ fontWeight: '900', my: 2 }}>
-          Revolutionizing Voting with 3-Cast
+        <Typography variant="h3" sx={{ fontWeight: "900", my: 2 }}>
+          Revolutionizing Voting with Judg3
         </Typography>
         <Typography variant="h6" color="text.secondary" sx={{ mb: 4 }}>
           Host your hackathon on our platform for decentralized, unbiased voting
@@ -93,15 +93,15 @@ const Home: React.FC = () => {
         startIcon={
           <img
             src="/logo-black.svg"
-            style={{ height: '20px', color: 'black' }}
+            style={{ height: "20px", color: "black" }}
           />
         }
         onClick={() => {
-          console.log('Organise Voting');
+          console.log("Organise Voting");
           if (token) {
-            navigate('/dashboard');
+            navigate("/dashboard");
           } else {
-            navigate('/login');
+            navigate("/login");
           }
         }}
       >
@@ -110,16 +110,16 @@ const Home: React.FC = () => {
       <Button
         variant="outlined"
         sx={{
-          bgcolor: 'rgba(0, 0, 0, 0.70) !important',
-          height: '50px',
+          bgcolor: "rgba(0, 0, 0, 0.70) !important",
+          height: "50px",
           ml: 2,
         }}
         onClick={() => {
-          console.log('Start Voting', token);
+          console.log("Start Voting", token);
           if (token && token?.length > 0) {
-            navigate('/voter-dashboard');
+            navigate("/voter-dashboard");
           } else {
-            navigate('/login');
+            navigate("/login");
           }
         }}
       >
@@ -134,7 +134,7 @@ const Home: React.FC = () => {
       >
         <Typography
           variant="h4"
-          sx={{ mb: 3, color: '#fff' }}
+          sx={{ mb: 3, color: "#fff" }}
           textAlign="start"
           fontWeight="bold"
         >
@@ -142,10 +142,10 @@ const Home: React.FC = () => {
         </Typography>
         <Box
           sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            gap: '2rem',
-            flexWrap: 'wrap',
+            display: "flex",
+            justifyContent: "center",
+            gap: "2rem",
+            flexWrap: "wrap",
           }}
         >
           {hackathons.map((hackathon) => (

@@ -6,7 +6,7 @@ import { useAuth } from "../../../context/AuthContext";
 import { saveToken } from "../../../utils/comman";
 
 export const useDynamicWallet = () => {
-  const { address, isConnected, chain } = useAccount();
+  const { address, isConnected, chain, isConnecting } = useAccount();
   const { setAddress, setToken } = useAuth();
   const { primaryWallet, handleLogOut } = useDynamicContext();
 
@@ -41,5 +41,5 @@ export const useDynamicWallet = () => {
     fnc();
   }, [primaryWallet, setAddress, setToken]);
 
-  return { address, isConnected, chain, handleLogOut };
+  return { address, isConnected, chain, handleLogOut, isConnecting };
 };
