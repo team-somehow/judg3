@@ -41,7 +41,7 @@ def verify_world_id(request):
         chain_of_address = validated_data.get('chain_of_address')
 
         user, created = User.objects.get_or_create(
-            world_id_user_hash=nullifier_hash, user_address=user_address, chain_of_address=chain_of_address)
+            world_id_user_hash=nullifier_hash+user_address+chain_of_address, user_address=user_address, chain_of_address=chain_of_address)
 
         if user.is_verified:
 
