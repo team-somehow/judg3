@@ -76,3 +76,11 @@ Vote: https://github.com/privacy-scaling-explorations/maci-platform/blob/main/pa
 - had to be an imp descisions
 
 - each param of voting hot or not
+
+
+# morph
+
+- upvote and downvote
+- weighted votes
+- social aspect - comments, likes
+- voting loyalty
