@@ -2,7 +2,7 @@
 
 This project is a decentralized system that allows users to vote on various projects using blockchain-bakced technology based on the well known "This-or-That" Game. The system ensures transparency and accuracy in calculating project scores and provides intelligent project recommendations based on user votes. It involves several key components, including an algorithmic scoring system, a project recommendation system, and a detailed user journey flow.
 
-<img src="https://firebasestorage.googleapis.com/v0/b/somehow-eth-singapore.appspot.com/o/seed%2FWhatsApp%20Image%202024-09-22%20at%2003.44.13.jpeg?alt=media&token=f7b3ce9e-9ac9-4b32-bbc7-62ed562ef8ee" alt="llocal-banner" width="800" />
+<img src="https://firebasestorage.googleapis.com/v0/b/somehow-eth-singapore.appspot.com/o/seed%2FWhatsApp%20Image%202024-09-22%20at%2003.44.13.jpeg?alt=media&token=f7b3ce9e-9ac9-4b32-bbc7-62ed562ef8ee" alt="banner" />
 
 
 ## Table of Contents
@@ -12,7 +12,6 @@ This project is a decentralized system that allows users to vote on various proj
 - [User Journey Flow](#user-journey-flow)
 - [System Architecture](#system-architecture)
 - [Getting Started](#getting-started)
-- [License](#license)
 
 ## Algorithmic System
 
