@@ -98,7 +98,6 @@ const EventCard: React.FC<EventCardProps> = ({
         title={name}
       />
       <CardMedia component="img" height="180" image={photo} alt={"Image"} />
-      <CardMedia component="img" height="180" image={photo} alt={"Image"} />
       <CardContent sx={{ p: 1 }}>
         <Typography
           variant="subtitle2"
