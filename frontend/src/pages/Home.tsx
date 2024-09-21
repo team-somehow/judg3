@@ -9,8 +9,6 @@ import {
 import Bg from "../components/ui/Bg";
 import EventCard from "../components/shared/EventCard";
 import GradientCard from "../components/ui/GradientCard";
-import { useMagic } from "../components/auth/magic/MagicContext";
-import { useAuth } from "../context/AuthContext";
 
 interface Hackathon {
   id: number;
@@ -23,28 +21,7 @@ interface Hackathon {
 const Home: React.FC = () => {
   const [hackathons, setHackathons] = useState<Hackathon[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const { setAddress, setToken } = useAuth();
-  const { magic } = useMagic();
-  useEffect(() => {
-    const fetchData = async () => {
-      if (!magic) return console.error("Magic not initialized");
-      try {
-        console.log("Fetching user metadata");
-
-        setLoading(true);
-        const m = await magic.user.getMetadata();
-        setAddress(m.publicAddress!);
-        setToken(localStorage.getItem("token")!);
-
-        setLoading(false);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchData();
-  }, [magic, setAddress, setToken]);
+  // const { getEvents, handleCreateEvent } = useFlowInteraction();
 
   // Simulate fetching data from JSON file
   useEffect(() => {
@@ -78,7 +55,7 @@ const Home: React.FC = () => {
         },
       ];
       setHackathons(data);
-      // setLoading(false);
+      setLoading(false);
     };
     fetchData();
   }, []);
@@ -89,6 +66,8 @@ const Home: React.FC = () => {
 
   return (
     <Box sx={{ textAlign: "center", padding: "1rem" }}>
+      {/* <Button onClick={handleCreateEvent}>Create Event</Button>
+      <Button onClick={getEvents}>Get Events</Button> */}
       <Container maxWidth="lg">
         <Typography variant="h3" sx={{ fontWeight: "900", my: 2 }}>
           Revolutionizing Voting with 3-Cast
