@@ -19,6 +19,7 @@ interface StatusCardProps {
   buttonText: string;
   onButtonClick: () => void;
   isAdmin?: boolean;
+  statusAdmin?: string;
 }
 
 const StatusCard: React.FC<StatusCardProps> = ({
@@ -29,10 +30,12 @@ const StatusCard: React.FC<StatusCardProps> = ({
   buttonText,
   onButtonClick,
   isAdmin = false,
+  statusAdmin,
 }) => {
   const [status, setStatus] = useState<string>("Pending"); // default is 'Pending'
 
   useEffect(() => {
+    if (isAdmin) return;
     const fetchStatus = async () => {
       try {
         const response = await axiosInstance.get(`/voter-apply-status/${id}`);
@@ -117,7 +120,10 @@ const StatusCard: React.FC<StatusCardProps> = ({
             <Typography variant="subtitle1" fontWeight="bold">
               Approval Status
             </Typography>
-            <CustomStepper status={status} isAdmin={isAdmin} />
+            <CustomStepper
+              status={isAdmin ? statusAdmin! : status}
+              isAdmin={isAdmin}
+            />
           </Box>
 
           <Button

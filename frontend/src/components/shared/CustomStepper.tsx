@@ -1,7 +1,7 @@
-import Box from '@mui/material/Box';
-import Stepper from '@mui/material/Stepper';
-import Step from '@mui/material/Step';
-import StepLabel from '@mui/material/StepLabel';
+import Box from "@mui/material/Box";
+import Stepper from "@mui/material/Stepper";
+import Step from "@mui/material/Step";
+import StepLabel from "@mui/material/StepLabel";
 
 interface CustomStepperProps {
   status: string;
@@ -9,14 +9,9 @@ interface CustomStepperProps {
   isVertical?: boolean;
 }
 
-const adminLabels = [
-  'Event Creation',
-  'Open Applications',
-  'Project Uploads',
-  'Completed',
-];
+const adminLabels = ["voters", "project", "active", "complete"];
 
-const voterLabels = ['Pending', 'Accepted', 'Rejected'];
+const voterLabels = ["Pending", "Accepted", "Rejected"];
 
 export default function CustomStepper({
   status,
@@ -32,25 +27,25 @@ export default function CustomStepper({
   const activeStep = getActiveStep(status);
 
   return (
-    <Box sx={{ width: '100%', my: 1 }}>
+    <Box sx={{ width: "100%", my: 1 }}>
       <Stepper
         activeStep={activeStep}
         alternativeLabel={!isVertical}
-        orientation={isVertical ? 'vertical' : 'horizontal'}
+        orientation={isVertical ? "vertical" : "horizontal"}
       >
         {steps.map((label, index) => (
           <Step key={label}>
             <StepLabel
               StepIconProps={{
                 sx: {
-                  color: index === activeStep ? 'primary.main' : 'white',
-                  fontSize: isVertical ? '1.5rem' : '1rem',
+                  color: index === activeStep ? "primary.main" : "white",
+                  fontSize: isVertical ? "1.5rem" : "1rem",
                 },
               }}
               sx={{
-                '& .MuiStepLabel-label': {
-                  color: index === activeStep ? 'inherit' : 'white',
-                  fontSize: isVertical ? '1.1rem' : '1rem',
+                "& .MuiStepLabel-label": {
+                  color: index === activeStep ? "inherit" : "white",
+                  fontSize: isVertical ? "1.1rem" : "1rem",
                 },
               }}
             >

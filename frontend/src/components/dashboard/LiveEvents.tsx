@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import StatusCard from './StatusCard';
-import { Box, CircularProgress } from '@mui/material';
-import axiosInstance from '../../config/axios';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import StatusCard from "./StatusCard";
+import { Box, CircularProgress } from "@mui/material";
+import axiosInstance from "../../config/axios";
+import { useNavigate } from "react-router-dom";
 
 interface EventStatus {
   id: number;
@@ -19,13 +19,13 @@ const LiveEvents: React.FC = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await axiosInstance.get('/get-event-admin');
+        const response = await axiosInstance.get("/get-event-admin");
         const temp = response.data.filter(
-          (event: EventStatus) => event.status === 'Active'
+          (event: EventStatus) => event.status !== "complete"
         );
         setEvents(temp);
       } catch (error) {
-        console.error('Error fetching events:', error);
+        console.error("Error fetching events:", error);
       }
     };
 
@@ -33,18 +33,18 @@ const LiveEvents: React.FC = () => {
   }, []);
 
   const handleButtonClick = (id: number) => {
-    console.log('Go to Event clicked');
+    console.log("Go to Event clicked");
     navigate(`/dashboard/applications/${id}`);
   };
 
   return (
     <Box
       sx={{
-        display: 'flex',
-        gap: '1rem',
-        flexWrap: 'wrap',
-        justifyContent: 'center',
-        alignItems: 'center',
+        display: "flex",
+        gap: "1rem",
+        flexWrap: "wrap",
+        justifyContent: "center",
+        alignItems: "center",
       }}
     >
       {events.length === 0 ? (
@@ -57,7 +57,7 @@ const LiveEvents: React.FC = () => {
             name={event.name}
             description={event.description}
             photo={event.photo}
-            status={event.status}
+            statusAdmin={event.status}
             buttonText="Go to Event"
             onButtonClick={() => handleButtonClick(event.id)}
             isAdmin
