@@ -74,6 +74,11 @@ class Event(models.Model):
         max_length=50, choices=STATUS_CHOICES, default='voters')
     creator = models.ForeignKey(User, on_delete=models.CASCADE)
 
+    blockchain_event_id = models.CharField(
+        max_length=500, null=True, blank=True)
+    blockchain_transaction_hash = models.CharField(
+        max_length=500, null=True, blank=True)
+
     def __str__(self):
         return self.name
 

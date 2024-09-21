@@ -11,7 +11,8 @@ from app.models import Event, Application
 class EventCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Event
-        fields = ['id', 'name', 'description', 'photo', 'status']
+        fields = ['id', 'name', 'description', 'photo', 'status',
+                  'blockchain_event_id', 'blockchain_transaction_hash']
 
     def create(self, validated_data):
         # Ensure the creator is set manually in the view
