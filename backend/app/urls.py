@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import hello
 from .views import auth
-from .views import events, vote, leaderboard, apply, voters, projects, suggest
+from .views import events, vote, leaderboard, apply, voters, projects, suggest, matrix
 
 urlpatterns = [
     path("", hello.index, name="index"),
@@ -34,5 +34,6 @@ urlpatterns = [
     path('suggest/<int:event_id>/', suggest.suggest, name='suggest'),
 
     path('vote', vote.create_vote, name="create_vote"),
+    path('matrix', matrix.get_matrix, name="get_matrix"),
     path('leaderboard', leaderboard.get_leaderboard, name="get_leaderboard")
 ]
