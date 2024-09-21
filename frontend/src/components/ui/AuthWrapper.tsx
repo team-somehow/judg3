@@ -8,9 +8,9 @@ type Props = {
 };
 
 const AuthWrapper = ({ children }: Props) => {
-  const { setAddress, setToken } = useAuth();
+  // const { setAddress, setToken } = useAuth();
   const navigate = useNavigate();
-  const { pathname } = useLocation();
+  // const { pathname } = useLocation();
 
   // useEffect(() => {
   //   const fetchData = async () => {
@@ -30,9 +30,11 @@ const AuthWrapper = ({ children }: Props) => {
   //   };
   //   fetchData();
   // }, [navigate, pathname, setAddress, setToken]);
-  if (!localStorage.getItem("token")) {
-    return navigate("/login");
-  }
+  React.useEffect(() => {
+    if (!localStorage.getItem("token")) {
+      return navigate("/login");
+    }
+  });
 
   return <Box>{children}</Box>;
 };

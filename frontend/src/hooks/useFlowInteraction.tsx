@@ -117,16 +117,17 @@ export const useFlowInteraction = () => {
     // console.log("Output", res);
   };
 
-  const applyVoter = async ({}) => {
+  const applyVoter = async ({ eventId }: { eventId: string }) => {
     const txId = await fcl.send([
       fcl.transaction`
       import VotingSystem2 from 0xee884352e5d52524
 
-      transaction {
+      transaction(eventId: UInt64) {
         prepare(signer: auth(BorrowValue, IssueStorageCapabilityController, PublishCapability, SaveValue) &Account) {
           log(signer.address)
-          VotingSystem2.applyVoter(
-            organizer: signer.address,
+          VotingSystem2.addVoter(
+            eventId: eventId,
+            voter: signer.address,
           )
         }
         execute {
@@ -135,9 +136,7 @@ export const useFlowInteraction = () => {
         }
       }
         `,
-      // fcl.args([
-      //   fcl.arg("0x01", t.String),
-      // ]),
+      fcl.args([fcl.arg(eventId, t.UInt64)]),
       fcl.proposer(magic!.flow.authorization),
       fcl.payer(magic!.flow.authorization),
 
@@ -150,5 +149,97 @@ export const useFlowInteraction = () => {
 
     await fcl.tx(txId).onceSealed();
   };
-  return { handleCreateEvent, getEvents, createProject, applyVoter };
+
+  const approveVoter = async ({ eventId }: { eventId: string }) => {
+    const txId = await fcl.send([
+      fcl.transaction`
+      import VotingSystem2 from 0xee884352e5d52524
+
+      transaction(eventId: UInt64) {
+        prepare(signer: auth(BorrowValue, IssueStorageCapabilityController, PublishCapability, SaveValue) &Account) {
+          log(signer.address)
+          VotingSystem2.approveVoter(
+            eventId: eventId,
+            voter: signer.address,
+          )
+        }
+        execute {
+          
+          log("Event created")
+        }
+      }
+        `,
+      fcl.args([fcl.arg(eventId, t.UInt64)]),
+      fcl.proposer(magic!.flow.authorization),
+      fcl.payer(magic!.flow.authorization),
+
+      // fcl.payer(fcl.currentUser),
+      // fcl.authorizations([adminAuthorizationFunction]),
+      fcl.authorizations([magic!.flow.authorization]),
+
+      fcl.limit(9999),
+    ]);
+
+    await fcl.tx(txId).onceSealed();
+  };
+
+  const castVote = async ({
+    eventId,
+    project1Id,
+    project2Id,
+    winnerProjectId,
+  }: {
+    eventId: string;
+    project1Id: string;
+    project2Id: string;
+    winnerProjectId: string;
+  }) => {
+    const txId = await fcl.send([
+      fcl.transaction`
+      import VotingSystem2 from 0xee884352e5d52524
+
+      transaction(eventId: UInt64, projectId: UInt64) {
+        prepare(signer: auth(BorrowValue, IssueStorageCapabilityController, PublishCapability, SaveValue) &Account) {
+          log(signer.address)
+          VotingSystem2.castVote(
+            eventId: eventId,
+            project1Id: project1Id,
+            project2Id: project2Id,
+            winnerProjectId: winnerProjectId,
+            voter: signer.address,
+          )
+        }
+        execute {
+          
+          log("Event created")
+        }
+      }
+        `,
+      fcl.args([
+        fcl.arg(eventId, t.UInt64),
+        fcl.arg(project1Id, t.UInt64),
+        fcl.arg(project2Id, t.UInt64),
+        fcl.arg(winnerProjectId, t.UInt64),
+      ]),
+      fcl.proposer(magic!.flow.authorization),
+      fcl.payer(magic!.flow.authorization),
+
+      // fcl.payer(fcl.currentUser),
+      // fcl.authorizations([adminAuthorizationFunction]),
+      fcl.authorizations([magic!.flow.authorization]),
+
+      fcl.limit(9999),
+    ]);
+
+    await fcl.tx(txId).onceSealed();
+  };
+
+  return {
+    handleCreateEvent,
+    getEvents,
+    createProject,
+    applyVoter,
+    approveVoter,
+    castVote,
+  };
 };
