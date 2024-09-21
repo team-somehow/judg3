@@ -36,7 +36,7 @@ class Event(models.Model):
     description = models.TextField()
     photo = models.URLField()
     created_at = models.DateTimeField(auto_now_add=True)
-    status = models.CharField(max_length=50, default='Active')
+    status = models.CharField(max_length=50, default='voters')
     creator = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):

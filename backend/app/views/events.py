@@ -9,7 +9,7 @@ from app.models import Event, Application
 class EventCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Event
-        fields = ['id', 'name', 'description', 'photo']
+        fields = ['id', 'name', 'description', 'photo', 'status']
 
     def create(self, validated_data):
         # Ensure the creator is set manually in the view
@@ -35,7 +35,6 @@ def get_all_events_noauth(request):
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def get_all_events_admin(request):
@@ -43,7 +42,6 @@ def get_all_events_admin(request):
     events = Event.objects.filter(creator=user)
     serializer = EventCreateSerializer(events, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
-
 
 
 @api_view(['GET'])
