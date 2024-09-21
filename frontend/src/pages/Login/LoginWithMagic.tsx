@@ -1,5 +1,5 @@
 import { enqueueSnackbar } from "notistack";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { Box, Button, CircularProgress, Typography } from "@mui/material";
@@ -7,8 +7,11 @@ import { Box, Button, CircularProgress, Typography } from "@mui/material";
 import useMagicLogin from "../../components/auth/magic/useLogin";
 import InputField from "../../components/shared/InputField";
 import { DynamicWidget } from "@dynamic-labs/sdk-react-core";
+import { useAuth } from "../../context/AuthContext";
 
 const LoginWithMagic = () => {
+  const { currentAuthSupply } = useAuth();
+
   const { handleOnLogin } = useMagicLogin();
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
@@ -36,7 +39,7 @@ const LoginWithMagic = () => {
         >
           <CircularProgress />
         </Box>
-      ) : (
+      ) : currentAuthSupply === "magic" ? (
         <form onSubmit={handleSubmit}>
           <Box
             sx={{
@@ -66,23 +69,25 @@ const LoginWithMagic = () => {
             <Button type="submit">Submit</Button>
           </Box>
         </form>
-      )}
+      ) : null}
 
-      <Box
-        width="100%"
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        mt={4}
-      >
-        <DynamicWidget
-          innerButtonComponent={
-            <Button variant="outlined" fullWidth>
-              Login with Dynamic
-            </Button>
-          }
-        />
-      </Box>
+      {currentAuthSupply === "dynamic" && (
+        <Box
+          width="100%"
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          mt={4}
+        >
+          <DynamicWidget
+            innerButtonComponent={
+              <Button variant="outlined" fullWidth>
+                Login with Dynamic
+              </Button>
+            }
+          />
+        </Box>
+      )}
     </>
   );
 };
