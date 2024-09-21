@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Avatar,
@@ -8,10 +8,10 @@ import {
   CardContent,
   Grid,
   Divider,
-} from '@mui/material';
-import { Link, Share } from '@mui/icons-material';
-import { enqueueSnackbar } from 'notistack';
-import axiosInstance from '../../config/axios';
+} from "@mui/material";
+import { Link, Share } from "@mui/icons-material";
+import { enqueueSnackbar } from "notistack";
+import axiosInstance from "../../config/axios";
 
 // Sample JSON data (you can replace this with data fetched from an API)
 
@@ -32,9 +32,10 @@ const VoterDetails: React.FC<Props> = ({ eventId }) => {
     const getVoters = async () => {
       try {
         const response = await axiosInstance.get(`voters/${eventId}`);
+        console.log("Voters:", response.data);
         setVoters(response.data);
       } catch (error) {
-        console.error('Error fetching voters:', error);
+        console.error("Error fetching voters:", error);
       }
     };
     getVoters();
@@ -72,9 +73,9 @@ const VoterDetails: React.FC<Props> = ({ eventId }) => {
     <Box>
       <Box
         sx={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
           mb: 1,
         }}
       >
@@ -83,11 +84,11 @@ const VoterDetails: React.FC<Props> = ({ eventId }) => {
         </Typography>
         <Box
           sx={{
-            display: 'flex',
-            alignItems: 'center',
-            bgcolor: 'rgba(255, 255, 255, 0.10)',
+            display: "flex",
+            alignItems: "center",
+            bgcolor: "rgba(255, 255, 255, 0.10)",
             p: 1,
-            borderRadius: '5px',
+            borderRadius: "5px",
           }}
         >
           <Link sx={{ mx: 1 }} />
@@ -98,9 +99,9 @@ const VoterDetails: React.FC<Props> = ({ eventId }) => {
             variant="contained"
             startIcon={<Share />}
             onClick={(e) => {
-              navigator.clipboard.writeText('https://3-cast.web.app');
-              enqueueSnackbar('Link copied to clipboard', {
-                variant: 'success',
+              navigator.clipboard.writeText("https://3-cast.web.app");
+              enqueueSnackbar("Link copied to clipboard", {
+                variant: "success",
               });
             }}
           >
@@ -113,22 +114,22 @@ const VoterDetails: React.FC<Props> = ({ eventId }) => {
       <Grid container spacing={2} sx={{ mt: 2 }}>
         {voters.map((voter) => (
           <Grid item xs={12} key={voter}>
-            <Card sx={{ display: 'flex', alignItems: 'center' }}>
+            <Card sx={{ display: "flex", alignItems: "center" }}>
               <CardContent
-                sx={{ display: 'flex', alignItems: 'center', width: '100%' }}
+                sx={{ display: "flex", alignItems: "center", width: "100%" }}
               >
-                <Avatar sx={{ bgcolor: 'purple', mr: 2 }}>
+                <Avatar sx={{ bgcolor: "purple", mr: 2 }}>
                   {voter.name.charAt(0)}
                 </Avatar>
                 <Box sx={{ flexGrow: 1 }}>
-                  <Typography variant="h6">{voter.name}</Typography>
-                  <Typography variant="body2">{voter.username}</Typography>
+                  <Typography variant="h6">{voter.voterId}</Typography>
+                  <Typography variant="body2">{voter.voterId}</Typography>
                 </Box>
                 <Box>
                   <Button
                     variant="contained"
                     color="success"
-                    onClick={() => handleAccept(voter.id)}
+                    onClick={() => handleAccept(voter.voterId)}
                     disabled={voter.accepted === true}
                   >
                     Accept
@@ -136,7 +137,7 @@ const VoterDetails: React.FC<Props> = ({ eventId }) => {
                   <Button
                     variant="outlined"
                     color="error"
-                    onClick={() => handleReject(voter.id)}
+                    onClick={() => handleReject(voter.voterId)}
                     sx={{ ml: 2 }}
                     disabled={voter.accepted === false}
                   >
