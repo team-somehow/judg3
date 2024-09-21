@@ -52,6 +52,11 @@ const AuthProvider = ({ children }: Props) => {
   }, []);
 
   useEffect(() => {
+    localStorage.getItem("hussainToken") &&
+      setToken(localStorage.getItem("hussainToken"));
+  }, []);
+
+  useEffect(() => {
     if (currentAuthSupply === "magic") {
       const fetchData = async () => {
         if (!magic) return console.error("Magic not initialized");

@@ -28,10 +28,9 @@ function VoterDashboard() {
 
   // Update the URL whenever the tabValue changes
   useEffect(() => {
-    const url = new URL(window.location.href);
-    url.searchParams.set("tab", tabValue === 1 ? "applied" : "upcoming");
-    window.history.pushState({}, "", url.toString());
-  }, [tabValue]);
+    const newTab = tabValue === 1 ? "applied" : "upcoming";
+    navigate(`?tab=${newTab}`, { replace: true });
+  }, [tabValue, navigate]);
 
   return (
     <Box sx={{ p: "2rem" }}>

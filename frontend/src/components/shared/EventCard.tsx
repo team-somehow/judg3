@@ -60,12 +60,15 @@ const EventCard: React.FC<EventCardProps> = ({
         // Navigate to the voting dashboard if the application was successful
         navigate(`/voter-dashboard/?tab=applied`);
         setTabValue && setTabValue(1);
+        setTabValue && setTabValue(1);
       } catch (error) {
+        console.error("Error applying to event:", error);
         console.error("Error applying to event:", error);
         // Handle any errors, such as showing a message to the user
       }
     } else {
       // If not authenticated, redirect to the login page
+      navigate("/login");
       navigate("/login");
     }
   };
@@ -94,6 +97,7 @@ const EventCard: React.FC<EventCardProps> = ({
         }
         title={name}
       />
+      <CardMedia component="img" height="180" image={photo} alt={"Image"} />
       <CardMedia component="img" height="180" image={photo} alt={"Image"} />
       <CardContent sx={{ p: 1 }}>
         <Typography
