@@ -1,110 +1,110 @@
 [
-    {
-        "name": "Manchester City",
-        "description": "Manchester City FC, led by manager Pep Guardiola, is a dominant force in English and European football. Known for their possession-based football, they have won numerous Premier League titles in recent years and lifted their first-ever UEFA Champions League trophy in 2023. Key players like Kevin De Bruyne, Erling Haaland, and Ruben Dias provide a strong spine for the team. In the 2023-24 season, City has scored an average of 2.4 goals per match, with Haaland leading the goal charts. They maintain a 65% average possession and boast a pass completion rate of 90%.",
-        "url": "https://www.mancity.com",
-        "photo": "https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg"
-    },
-    {
-        "name": "Real Madrid",
-        "description": "Real Madrid CF, the most successful club in Champions League history with 14 titles, continues to dominate European football. With a strong defensive record, they have kept 12 clean sheets in their last 18 matches. Vinícius Júnior and Rodrygo provide pace and flair upfront, while midfield maestro Luka Modric continues to pull the strings. Real Madrid maintains an impressive 72% pass accuracy in the final third and averages 2.1 goals per game. Their recent form has seen them reach the knockout stages with 5 wins in 6 group stage matches.",
-        "url": "https://www.realmadrid.com",
-        "photo": "https://upload.wikimedia.org/wikipedia/en/5/56/Real_Madrid_CF.svg"
-    },
-    {
-        "name": "Bayern Munich",
-        "description": "FC Bayern Munich is one of the powerhouses of European football, having won 6 UEFA Champions League titles. Their high-pressing style under manager Thomas Tuchel has resulted in a 68% win rate in the 2023-24 season. Key players like Joshua Kimmich, Jamal Musiala, and Leroy Sané have contributed to their success. Bayern’s defense, led by Dayot Upamecano, has conceded only 0.7 goals per match, while their attack boasts a 2.5 goal-per-game average. Their crossing accuracy is one of the highest in Europe, sitting at 28%.",
-        "url": "https://fcbayern.com",
-        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/FC_Bayern_M%C3%BCnchen_logo_%282017%29.svg/2048px-FC_Bayern_M%C3%BCnchen_logo_%282017%29.svg.png"
-    },
-    {
-        "name": "Paris Saint-Germain",
-        "description": "Paris Saint-Germain (PSG) has risen to prominence as one of the top teams in Europe, consistently reaching the knockout stages of the UEFA Champions League. Their 2023-24 campaign has been marked by strong offensive performances, with Kylian Mbappé and Neymar leading the charge. PSG averages 3.1 goals per game, the highest in the competition, and has a shot accuracy of 58%. Defensively, they have struggled at times, conceding an average of 1.2 goals per match, but the addition of Milan Škriniar has improved their backline stability.",
-        "url": "https://www.psg.fr",
-        "photo": "https://upload.wikimedia.org/wikipedia/en/a/a7/Paris_Saint-Germain_F.C..svg"
-    },
-    {
-        "name": "FC Barcelona",
-        "description": "FC Barcelona, under the leadership of Xavi Hernández, has returned to playing the trademark 'tiki-taka' football that defined their golden era. Despite a rocky couple of seasons, Barcelona is back in top form with players like Pedri, Frenkie de Jong, and Robert Lewandowski. Their defense has been solid, conceding only 0.8 goals per match, while Lewandowski has been crucial in attack with 22 goals in the current season. Barcelona’s passing accuracy is exceptional at 92%, with an average of 640 passes per match.",
-        "url": "https://www.fcbarcelona.com",
-        "photo": "https://upload.wikimedia.org/wikipedia/en/4/47/FC_Barcelona_%28crest%29.svg"
-    },
-    {
-        "name": "Liverpool",
-        "description": "Liverpool FC, managed by Jürgen Klopp, is renowned for its high-intensity pressing game and counter-attacking football. The club has reached two Champions League finals in the last five years, winning one in 2019. Mohamed Salah continues to be the team's talisman, contributing 25 goals in the 2023-24 season. Defensively, Virgil van Dijk anchors the backline, leading to a defensive record of 0.9 goals conceded per match. Their counter-attack efficiency is among the best in Europe, with an average of 2.3 goals per match.",
-        "url": "https://www.liverpoolfc.com",
-        "photo": "https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg"
-    },
-    {
-        "name": "Juventus",
-        "description": "Juventus FC, led by coach Massimiliano Allegri, is known for their defensive discipline and structured approach. Despite their struggles in Serie A, Juventus continues to be a threat in European competitions. The team has a strong defensive record, conceding only 0.7 goals per match in the 2023-24 Champions League campaign. Federico Chiesa has been a standout performer in attack, providing key goals and assists. Juventus also excels in set pieces, converting 24% of their corners into goals, one of the highest rates in the tournament.",
-        "url": "https://www.juventus.com",
-        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Juventus_Logo.png/1200px-Juventus_Logo.png"
-    },
-    {
-        "name": "Chelsea",
-        "description": "Chelsea FC, under the management of Mauricio Pochettino, remains a competitive force in European football. The club won the UEFA Champions League in 2021 and continues to boast a solid squad. With Raheem Sterling and Enzo Fernández leading the attack, Chelsea has averaged 1.9 goals per game this season. Defensively, they have conceded 1.1 goals per match, with Édouard Mendy pulling off numerous crucial saves. Their possession stats remain strong at 64%, and they have an 87% pass completion rate.",
-        "url": "https://www.chelseafc.com",
-        "photo": "https://upload.wikimedia.org/wikipedia/en/c/cc/Chelsea_FC.svg"
-    },
-    {
-        "name": "Atletico Madrid",
-        "description": "Atletico Madrid, under manager Diego Simeone, is famed for its resolute defense and counter-attacking style. Known for grinding out tough results, Atletico has a solid defensive record with an average of 0.6 goals conceded per game. João Félix and Antoine Griezmann lead the attack, while Jan Oblak remains one of the best goalkeepers in Europe. Their physical style of play, combined with their ability to win duels in midfield, has resulted in a win rate of 71% in the 2023-24 Champions League.",
-        "url": "https://en.atleticodemadrid.com",
-        "photo": "https://upload.wikimedia.org/wikipedia/en/thumb/f/f9/Atletico_Madrid_Logo_2024.svg/640px-Atletico_Madrid_Logo_2024.svg.png"
-    },
-    {
-        "name": "Inter Milan",
-        "description": "Inter Milan, managed by Simone Inzaghi, has had a resurgence in European competitions. Their disciplined defense and clinical finishing have seen them consistently perform in the Champions League. Lautaro Martínez has been pivotal in attack, scoring 17 goals this season. Defensively, they have conceded only 0.9 goals per match. With a pass completion rate of 85% and an average possession of 60%, Inter Milan has controlled many of their matches, making them one of the most dangerous teams in the knockout stages.",
-        "url": "https://www.inter.it/en",
-        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/FC_Internazionale_Milano_2021.svg/2048px-FC_Internazionale_Milano_2021.svg.png"
-    },
-    {
-        "name": "AC Milan",
-        "description": "AC Milan, one of Europe's most decorated clubs, is back in the top tier of European football after a few rebuilding years. Known for their solid defensive play and clinical counter-attacks, Milan reached the semifinals in the 2022-23 season. Theo Hernández and Rafael Leão have been standout performers, with Leão contributing 16 goals in the 2023-24 season. Milan's defensive unit, anchored by Fikayo Tomori, has kept 8 clean sheets this season. Their possession averages 53%, and they are known for their tactical flexibility.",
-        "url": "https://www.acmilan.com",
-        "photo": "https://upload.wikimedia.org/wikipedia/commons/d/d0/Logo_of_AC_Milan.svg"
-    },
-    {
-        "name": "Borussia Dortmund",
-        "description": "Borussia Dortmund, under manager Edin Terzić, is known for their attacking prowess and exciting young talents. Their high pressing game has seen them score an average of 2.2 goals per match in the 2023-24 season. Jude Bellingham has been a revelation in midfield, contributing with both goals and assists. Dortmund's defense, led by Mats Hummels, has been more inconsistent, with the team conceding an average of 1.4 goals per match. Despite defensive struggles, their fast, attacking style keeps them competitive in every game.",
-        "url": "https://www.bvb.de",
-        "photo": "https://upload.wikimedia.org/wikipedia/commons/6/67/Borussia_Dortmund_logo.svg"
-    },
-    {
-        "name": "Tottenham Hotspur",
-        "description": "Tottenham Hotspur, led by manager Ange Postecoglou, has been striving to regain their status as a European contender. Harry Kane continues to be their standout player, contributing 28 goals in the 2023-24 season. Spurs' defense has been inconsistent, with an average of 1.3 goals conceded per match. However, their attack, led by Kane and Heung-Min Son, has been among the most efficient in the Premier League, averaging 2.0 goals per match. Their counter-attacking style remains a dangerous weapon in knockout competitions.",
-        "url": "https://www.tottenhamhotspur.com",
-        "photo": "https://upload.wikimedia.org/wikipedia/en/b/b4/Tottenham_Hotspur.svg"
-    },
-    {
-        "name": "RB Leipzig",
-        "description": "RB Leipzig, one of the rising powers in German football, continues to impress under the management of Marco Rose. Their pressing game and youthful energy have seen them reach the knockout stages in consecutive Champions League campaigns. Christopher Nkunku has been instrumental in their attack, scoring 19 goals this season. Defensively, they have conceded an average of 1.0 goals per match, with Willi Orban leading the backline. Leipzig’s possession and passing game have improved significantly, boasting an average possession of 61%.",
-        "url": "https://rbleipzig.com",
-        "photo": "https://upload.wikimedia.org/wikipedia/en/0/04/RB_Leipzig_2014_logo.svg"
-    },
-    {
-        "name": "Sevilla",
-        "description": "Sevilla FC, known for their Europa League dominance, remains a tough competitor in the Champions League. Their defensive organization, led by Jules Koundé, has kept them competitive in Europe’s top competition. Sevilla’s attack is led by Youssef En-Nesyri, who has scored 14 goals this season. Their midfield, with Ivan Rakitić pulling the strings, controls games through a 58% average possession rate. Despite some inconsistency in form, Sevilla remains one of the most feared teams in European knockout stages due to their tactical discipline.",
-        "url": "https://www.sevillafc.es",
-        "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVzCarOTONpNZuTntLZwUu79_GlK5GGW5OAQ&s"
-    },
-    {
-        "name": "Napoli",
-        "description": "SSC Napoli, led by manager Rudi Garcia, has enjoyed a resurgence in European competitions. Known for their dynamic attacking style, Napoli averages 2.6 goals per match in the 2023-24 season. Victor Osimhen and Khvicha Kvaratskhelia form a lethal partnership up front, combining for 32 goals in the season. Napoli’s defense, led by Kalidou Koulibaly, has been solid, conceding just 0.9 goals per game. Their high-pressing game and fast transitions make them a formidable opponent for any team in Europe.",
-        "url": "https://www.sscnapoli.it",
-        "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxZ03wd8-wu2tU_Jb43NkLuvs22Z5RoBUt3w&s"
-    },
-    {
-        "name": "Ajax",
-        "description": "Ajax Amsterdam, known for their famed youth academy and attacking football, remains a competitive team in Europe. Ajax’s possession-based football has seen them control games, with an average possession rate of 64%. Steven Bergwijn and Dusan Tadic lead the attack, with Bergwijn scoring 15 goals this season. Ajax’s defense has been inconsistent, conceding 1.2 goals per match, but their high pressing and passing accuracy of 88% make them dangerous in transitions and attacking play.",
-        "url": "https://www.ajax.nl",
-        "photo": "https://upload.wikimedia.org/wikipedia/en/7/79/Ajax_Amsterdam.svg"
-    },
-    {
-        "name": "AS Roma",
-        "description": "AS Roma, led by manager José Mourinho, has been a tough competitor in European football. Known for their defensive structure and tactical discipline, Roma reached the final of the UEFA Europa League in the 2022-23 season. Their attack, led by Paulo Dybala and Tammy Abraham, has been clinical in key moments, averaging 1.8 goals per game. Defensively, Roma has been solid, conceding just 0.8 goals per match, and their organization under Mourinho makes them a tough opponent in any knockout scenario.",
-        "url": "https://www.asroma.com",
-        "photo": "https://upload.wikimedia.org/wikipedia/en/thumb/f/f7/AS_Roma_logo_%282017%29.svg/1200px-AS_Roma_logo_%282017%29.svg.png"
-    }
+  {
+      "name": "Manchester City",
+      "description": "Manchester City FC, led by manager Pep Guardiola, is a dominant force in English and European football. Known for their possession-based football, they have won numerous Premier League titles in recent years and lifted their first-ever UEFA Champions League trophy in 2023. Key players like Kevin De Bruyne, Erling Haaland, and Ruben Dias provide a strong spine for the team. In the 2023-24 season, City has scored an average of 2.4 goals per match, with Haaland leading the goal charts. They maintain a 65% average possession and boast a pass completion rate of 90%.",
+      "url": "https://www.mancity.com",
+      "photo": "https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg"
+  },
+  {
+      "name": "Real Madrid",
+      "description": "Real Madrid CF, the most successful club in Champions League history with 14 titles, continues to dominate European football. With a strong defensive record, they have kept 12 clean sheets in their last 18 matches. Vinícius Júnior and Rodrygo provide pace and flair upfront, while midfield maestro Luka Modric continues to pull the strings. Real Madrid maintains an impressive 72% pass accuracy in the final third and averages 2.1 goals per game. Their recent form has seen them reach the knockout stages with 5 wins in 6 group stage matches.",
+      "url": "https://www.realmadrid.com",
+      "photo": "https://upload.wikimedia.org/wikipedia/en/5/56/Real_Madrid_CF.svg"
+  },
+  {
+      "name": "Bayern Munich",
+      "description": "FC Bayern Munich is one of the powerhouses of European football, having won 6 UEFA Champions League titles. Their high-pressing style under manager Thomas Tuchel has resulted in a 68% win rate in the 2023-24 season. Key players like Joshua Kimmich, Jamal Musiala, and Leroy Sané have contributed to their success. Bayern’s defense, led by Dayot Upamecano, has conceded only 0.7 goals per match, while their attack boasts a 2.5 goal-per-game average. Their crossing accuracy is one of the highest in Europe, sitting at 28%.",
+      "url": "https://fcbayern.com",
+      "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/FC_Bayern_M%C3%BCnchen_logo_%282017%29.svg/2048px-FC_Bayern_M%C3%BCnchen_logo_%282017%29.svg.png"
+  },
+  {
+      "name": "Paris Saint-Germain",
+      "description": "Paris Saint-Germain (PSG) has risen to prominence as one of the top teams in Europe, consistently reaching the knockout stages of the UEFA Champions League. Their 2023-24 campaign has been marked by strong offensive performances, with Kylian Mbappé and Neymar leading the charge. PSG averages 3.1 goals per game, the highest in the competition, and has a shot accuracy of 58%. Defensively, they have struggled at times, conceding an average of 1.2 goals per match, but the addition of Milan Škriniar has improved their backline stability.",
+      "url": "https://www.psg.fr",
+      "photo": "https://upload.wikimedia.org/wikipedia/en/a/a7/Paris_Saint-Germain_F.C..svg"
+  },
+  {
+      "name": "FC Barcelona",
+      "description": "FC Barcelona, under the leadership of Xavi Hernández, has returned to playing the trademark 'tiki-taka' football that defined their golden era. Despite a rocky couple of seasons, Barcelona is back in top form with players like Pedri, Frenkie de Jong, and Robert Lewandowski. Their defense has been solid, conceding only 0.8 goals per match, while Lewandowski has been crucial in attack with 22 goals in the current season. Barcelona’s passing accuracy is exceptional at 92%, with an average of 640 passes per match.",
+      "url": "https://www.fcbarcelona.com",
+      "photo": "https://upload.wikimedia.org/wikipedia/en/4/47/FC_Barcelona_%28crest%29.svg"
+  },
+  {
+      "name": "Liverpool",
+      "description": "Liverpool FC, managed by Jürgen Klopp, is renowned for its high-intensity pressing game and counter-attacking football. The club has reached two Champions League finals in the last five years, winning one in 2019. Mohamed Salah continues to be the team's talisman, contributing 25 goals in the 2023-24 season. Defensively, Virgil van Dijk anchors the backline, leading to a defensive record of 0.9 goals conceded per match. Their counter-attack efficiency is among the best in Europe, with an average of 2.3 goals per match.",
+      "url": "https://www.liverpoolfc.com",
+      "photo": "https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg"
+  },
+  {
+      "name": "Juventus",
+      "description": "Juventus FC, led by coach Massimiliano Allegri, is known for their defensive discipline and structured approach. Despite their struggles in Serie A, Juventus continues to be a threat in European competitions. The team has a strong defensive record, conceding only 0.7 goals per match in the 2023-24 Champions League campaign. Federico Chiesa has been a standout performer in attack, providing key goals and assists. Juventus also excels in set pieces, converting 24% of their corners into goals, one of the highest rates in the tournament.",
+      "url": "https://www.juventus.com",
+      "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Juventus_Logo.png/1200px-Juventus_Logo.png"
+  },
+  {
+      "name": "Chelsea",
+      "description": "Chelsea FC, under the management of Mauricio Pochettino, remains a competitive force in European football. The club won the UEFA Champions League in 2021 and continues to boast a solid squad. With Raheem Sterling and Enzo Fernández leading the attack, Chelsea has averaged 1.9 goals per game this season. Defensively, they have conceded 1.1 goals per match, with Édouard Mendy pulling off numerous crucial saves. Their possession stats remain strong at 64%, and they have an 87% pass completion rate.",
+      "url": "https://www.chelseafc.com",
+      "photo": "https://upload.wikimedia.org/wikipedia/en/c/cc/Chelsea_FC.svg"
+  },
+  {
+      "name": "Atletico Madrid",
+      "description": "Atletico Madrid, under manager Diego Simeone, is famed for its resolute defense and counter-attacking style. Known for grinding out tough results, Atletico has a solid defensive record with an average of 0.6 goals conceded per game. João Félix and Antoine Griezmann lead the attack, while Jan Oblak remains one of the best goalkeepers in Europe. Their physical style of play, combined with their ability to win duels in midfield, has resulted in a win rate of 71% in the 2023-24 Champions League.",
+      "url": "https://en.atleticodemadrid.com",
+      "photo": "https://upload.wikimedia.org/wikipedia/en/thumb/f/f9/Atletico_Madrid_Logo_2024.svg/640px-Atletico_Madrid_Logo_2024.svg.png"
+  },
+  {
+      "name": "Inter Milan",
+      "description": "Inter Milan, managed by Simone Inzaghi, has had a resurgence in European competitions. Their disciplined defense and clinical finishing have seen them consistently perform in the Champions League. Lautaro Martínez has been pivotal in attack, scoring 17 goals this season. Defensively, they have conceded only 0.9 goals per match. With a pass completion rate of 85% and an average possession of 60%, Inter Milan has controlled many of their matches, making them one of the most dangerous teams in the knockout stages.",
+      "url": "https://www.inter.it/en",
+      "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/FC_Internazionale_Milano_2021.svg/2048px-FC_Internazionale_Milano_2021.svg.png"
+  },
+  {
+      "name": "AC Milan",
+      "description": "AC Milan, one of Europe's most decorated clubs, is back in the top tier of European football after a few rebuilding years. Known for their solid defensive play and clinical counter-attacks, Milan reached the semifinals in the 2022-23 season. Theo Hernández and Rafael Leão have been standout performers, with Leão contributing 16 goals in the 2023-24 season. Milan's defensive unit, anchored by Fikayo Tomori, has kept 8 clean sheets this season. Their possession averages 53%, and they are known for their tactical flexibility.",
+      "url": "https://www.acmilan.com",
+      "photo": "https://upload.wikimedia.org/wikipedia/commons/d/d0/Logo_of_AC_Milan.svg"
+  },
+  {
+      "name": "Borussia Dortmund",
+      "description": "Borussia Dortmund, under manager Edin Terzić, is known for their attacking prowess and exciting young talents. Their high pressing game has seen them score an average of 2.2 goals per match in the 2023-24 season. Jude Bellingham has been a revelation in midfield, contributing with both goals and assists. Dortmund's defense, led by Mats Hummels, has been more inconsistent, with the team conceding an average of 1.4 goals per match. Despite defensive struggles, their fast, attacking style keeps them competitive in every game.",
+      "url": "https://www.bvb.de",
+      "photo": "https://upload.wikimedia.org/wikipedia/commons/6/67/Borussia_Dortmund_logo.svg"
+  },
+  {
+      "name": "Tottenham Hotspur",
+      "description": "Tottenham Hotspur, led by manager Ange Postecoglou, has been striving to regain their status as a European contender. Harry Kane continues to be their standout player, contributing 28 goals in the 2023-24 season. Spurs' defense has been inconsistent, with an average of 1.3 goals conceded per match. However, their attack, led by Kane and Heung-Min Son, has been among the most efficient in the Premier League, averaging 2.0 goals per match. Their counter-attacking style remains a dangerous weapon in knockout competitions.",
+      "url": "https://www.tottenhamhotspur.com",
+      "photo": "https://upload.wikimedia.org/wikipedia/en/b/b4/Tottenham_Hotspur.svg"
+  },
+  {
+      "name": "RB Leipzig",
+      "description": "RB Leipzig, one of the rising powers in German football, continues to impress under the management of Marco Rose. Their pressing game and youthful energy have seen them reach the knockout stages in consecutive Champions League campaigns. Christopher Nkunku has been instrumental in their attack, scoring 19 goals this season. Defensively, they have conceded an average of 1.0 goals per match, with Willi Orban leading the backline. Leipzig’s possession and passing game have improved significantly, boasting an average possession of 61%.",
+      "url": "https://rbleipzig.com",
+      "photo": "https://upload.wikimedia.org/wikipedia/en/0/04/RB_Leipzig_2014_logo.svg"
+  },
+  {
+      "name": "Sevilla",
+      "description": "Sevilla FC, known for their Europa League dominance, remains a tough competitor in the Champions League. Their defensive organization, led by Jules Koundé, has kept them competitive in Europe’s top competition. Sevilla’s attack is led by Youssef En-Nesyri, who has scored 14 goals this season. Their midfield, with Ivan Rakitić pulling the strings, controls games through a 58% average possession rate. Despite some inconsistency in form, Sevilla remains one of the most feared teams in European knockout stages due to their tactical discipline.",
+      "url": "https://www.sevillafc.es",
+      "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVzCarOTONpNZuTntLZwUu79_GlK5GGW5OAQ&s"
+  },
+  {
+      "name": "Napoli",
+      "description": "SSC Napoli, led by manager Rudi Garcia, has enjoyed a resurgence in European competitions. Known for their dynamic attacking style, Napoli averages 2.6 goals per match in the 2023-24 season. Victor Osimhen and Khvicha Kvaratskhelia form a lethal partnership up front, combining for 32 goals in the season. Napoli’s defense, led by Kalidou Koulibaly, has been solid, conceding just 0.9 goals per game. Their high-pressing game and fast transitions make them a formidable opponent for any team in Europe.",
+      "url": "https://www.sscnapoli.it",
+      "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxZ03wd8-wu2tU_Jb43NkLuvs22Z5RoBUt3w&s"
+  },
+  {
+      "name": "Ajax",
+      "description": "Ajax Amsterdam, known for their famed youth academy and attacking football, remains a competitive team in Europe. Ajax’s possession-based football has seen them control games, with an average possession rate of 64%. Steven Bergwijn and Dusan Tadic lead the attack, with Bergwijn scoring 15 goals this season. Ajax’s defense has been inconsistent, conceding 1.2 goals per match, but their high pressing and passing accuracy of 88% make them dangerous in transitions and attacking play.",
+      "url": "https://www.ajax.nl",
+      "photo": "https://upload.wikimedia.org/wikipedia/en/7/79/Ajax_Amsterdam.svg"
+  },
+  {
+      "name": "AS Roma",
+      "description": "AS Roma, led by manager José Mourinho, has been a tough competitor in European football. Known for their defensive structure and tactical discipline, Roma reached the final of the UEFA Europa League in the 2022-23 season. Their attack, led by Paulo Dybala and Tammy Abraham, has been clinical in key moments, averaging 1.8 goals per game. Defensively, Roma has been solid, conceding just 0.8 goals per match, and their organization under Mourinho makes them a tough opponent in any knockout scenario.",
+      "url": "https://www.asroma.com",
+      "photo": "https://upload.wikimedia.org/wikipedia/en/thumb/f/f7/AS_Roma_logo_%282017%29.svg/1200px-AS_Roma_logo_%282017%29.svg.png"
+  }
 ]

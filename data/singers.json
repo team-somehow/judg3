@@ -1,0 +1,122 @@
+[
+    {
+      "name": "Taylor Swift",
+      "description": "An American singer-songwriter known for her narrative songwriting and evolving musical styles, ranging from country to pop and indie folk.",
+      "url": "https://en.wikipedia.org/wiki/Taylor_Swift",
+      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Taylor_Swift_at_the_2023_MTV_Video_Music_Awards_4.png/440px-Taylor_Swift_at_the_2023_MTV_Video_Music_Awards_4.png"
+    },
+    {
+      "name": "Adele",
+      "description": "An English singer-songwriter known for her powerful vocals and deeply emotional ballads, often centered around themes of heartbreak and relationships.",
+      "url": "https://en.wikipedia.org/wiki/Adele",
+      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/5/52/Adele_for_Vogue_in_2021.png"
+    },
+    {
+      "name": "Drake",
+      "description": "A Canadian rapper, singer, and actor known for blending rap and R&B, with themes often focused on fame, relationships, and success.",
+      "url": "https://en.wikipedia.org/wiki/Drake_(musician)",
+      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Drake_July_2016.jpg/440px-Drake_July_2016.jpg"
+    },
+    {
+      "name": "Beyoncé",
+      "description": "An American singer, songwriter, and actress known for her powerhouse vocals, stage presence, and cultural impact.",
+      "url": "https://en.wikipedia.org/wiki/Beyonc%C3%A9",
+      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Beyonc%C3%A9_-_Tottenham_Hotspur_Stadium_-_1st_June_2023_%285_of_118%29_%2852945900006%29_%28cropped_2%29.jpg/440px-Beyonc%C3%A9_-_Tottenham_Hotspur_Stadium_-_1st_June_2023_%285_of_118%29_%2852945900006%29_%28cropped_2%29.jpg"
+    },
+    {
+      "name": "Ed Sheeran",
+      "description": "An English singer-songwriter known for his acoustic pop and soulful voice, often centered on love and personal experiences.",
+      "url": "https://en.wikipedia.org/wiki/Ed_Sheeran",
+      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Ed_Sheeran-6886_%28cropped%29.jpg/440px-Ed_Sheeran-6886_%28cropped%29.jpg"
+    },
+    {
+      "name": "Rihanna",
+      "description": "A Barbadian singer, songwriter, and businesswoman known for her versatility across genres such as pop, R&B, and reggae.",
+      "url": "https://en.wikipedia.org/wiki/Rihanna",
+      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Rihanna_Fenty_2024_02.jpg/440px-Rihanna_Fenty_2024_02.jpg"
+    },
+    {
+      "name": "Billie Eilish",
+      "description": "An American singer-songwriter known for her distinctive vocal style and dark, avant-pop music, capturing themes of melancholy and introspection.",
+      "url": "https://en.wikipedia.org/wiki/Billie_Eilish",
+      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Billie_Eilish_Vogue_2023.jpg/440px-Billie_Eilish_Vogue_2023.jpg"
+    },
+    {
+      "name": "The Weeknd",
+      "description": "A Canadian singer-songwriter and record producer known for his genre-blending style of pop, R&B, and alternative, often exploring themes of hedonism and melancholy.",
+      "url": "https://en.wikipedia.org/wiki/The_Weeknd",
+      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/The_Weeknd_Cannes_2023.png/440px-The_Weeknd_Cannes_2023.png"
+    },
+    {
+      "name": "Lady Gaga",
+      "description": "An American singer, songwriter, and actress known for her flamboyant stage presence, genre versatility, and social activism.",
+      "url": "https://en.wikipedia.org/wiki/Lady_Gaga",
+      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Lady_Gaga_at_Joe_Biden%27s_inauguration_%28cropped_5%29.jpg/440px-Lady_Gaga_at_Joe_Biden%27s_inauguration_%28cropped_5%29.jpg"
+    },
+    {
+      "name": "Bruno Mars",
+      "description": "An American singer-songwriter and record producer known for his wide vocal range and blending of pop, funk, R&B, and soul genres.",
+      "url": "https://en.wikipedia.org/wiki/Bruno_Mars",
+      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Bruno_Mars_-_24K_Magic_Tour_%2837320927992%29_%28cropped%29.jpg/440px-Bruno_Mars_-_24K_Magic_Tour_%2837320927992%29_%28cropped%29.jpg"
+    },
+    {
+      "name": "Kendrick Lamar",
+      "description": "An American rapper, songwriter, and record producer known for his socially conscious lyrics and narrative-driven hip-hop.",
+      "url": "https://en.wikipedia.org/wiki/Kendrick_Lamar",
+      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Pulitzer2018-portraits-kendrick-lamar.jpg/440px-Pulitzer2018-portraits-kendrick-lamar.jpg"
+    },
+    {
+      "name": "Ariana Grande",
+      "description": "An American singer, songwriter, and actress known for her powerful vocals and wide vocal range, often blending pop and R&B styles.",
+      "url": "https://en.wikipedia.org/wiki/Ariana_Grande",
+      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Ariana_Grande_at_the_Met_Gala_2024_%281%29.jpg/440px-Ariana_Grande_at_the_Met_Gala_2024_%281%29.jpg"
+    },
+    {
+      "name": "Katy Perry",
+      "description": "An American singer-songwriter known for her upbeat pop anthems, colorful performances, and chart-topping hits.",
+      "url": "https://en.wikipedia.org/wiki/Katy_Perry",
+      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Katy_Perry_for_Vogue_Magazine%2C_2023_%28cropped%29.png/440px-Katy_Perry_for_Vogue_Magazine%2C_2023_%28cropped%29.png"
+    },
+    {
+      "name": "Post Malone",
+      "description": "An American rapper, singer, and songwriter known for his unique blend of hip-hop, R&B, and rock influences.",
+      "url": "https://en.wikipedia.org/wiki/Post_Malone",
+      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Post_Malone_July_2021_%28cropped%29.jpg/440px-Post_Malone_July_2021_%28cropped%29.jpg"
+    },
+    {
+      "name": "Shawn Mendes",
+      "description": "A Canadian singer-songwriter known for his soulful pop ballads and acoustic guitar-driven sound.",
+      "url": "https://en.wikipedia.org/wiki/Shawn_Mendes",
+      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/191125_Shawn_Mendes_at_the_2019_American_Music_Awards.png/440px-191125_Shawn_Mendes_at_the_2019_American_Music_Awards.png"
+    },
+    {
+      "name": "Travis Scott",
+      "description": "An American rapper, singer, and record producer known for his eclectic production style and auto-tuned vocal delivery, often focusing on trap and psychedelic music.",
+      "url": "https://en.wikipedia.org/wiki/Travis_Scott",
+      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Travis_Scott_-_Openair_Frauenfeld_2019_08.jpg/440px-Travis_Scott_-_Openair_Frauenfeld_2019_08.jpg"
+    },
+    {
+      "name": "Lizzo",
+      "description": "An American singer, rapper, and flutist known for her empowering songs, body positivity messages, and energetic performances.",
+      "url": "https://en.wikipedia.org/wiki/Lizzo",
+      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Glasto2023_%28181_of_468%29_%2853009327490%29_%28cropped%29.jpg/440px-Glasto2023_%28181_of_468%29_%2853009327490%29_%28cropped%29.jpg"
+    },
+    {
+      "name": "Harry Styles",
+      "description": "An English singer, songwriter, and actor known for his versatile sound and fashion-forward image, formerly a member of the boy band One Direction.",
+      "url": "https://en.wikipedia.org/wiki/Harry_Styles",
+      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/HarryStyles2013-corte2.png/340px-HarryStyles2013-corte2.png"
+    },
+    {
+      "name": "Dua Lipa",
+      "description": "An English singer and songwriter known for her distinctive vocal style, blending pop with electronic and dance music.",
+      "url": "https://en.wikipedia.org/wiki/Dua_Lipa",
+      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Glasto24_28_300624_%28259_of_545%29_%2853838014719%29_%28cropped%29.jpg/440px-Glasto24_28_300624_%28259_of_545%29_%2853838014719%29_%28cropped%29.jpg"
+    },
+    {
+      "name": "SZA",
+      "description": "An American singer-songwriter known for her soulful voice and eclectic mix of R&B, hip-hop, and neo-soul, often focusing on themes of self-discovery and empowerment.",
+      "url": "https://en.wikipedia.org/wiki/SZA_(singer)",
+      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Glaston2024_2806_300624_%28158_of_173%29_%2853836776232%29_%28cropped%29.jpg/440px-Glaston2024_2806_300624_%28158_of_173%29_%2853836776232%29_%28cropped%29.jpg"
+    }
+  ]
