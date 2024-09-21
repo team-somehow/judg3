@@ -30,11 +30,13 @@ interface LeaderboardRow {
 type Props = {
   title?: string;
   eventId?: string;
+  hideTop?: boolean;
 };
 
 const Leaderboard: React.FC<Props> = ({
   title = 'Live Leaderboard',
   eventId,
+  hideTop = false,
 }) => {
   const { id } = useParams<{ id: string }>();
 
@@ -58,53 +60,32 @@ const Leaderboard: React.FC<Props> = ({
   }, [id, eventId]);
 
   return (
-    <Box sx={{ padding: 4 }}>
+    <Box sx={{ padding: 4, height: '80vh' }}>
       <Typography variant="h4" align="center" fontWeight="900" gutterBottom>
         {title}
       </Typography>
 
       {/* Top 3 Teams Section */}
-      <Container
-        maxWidth="md"
-        sx={{
-          display: 'flex',
-          justifyContent: 'space-around',
-          marginBottom: 4,
-        }}
-      >
-        {leaderboardData.slice(0, 3).map((entry, rank) => (
-          <GradientCard
-            key={rank}
-            style={{
-              width: '100%',
-              height: 200,
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              margin: '0 10px',
-            }}
-          >
-            <Avatar
-              sx={{
-                bgcolor: 'primary.main',
-                color: 'white',
-                fontWeight: '900',
-                scale: 1.5,
-                mt: 2,
-              }}
-            >
-              {rank + 1}
-            </Avatar>
-            <Card
-              sx={{
-                display: 'flex',
-                flexDirection: 'row',
-                alignItems: 'center',
-                marginTop: 2,
+      {!hideTop && (
+        <Container
+          maxWidth="md"
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-around',
+            marginBottom: 4,
+          }}
+        >
+          {leaderboardData.slice(0, 3).map((entry, rank) => (
+            <GradientCard
+              key={rank}
+              style={{
                 width: '100%',
-                gap: 2,
-                p: 1,
+                height: 200,
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                margin: '0 10px',
               }}
             >
               <Avatar
@@ -112,31 +93,54 @@ const Leaderboard: React.FC<Props> = ({
                   bgcolor: 'primary.main',
                   color: 'white',
                   fontWeight: '900',
-                }}
-                src={entry.project.photo}
-              />
-              <Box
-                sx={{
-                  width: '100%',
+                  scale: 1.5,
+                  mt: 2,
                 }}
               >
-                <Typography variant="subtitle2">
-                  {entry.project.name}
-                </Typography>
-                <Button
-                  color="primary"
-                  onClick={() => {
-                    window.open(entry.project.url, '_blank');
+                {rank + 1}
+              </Avatar>
+              <Card
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  marginTop: 2,
+                  width: '100%',
+                  gap: 2,
+                  p: 1,
+                }}
+              >
+                <Avatar
+                  sx={{
+                    bgcolor: 'primary.main',
+                    color: 'white',
+                    fontWeight: '900',
                   }}
-                  startIcon={<Link />}
+                  src={entry.project.photo}
+                />
+                <Box
+                  sx={{
+                    width: '100%',
+                  }}
                 >
-                  Project
-                </Button>
-              </Box>
-            </Card>
-          </GradientCard>
-        ))}
-      </Container>
+                  <Typography variant="subtitle2">
+                    {entry.project.name}
+                  </Typography>
+                  <Button
+                    color="primary"
+                    onClick={() => {
+                      window.open(entry.project.url, '_blank');
+                    }}
+                    startIcon={<Link />}
+                  >
+                    Project
+                  </Button>
+                </Box>
+              </Card>
+            </GradientCard>
+          ))}
+        </Container>
+      )}
 
       <GradientCard
         style={{
@@ -158,7 +162,12 @@ const Leaderboard: React.FC<Props> = ({
                   justifyContent: 'space-between',
                 }}
               >
-                <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                  }}
+                >
                   <Avatar
                     sx={{
                       bgcolor: 'primary.main',
@@ -182,17 +191,30 @@ const Leaderboard: React.FC<Props> = ({
                     <Typography variant="body2" color="text.secondary">
                       {entry.project.description.trim().slice(0, 100)}...
                     </Typography>
+                    {hideTop && (
+                      <Button
+                        color="primary"
+                        startIcon={<Link />}
+                        onClick={() => {
+                          window.open(entry.project.url, '_blank');
+                        }}
+                      >
+                        Project Link
+                      </Button>
+                    )}
                   </Box>
                 </Box>
-                <Button
-                  color="primary"
-                  startIcon={<Link />}
-                  onClick={() => {
-                    window.open(entry.project.url, '_blank');
-                  }}
-                >
-                  Project Link
-                </Button>
+                {!hideTop && (
+                  <Button
+                    color="primary"
+                    startIcon={<Link />}
+                    onClick={() => {
+                      window.open(entry.project.url, '_blank');
+                    }}
+                  >
+                    Project Link
+                  </Button>
+                )}
               </Card>
             </Grid>
           ))}

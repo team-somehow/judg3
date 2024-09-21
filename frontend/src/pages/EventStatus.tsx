@@ -135,7 +135,7 @@ function EventStatus({}: Props) {
             }}
           >
             {showLeaderboard ? (
-              <Leaderboard title="Final Leaderboard" eventId={eventID} />
+              <Leaderboard title="Final Leaderboard" eventId={eventID} hideTop />
             ) : (
               <Typography variant="h6" fontWeight="500" mt={2}>
                 Leaderboard will appear here once you click "View Leaderboard."
