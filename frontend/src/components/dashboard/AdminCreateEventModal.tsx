@@ -1,15 +1,16 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback } from "react";
 import {
   Box,
   Button,
   TextField,
   Typography,
   CircularProgress,
-} from '@mui/material';
-import CustomModal from '../shared/CustomModal';
-import { uploadFileToFirebase } from '../../utils/uploadFile';
-import axiosInstance from '../../config/axios';
-import { enqueueSnackbar } from 'notistack';
+} from "@mui/material";
+import CustomModal from "../shared/CustomModal";
+import { uploadFileToFirebase } from "../../utils/uploadFile";
+import axiosInstance from "../../config/axios";
+import { enqueueSnackbar } from "notistack";
+import { useFlowInteraction } from "../../hooks/useFlowInteraction";
 
 interface AdminCreateEventModalProps {
   open: boolean;
@@ -21,12 +22,13 @@ const AdminCreateEventModal: React.FC<AdminCreateEventModalProps> = ({
   handleClose,
 }) => {
   const [formData, setFormData] = useState({
-    eventName: '',
-    description: '',
+    eventName: "",
+    description: "",
     image: null as File | null,
     imageURL: null as string | null,
     uploading: false,
   });
+  const { handleCreateEvent, getEvents } = useFlowInteraction();
 
   // Handle input changes for text fields
   const handleInputChange = useCallback(
@@ -65,39 +67,42 @@ const AdminCreateEventModal: React.FC<AdminCreateEventModalProps> = ({
           uploading: false,
         }));
       } else {
-        throw new Error('Failed to upload the image.');
+        throw new Error("Failed to upload the image.");
       }
     } catch (error) {
-      console.error('Error uploading image:', error);
+      console.error("Error uploading image:", error);
       setFormData((prevData) => ({
         ...prevData,
         uploading: false,
       }));
     }
   };
+  getEvents();
 
   // Handle form submission
   const handleFormSubmit = async () => {
     if (!formData.eventName || !formData.description || !formData.imageURL) {
-      enqueueSnackbar('Please fill in all fields.', { variant: 'error' });
+      enqueueSnackbar("Please fill in all fields.", { variant: "error" });
       return;
     }
     console.log("trg", formData);
-    
+
     try {
-      const response = await axiosInstance.post('/event/', {
+      const response = await axiosInstance.post("/event/", {
         name: formData.eventName,
         description: formData.description,
         photo: formData.imageURL,
       });
 
       if (response.status === 201) {
-        enqueueSnackbar('Event created successfully.', { variant: 'success' });
+        enqueueSnackbar("Event created successfully.", { variant: "success" });
+        await handleCreateEvent();
+
         handleClose();
       }
     } catch (error) {
-      console.error('Error creating event:', error);
-      enqueueSnackbar('Failed to create event.', { variant: 'error' });
+      console.error("Error creating event:", error);
+      enqueueSnackbar("Failed to create event.", { variant: "error" });
     }
   };
 
@@ -119,7 +124,7 @@ const AdminCreateEventModal: React.FC<AdminCreateEventModalProps> = ({
                 {formData.uploading ? (
                   <CircularProgress size={24} />
                 ) : (
-                  'Upload Photo'
+                  "Upload Photo"
                 )}
                 <input type="file" hidden onChange={handleImageChange} />
               </Button>
@@ -130,7 +135,7 @@ const AdminCreateEventModal: React.FC<AdminCreateEventModalProps> = ({
                 component="img"
                 src={formData.imageURL}
                 alt="Uploaded Image Preview"
-                sx={{ width: '100%', height: 'auto', borderRadius: '5px' }}
+                sx={{ width: "100%", height: "auto", borderRadius: "5px" }}
               />
               <Typography variant="body2" color="text.secondary" mb={2}>
                 Image uploaded successfully.

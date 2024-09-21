@@ -131,6 +131,18 @@ init() {
         self.events[eventId]!.projectIds.append(projectId)
     }
 
+    access(all) fun addVoter(
+        eventId: UInt64,
+        voter: Address,
+    ){
+        let currentEvent: VotingSystem2.EventData = self.events[eventId] ?? panic("Event does not exist")
+        if let voterDict: {Address: VotingSystem2.Voter} = self.eventVoters[eventId] {
+            voterDict[voter] = VotingSystem2.Voter(isApproved: false, hasVoted: false)
+        } else {
+            panic("Event not found")
+        }
+    }
+
 access(all) fun approveVoter(
     eventId: UInt64,
     voter: Address,

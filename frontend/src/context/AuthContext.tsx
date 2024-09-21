@@ -1,7 +1,7 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
-import { useMagic } from '../components/auth/magic/MagicContext';
-import Loading from '../components/ui/Loading';
-import { useDynamicWallet } from '../components/auth/dynamic/dynamicHooks';
+import React, { createContext, useContext, useEffect, useState } from "react";
+import { useMagic } from "../components/auth/magic/MagicContext";
+import Loading from "../components/ui/Loading";
+import { useDynamicWallet } from "../components/auth/dynamic/dynamicHooks";
 
 type Props = {
   children: React.ReactNode;
@@ -19,15 +19,15 @@ export const AuthContext = createContext<AuthContextType>({
   setToken: () => {},
   address: null,
   setAddress: () => {},
-  currentAuthSupply: '',
+  currentAuthSupply: "",
 });
 
 // eslint-disable-next-line react-refresh/only-export-components,
 export const useAuth = () => useContext(AuthContext);
 
 const AuthProvider = ({ children }: Props) => {
-  const [currentAuthSupply, setCurrentSupply] = useState<'magic' | 'dynamic'>(
-    'magic'
+  const [currentAuthSupply, setCurrentSupply] = useState<"magic" | "dynamic">(
+    "magic"
   );
 
   const [token, setToken] = useState<string | null>(null);
@@ -39,16 +39,16 @@ const AuthProvider = ({ children }: Props) => {
     useDynamicWallet();
 
   useEffect(() => {
-    if (currentAuthSupply === 'magic') {
+    if (currentAuthSupply === "magic") {
       const fetchData = async () => {
-        if (!magic) return console.error('Magic not initialized');
+        if (!magic) return console.error("Magic not initialized");
         try {
-          console.log('Fetching user metadata');
+          console.log("Fetching user metadata");
 
           setLoading(true);
           const m = await magic.user.getMetadata();
           setAddress(m.publicAddress!);
-          setToken(localStorage.getItem('token')!);
+          setToken(localStorage.getItem("token")!);
 
           setLoading(false);
         } catch (error) {
@@ -62,7 +62,7 @@ const AuthProvider = ({ children }: Props) => {
   }, [currentAuthSupply, magic, setAddress, setToken]);
 
   useEffect(() => {
-    if (currentAuthSupply === 'dynamic') {
+    if (currentAuthSupply === "dynamic") {
       setLoading(true);
       if (dynamicAddress) {
         setAddress(dynamicAddress);
