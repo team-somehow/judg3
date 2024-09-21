@@ -1,34 +1,38 @@
+import { VeraxSdk } from "@verax-attestation-registry/verax-sdk";
 import dotenv from "dotenv";
-import { http, createPublicClient } from "viem";
 
 dotenv.config();
 
-const rpcUrl = process.env.LINEA_TESTNET_URL;
+// Log the configuration to verify
+console.log("Using Linea Sepolia Configuration");
 
-if (!rpcUrl) {
-    throw new Error("RPC URL is missing from .env. Make sure LINEA_TESTNET_URL is defined.");
+// Instantiate Verax SDK with the DEFAULT_LINEA_SEPOLIA_FRONTEND configuration
+const veraxSdk = new VeraxSdk(VeraxSdk.DEFAULT_LINEA_SEPOLIA);
+
+async function createPortalAndSchema() {
+    try {
+        console.log("Creating schema and portal...");
+
+        // Define a simple schema for the voting system
+        const schemaId = "0xSchema123";  // Replace with actual schema creation logic
+
+        // Deploy a portal using the DEFAULT_LINEA_SEPOLIA_FRONTEND configuration
+        const portalTxHash = await veraxSdk.portal.deployDefaultPortal(
+            [], 
+            "VotingSystem Portal", 
+            "Portal for voting attestations", 
+            true, 
+            "VotingSystemOwner"  
+        );
+
+        console.log("Portal created successfully with transaction hash:", portalTxHash);
+
+        // Returning the schema ID and portal ID (example portal ID, replace with actual logic)
+        return { schemaId, portalId: "0xPortal456" };
+    } catch (error) {
+        console.error("Error creating portal and schema:", error);
+        throw error;
+    }
 }
 
-console.log("Using RPC URL:", rpcUrl);
-
-// Simulate realistic public client setup using RPC URL
-const publicClient = createPublicClient({
-    chain: { id: 59140, name: "Linea Testnet" },
-    transport: http(rpcUrl),
-});
-
-async function createPortal() {
-    console.log("Simulating Portal creation...");
-
-    // Simulating realistic portal creation logic
-    const schemaId = "0xSchema123";  // Simulated schema ID
-    const portalId = "0xPortal456";  // Simulated portal ID
-
-    console.log(`Simulated Schema ID: ${schemaId}`);
-    console.log(`Simulated Portal ID: ${portalId}`);
-
-    // Returning realistic values
-    return { portalId, schemaId };
-}
-
-export { createPortal };
+export { createPortalAndSchema };

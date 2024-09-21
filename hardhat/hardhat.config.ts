@@ -30,6 +30,12 @@ const config: HardhatUserConfig = {
       url: process.env.LINEA_TESTNET_URL || "",
       accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
     },
+    oasisTestnet: {
+      url: process.env.OASIS_TESTNET_URL || "https://testnet.emerald.oasis.dev",
+      accounts: process.env.PRIVATE_KEY
+        ? [process.env.PRIVATE_KEY]
+        : [],
+    },
   },
 };
 
