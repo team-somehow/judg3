@@ -5,28 +5,52 @@ from django.db import models
 
 
 class UserManager(BaseUserManager):
-    def create_user(self, world_id_user_hash):
-        user = self.model(world_id_user_hash=world_id_user_hash)
+    def create_user(self, world_id_user_hash, password=None, **extra_fields):
+        """
+        Creates and saves a User with the given world_id_user_hash and password.
+        """
+        if not world_id_user_hash:
+            raise ValueError("The world_id_user_hash field must be set")
+
+        user = self.model(
+            world_id_user_hash=world_id_user_hash, **extra_fields)
+        user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, world_id_user_hash):
-        user = self.create_user(world_id_user_hash)
-        user.is_admin = True
-        user.save(using=self._db)
-        return user
+    def create_superuser(self, world_id_user_hash, password=None, **extra_fields):
+        """
+        Creates and saves a superuser with the given world_id_user_hash and password.
+        """
+        extra_fields.setdefault('is_admin', True)
+        extra_fields.setdefault('is_superuser', True)
+        extra_fields.setdefault('is_staff', True)
+
+        if extra_fields.get('is_superuser') is not True:
+            raise ValueError('Superuser must have is_superuser=True.')
+        if extra_fields.get('is_staff') is not True:
+            raise ValueError('Superuser must have is_staff=True.')
+
+        return self.create_user(world_id_user_hash, password, **extra_fields)
 
 
 class User(AbstractBaseUser):
     world_id_user_hash = models.CharField(max_length=255, unique=True)
-    is_verified = models.BooleanField(
-        default=False)
+    is_verified = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
+    is_superuser = models.BooleanField(default=False)  # Add this
+    is_staff = models.BooleanField(default=False)  # Add this
 
     objects = UserManager()
 
     USERNAME_FIELD = 'world_id_user_hash'
+
+    def has_perm(self, perm, obj=None):
+        return self.is_superuser
+
+    def has_module_perms(self, app_label):
+        return self.is_superuser
 
 # events
 
