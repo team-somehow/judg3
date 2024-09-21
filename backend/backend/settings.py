@@ -9,10 +9,16 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
+import os
+import environ
 from pathlib import Path
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+env = environ.Env()
+environ.Env.read_env()
 
 APP_ID = 'app_staging_28318b7225dd14787048a5add1940b4b'
 ACTION_ID = 'login'
@@ -24,7 +30,7 @@ ACTION_ID = 'login'
 SECRET_KEY = 'django-insecure-tdqr4%er*0l8s%uz%691ziy=mk!(h!cmz%4)4*wws4%!ipa6(y'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -95,9 +101,24 @@ REST_FRAMEWORK = {
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
+    # }
+    "default": {
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": env("DB_NAME"),  # Or replace with your database name
+        "USER": env("DB_USER"),  # Or replace with your MySQL username
+        "PASSWORD": env("DB_PASSWORD"),  # Or replace with your MySQL password
+        "HOST": env("DB_HOST"),  # Or replace with your MySQL server host
+        "PORT": 3306,
+        "OPTIONS": {
+            "sql_mode": "traditional",
+            'ssl': {
+                # Ensure this points to your downloaded certificate
+                'ca': os.path.join(BASE_DIR, './cashkaka-prod-db-certificate.pem'),
+            },
+        },
     }
 }
 

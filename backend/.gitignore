@@ -1,0 +1,15 @@
+.DS_Store
+node_modules
+virt
+.env
+__pycache__
+.vscode/
+cashkaka.pem
+.env.backup
+cashkaka-dev.pem
+static
+pagekite.py
+CashKakaProdVM_key.pem
+setup.md
+cashkaka-prod-db-certificate.pem
+celerybeat-schedule
