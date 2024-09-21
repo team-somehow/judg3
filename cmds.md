@@ -77,10 +77,19 @@ Vote: https://github.com/privacy-scaling-explorations/maci-platform/blob/main/pa
 
 - each param of voting hot or not
 
-
 # morph
 
 - upvote and downvote
 - weighted votes
 - social aspect - comments, likes
 - voting loyalty
+
+## dynamic
+
+- best meme coin
+- who should be your class head
+- general consumer facing use case
+- fun stuff that applies to a lot of people
+- presentation should include
+- prevention of sybil attacks
+- prevention of bots
