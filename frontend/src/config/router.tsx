@@ -1,55 +1,56 @@
-import { createBrowserRouter, Outlet } from "react-router-dom";
+import { createBrowserRouter, Outlet } from 'react-router-dom';
 
-import { Box } from "@mui/material";
+import { Box } from '@mui/material';
 
-import Navbar from "../components/shared/Navbar";
-import Home from "../pages/Home";
-import NotFound from "../pages/NotFound";
-import LoginWithMina from "../pages/Login/LoginWithMagic";
-import LoginWrapper from "../pages/Login/LoginWrapper";
-import LoginWithWorldCoin from "../pages/Login/LoginWithWorldCoin";
-import Dashboard from "../pages/Dashboard";
-import VoterDashboard from "../pages/VoterDashboard";
-import Applications from "../pages/Applications";
-import VotingSystem from "../components/voter/Voting";
-import VoterLeaderboard from "../pages/VoterLeaderboard";
-import AuthWrapper from "../components/ui/AuthWrapper";
+import Navbar from '../components/shared/Navbar';
+import Home from '../pages/Home';
+import NotFound from '../pages/NotFound';
+import LoginWithMina from '../pages/Login/LoginWithMagic';
+import LoginWrapper from '../pages/Login/LoginWrapper';
+import LoginWithWorldCoin from '../pages/Login/LoginWithWorldCoin';
+import Dashboard from '../pages/Dashboard';
+import VoterDashboard from '../pages/VoterDashboard';
+import Applications from '../pages/Applications';
+import VotingSystem from '../components/voter/Voting';
+import VoterLeaderboard from '../pages/VoterLeaderboard';
+import AuthWrapper from '../components/ui/AuthWrapper';
+import UploadProject from '../pages/UploadProject';
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: (
-      <Box sx={{ minHeight: "100svh" }}>
+      <Box sx={{ minHeight: '100svh' }}>
         <Navbar />
         <Outlet />
       </Box>
     ),
     children: [
       {
-        path: "/",
+        path: '/',
         element: <Home />,
       },
       {
-        path: "/login",
+        path: '/login',
         element: <LoginWrapper />,
         children: [
           {
-            path: "",
+            path: '',
             element: <LoginWithMina />,
           },
           {
-            path: "verify",
+            path: 'verify',
             element: <LoginWithWorldCoin />,
           },
           {
-            path: "*",
+            path: '*',
             element: <NotFound />,
           },
         ],
       },
       // ADMIN ROUTES
       {
-        path: "/dashboard",
+        path: '/dashboard',
         element: (
           <AuthWrapper>
             <Outlet />
@@ -57,18 +58,22 @@ const router = createBrowserRouter([
         ),
         children: [
           {
-            path: "",
+            path: '',
             element: <Dashboard />,
           },
           {
-            path: "applications/:id",
+            path: 'applications/:id',
             element: <Applications />,
+          },
+          {
+            path: 'upload-project/:id',
+            element: <UploadProject />,
           },
         ],
       },
       // VOTER ROUTES
       {
-        path: "/voter-dashboard",
+        path: '/voter-dashboard',
         element: (
           <AuthWrapper>
             <Outlet />
@@ -76,11 +81,11 @@ const router = createBrowserRouter([
         ),
         children: [
           {
-            path: "",
+            path: '',
             element: <VoterDashboard />,
           },
           {
-            path: "voting/:id",
+            path: 'voting/:id',
             element: <VotingSystem />,
           },
           {
@@ -92,7 +97,7 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "*",
+    path: '*',
     element: <NotFound />,
   },
 ]);
