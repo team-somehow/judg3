@@ -40,8 +40,9 @@ def get_all_events_noauth(request):
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def get_all_events_admin(request):
-    user = request.user  # Get the authenticated user
-    events = Event.objects.filter(creator=user)
+    user = request.user
+    events = Event.objects.filter(
+        creator=user, creator__chain_of_address=user.chain_of_address)
     serializer = EventCreateSerializer(events, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -49,22 +50,18 @@ def get_all_events_admin(request):
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def get_all_events_with_status(request):
-    user = request.user  # Get the authenticated user
-    events = Event.objects.all()  # Get all events
-
+    user = request.user
+    events = Event.objects.filter(
+        creator__chain_of_address=user.chain_of_address)
     events_data = []
 
     for event in events:
-        # Check if the user has applied to this event
         is_applied = Application.objects.filter(
             user=user, event=event).exists()
         status1 = "applied" if is_applied else "not_applied"
-
-        # Serialize the event
         event_serializer = EventCreateSerializer(event)
         event_data = event_serializer.data
-        event_data['status'] = status1  # Add the application status
-
+        event_data['status'] = status1
         events_data.append(event_data)
 
     return Response(events_data, status=status.HTTP_200_OK)

@@ -42,6 +42,9 @@ class User(AbstractBaseUser):
     is_superuser = models.BooleanField(default=False)  # Add this
     is_staff = models.BooleanField(default=False)  # Add this
 
+    user_address = models.CharField(max_length=255)
+    chain_of_address = models.CharField(max_length=255)
+
     objects = UserManager()
 
     USERNAME_FIELD = 'world_id_user_hash'

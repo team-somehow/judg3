@@ -18,6 +18,9 @@ class WorldIDInputSerializer(serializers.Serializer):
     action = serializers.CharField(required=True)
     signal_hash = serializers.CharField(required=False)
 
+    user_address = serializers.CharField(required=True)
+    chain_of_address = serializers.CharField(required=True)
+
 
 @api_view(['POST'])
 def verify_world_id(request):
@@ -34,8 +37,12 @@ def verify_world_id(request):
         verification_level = validated_data['verification_level']
         action = validated_data['action']
 
+        user_address = validated_data.get('user_address')
+        chain_of_address = validated_data.get('chain_of_address')
+
         user, created = User.objects.get_or_create(
-            world_id_user_hash=nullifier_hash)
+            world_id_user_hash=nullifier_hash, user_address=user_address, chain_of_address=chain_of_address)
+
         if user.is_verified:
 
             token, _ = Token.objects.get_or_create(user=user)

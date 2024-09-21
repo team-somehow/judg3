@@ -25,9 +25,10 @@ def get_voters(request, event_id):
     # Get all applications (voters) for the event
     applications = Application.objects.filter(event=event)
 
-    # Prepare the voter data with voter_id and status
+    # Prepare the voter data with voter_id, status, and user_address
     voters_data = [{"voter_id": application.user.id,
-                    "status": application.status} for application in applications]
+                    "status": application.status,
+                    "user_address": application.user.user_address} for application in applications]
 
     return Response(voters_data, status=status.HTTP_200_OK)
 
