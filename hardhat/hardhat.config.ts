@@ -36,6 +36,10 @@ const config: HardhatUserConfig = {
         ? [process.env.PRIVATE_KEY]
         : [],
     },
+    polygonAmoy: {
+      url: process.env.POLYGON_AMOY_TESTNET_URL || "",
+      accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
+    },
   },
 };
 
