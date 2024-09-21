@@ -4,7 +4,7 @@ import { Box, CircularProgress } from "@mui/material";
 import axiosInstance from "../../config/axios";
 import { useNavigate } from "react-router-dom";
 
-interface EventStatus {
+export interface EventStatus {
   id: number;
   name: string;
   description: string;
