@@ -100,7 +100,7 @@ Our team is composed of highly passionate developers, data scientists, and block
 ## Team Members:- 
   - **Hussain Pettiwala** - **Backend Development**
   - **Gaurish Baliga** - **Backend Development**
-  - **PargatSingh Abadaba Dhanjal** - **Full Stack Development**
+  - **PargatSingh Dhanjal** - **Full Stack Development**
   - **Rahul Dandona** - **Backend and Smart Contracts Devlopment**
 
 
