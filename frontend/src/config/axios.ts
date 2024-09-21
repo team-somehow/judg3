@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_BACKEND_BASE_URL,
@@ -6,12 +6,10 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   (config) => {
-    // const token = localStorage.getItem('token');
-    // if (token) {
-    config.headers[
-      'Authorization'
-    ] = `Token 1b4e2b2766177a14c95d5a7fbf85257d5729310c`;
-    // }
+    const token = localStorage.getItem("token");
+    if (token) {
+      config.headers["Authorization"] = `Token ${token}`;
+    }
     return config;
   },
   (error) => {

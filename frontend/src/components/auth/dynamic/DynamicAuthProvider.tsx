@@ -1,6 +1,9 @@
 import { EthereumWalletConnectors } from "@dynamic-labs/ethereum";
 import { ZeroDevSmartWalletConnectors } from "@dynamic-labs/ethereum-aa";
-import { DynamicContextProvider } from "@dynamic-labs/sdk-react-core";
+import {
+  DynamicContextProvider,
+  getAuthToken,
+} from "@dynamic-labs/sdk-react-core";
 import { DynamicWagmiConnector } from "@dynamic-labs/wagmi-connector";
 import { QueryClientProvider } from "@tanstack/react-query";
 
@@ -18,6 +21,14 @@ function DynamicAuthProvider({ children }: { children: React.ReactNode }) {
             EthereumWalletConnectors,
             ZeroDevSmartWalletConnectors,
           ],
+          events: {
+            onAuthSuccess: (args) => {
+              console.log("onAuthSuccess was called", args);
+              const authToken = getAuthToken();
+              console.log("authToken", authToken);
+              window.location.href = "/login/verify";
+            },
+          },
         }}
       >
         <WagmiProvider config={config}>
