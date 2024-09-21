@@ -1,5 +1,5 @@
 import { useReadContract, useWriteContract } from "wagmi";
-import VotingSystemContract from "../../../../hardhat/artifacts/contracts/VotingSystem.sol/VotingSystem.json";
+import VotingSystemContract from "../../artifacts/contracts/VotingSystem.sol/VotingSystem.json";
 import { useDynamicWallet } from "../../components/auth/dynamic/dynamicHooks";
 const useMorphInteractions = () => {
   const { address } = useDynamicWallet();
@@ -102,8 +102,6 @@ const useMorphInteractions = () => {
       console.error("Error adding voter to event:", error);
     }
   };
-
-  console.log(data);
 
   return {
     handleCreateEventMorph,

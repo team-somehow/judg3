@@ -19,11 +19,16 @@ interface Hackathon {
 const Home: React.FC = () => {
   const [hackathons, setHackathons] = useState<Hackathon[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const { setAddress, setToken, token } = useAuth();
+  const { setAddress, setToken, token, currentAuthSupply } = useAuth();
+
   const navigate = useNavigate();
   const { magic } = useMagic();
 
   useEffect(() => {
+    if (currentAuthSupply === "dynamic") {
+      setToken(localStorage.getItem("token")!);
+      return;
+    }
     const fetchData = async () => {
       if (!magic) return console.error("Magic not initialized");
       try {
@@ -32,7 +37,7 @@ const Home: React.FC = () => {
         setLoading(true);
         const m = await magic.user.getMetadata();
         setAddress(m.publicAddress!);
-        // setToken(localStorage.getItem("jwtToken")!);
+        // setToken(localStorage.getItem("token")!);
 
         setLoading(false);
       } catch (error) {
@@ -93,6 +98,8 @@ const Home: React.FC = () => {
         }
         onClick={() => {
           console.log("Organise Voting");
+          console.log(token);
+
           if (token) {
             navigate("/dashboard");
           } else {
