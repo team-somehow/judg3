@@ -23,7 +23,7 @@ const Dashboard: React.FC = () => {
     <Box sx={{ p: '2rem' }}>
       <Container maxWidth="lg">
         <Typography variant="h4" fontWeight="600" gutterBottom>
-          Events
+          Orgraniser Events
         </Typography>
 
         <Tabs
@@ -50,7 +50,7 @@ const Dashboard: React.FC = () => {
           />
         </Tabs>
 
-        <GradientCard style={{ minHeight: '70vh', p: 2 }}>
+        <GradientCard style={{ minHeight: '70vh', p: 2, height: '100%' }}>
           <Button
             variant="outlined"
             startIcon={<Add />}

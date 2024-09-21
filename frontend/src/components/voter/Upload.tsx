@@ -1,40 +1,39 @@
-import React, { useEffect, useState } from "react";
-import { Box, Typography, Button, Divider, TextField } from "@mui/material";
-import { Link, Share } from "@mui/icons-material";
-import { enqueueSnackbar } from "notistack";
-import axiosInstance from "../../config/axios";
-import Loading from "../ui/Loading";
-import { useFlowInteraction } from "../../hooks/useFlowInteraction";
-import useMorphInteractions from "../../hooks/morph/useMorphInteractions";
-import { useAuth } from "../../context/AuthContext";
+import React, { useState } from 'react';
+import { Box, Typography, Button, Divider, TextField } from '@mui/material';
+import { Link, Share } from '@mui/icons-material';
+import { enqueueSnackbar } from 'notistack';
+import axiosInstance from '../../config/axios';
+import { useFlowInteraction } from '../../hooks/useFlowInteraction';
+import useMorphInteractions from '../../hooks/morph/useMorphInteractions';
+import { useAuth } from '../../context/AuthContext';
 
 type Props = {
   eventId: string;
 };
 
-interface Voter {
-  voter_id: number;
-  status: string;
-}
+// interface Voter {
+//   voter_id: number;
+//   status: string;
+// }
 
 const Upload: React.FC<Props> = ({ eventId }) => {
-  const [voters, setVoters] = useState<Voter[]>();
-  const [jsonField, setJsonField] = useState(""); // State to track TextField value
+  // const [voters, setVoters] = useState<Voter[]>();
+  const [jsonField, setJsonField] = useState(''); // State to track TextField value
   const { createProject } = useFlowInteraction();
   const { currentAuthSupply } = useAuth();
   const { handleAddProject } = useMorphInteractions();
-  useEffect(() => {
-    const getVoters = async () => {
-      try {
-        const response = await axiosInstance.get(`voters/${eventId}`);
-        console.log("Voters:", response.data);
-        setVoters(response.data);
-      } catch (error) {
-        console.error("Error fetching voters:", error);
-      }
-    };
-    getVoters();
-  }, [eventId]);
+  // useEffect(() => {
+  //   const getVoters = async () => {
+  //     try {
+  //       const response = await axiosInstance.get(`voters/${eventId}`);
+  //       console.log("Voters:", response.data);
+  //       setVoters(response.data);
+  //     } catch (error) {
+  //       console.error("Error fetching voters:", error);
+  //     }
+  //   };
+  //   getVoters();
+  // }, [eventId]);
 
   // Handle input change for the JSON field
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -46,62 +45,62 @@ const Upload: React.FC<Props> = ({ eventId }) => {
     try {
       const parsedJson = JSON.parse(jsonField); // Parse the JSON field
       if (!Array.isArray(parsedJson)) {
-        enqueueSnackbar("Invalid JSON format", {
-          variant: "error",
+        enqueueSnackbar('Invalid JSON format', {
+          variant: 'error',
         });
         return;
       }
 
       for (const project of parsedJson) {
         try {
-          const response = await axiosInstance.post("/project", project); // Post each project
+          const response = await axiosInstance.post('/project', project); // Post each project
 
-          console.log("system", eventId, response.data["project_id"]);
+          console.log('system', eventId, response.data['project_id']);
           {
-            currentAuthSupply === "magic" &&
+            currentAuthSupply === 'magic' &&
               (await createProject({
                 eventId: eventId,
-                projectId: response.data["project_id"].toString(),
+                projectId: response.data['project_id'].toString(),
               }));
           }
           {
-            currentAuthSupply === "morph" &&
+            currentAuthSupply === 'morph' &&
               (await handleAddProject({
                 eventId: eventId,
-                projectId: response.data["project_id"].toString(),
+                projectId: response.data['project_id'].toString(),
               }));
           }
 
-          console.log("Project uploaded:", response.data);
+          console.log('Project uploaded:', response.data);
         } catch (error) {
           console.error(`Error uploading project ${project.name}:`, error);
           enqueueSnackbar(`Error uploading project ${project.name}`, {
-            variant: "error",
+            variant: 'error',
           });
         }
       }
       enqueueSnackbar(`Projects uploaded successfully`, {
-        variant: "success",
+        variant: 'success',
       });
     } catch (error) {
-      console.error("Error parsing JSON or uploading project:", error);
-      enqueueSnackbar("Error parsing JSON or uploading project", {
-        variant: "error",
+      console.error('Error parsing JSON or uploading project:', error);
+      enqueueSnackbar('Error parsing JSON or uploading project', {
+        variant: 'error',
       });
     }
   };
 
-  if (!voters) {
-    return <Loading loading={true} />;
-  }
+  // if (!voters) {
+  //   return <Loading loading={true} />;
+  // }
 
   return (
     <Box>
       <Box
         sx={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
           mb: 1,
         }}
       >
@@ -120,7 +119,7 @@ const Upload: React.FC<Props> = ({ eventId }) => {
         fontWeight="bold"
         mt={3}
         sx={{
-          color: "text.primary",
+          color: 'text.primary',
         }}
       >
         1. Implement Webhook Url
@@ -131,12 +130,12 @@ const Upload: React.FC<Props> = ({ eventId }) => {
       </Typography>
       <Box
         sx={{
-          display: "flex",
-          alignItems: "center",
-          bgcolor: "rgba(255, 255, 255, 0.10)",
+          display: 'flex',
+          alignItems: 'center',
+          bgcolor: 'rgba(255, 255, 255, 0.10)',
           p: 1,
-          borderRadius: "5px",
-          width: "400px",
+          borderRadius: '5px',
+          width: '400px',
           mt: 2,
         }}
       >
@@ -147,14 +146,14 @@ const Upload: React.FC<Props> = ({ eventId }) => {
         <Button
           variant="contained"
           startIcon={<Share />}
-          onClick={(e) => {
-            navigator.clipboard.writeText("https://judg3.web.app");
-            enqueueSnackbar("Link copied to clipboard", {
-              variant: "success",
+          onClick={() => {
+            navigator.clipboard.writeText('https://judg3.web.app');
+            enqueueSnackbar('Link copied to clipboard', {
+              variant: 'success',
             });
           }}
           sx={{
-            width: "100%",
+            width: '100%',
           }}
         >
           Copy Link
@@ -166,7 +165,7 @@ const Upload: React.FC<Props> = ({ eventId }) => {
         fontWeight="bold"
         mt={3}
         sx={{
-          color: "text.primary",
+          color: 'text.primary',
         }}
       >
         2. Upload Projects Json
@@ -177,7 +176,7 @@ const Upload: React.FC<Props> = ({ eventId }) => {
       </Typography>
       <Box
         sx={{
-          display: "flex",
+          display: 'flex',
           gap: 2,
           mt: 2,
         }}

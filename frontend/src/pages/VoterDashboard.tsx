@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Typography, Container, Tabs, Tab } from '@mui/material';
 import GradientCard from '../components/ui/GradientCard';
 import Bg from '../components/ui/Bg';
@@ -15,11 +15,17 @@ function VoterDashboard() {
     setTabValue(newValue);
   };
 
+  useEffect(() => {
+    const url = new URL(window.location.href);
+    url.searchParams.set('tab', tabValue === 1 ? 'applied' : 'upcoming');
+    window.history.pushState({}, '', url.toString());
+  }, [tabValue]);
+
   return (
     <Box sx={{ p: '2rem' }}>
       <Container maxWidth="lg">
-        <Typography variant="h4" fontWeight="600">
-          Events
+        <Typography variant="h4" fontWeight="600" gutterBottom>
+          Voter Events
         </Typography>
 
         {/* Tabs for switching between Live and Past events */}

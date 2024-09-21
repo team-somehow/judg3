@@ -57,7 +57,7 @@ const StatusCard: React.FC<StatusCardProps> = ({
         borderRadius: '10px',
         width: '100%',
         transition: '0.3s all ease-in-out',
-        height: '300px',
+        height: '310px',
         // cursor: "pointer",
         // "&:hover": {
         //   bgcolor: "rgba(255, 255, 255, 0.30)",
@@ -115,6 +115,11 @@ const StatusCard: React.FC<StatusCardProps> = ({
             color="text.secondary"
             sx={{
               whiteSpace: 'pre-wrap',
+              height: '50px',
+              overflow: 'auto',
+              bgcolor: 'rgba(255, 255, 255, 0.10)',
+              p: 1,
+              borderRadius: '5px',
             }}
           >
             {description}

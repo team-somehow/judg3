@@ -32,15 +32,15 @@ const EventCard: React.FC<EventCardProps> = ({
   const { currentAuthSupply } = useAuth();
 
   const handleButtonClick = async (eventId: number) => {
-    console.log("Button clicked", eventId);
+    console.log('Button clicked', eventId);
 
     if (token) {
       // If the user is authenticated, apply to the event
       try {
-        const response = await axiosInstance.post("/voter-apply-event/", {
+        const response = await axiosInstance.post('/voter-apply-event/', {
           event_id: eventId,
         });
-        console.log("Application successful:", response.data);
+        console.log('Application successful:', response.data);
         {
           currentAuthSupply === "magic" &&
             applyVoter({ eventId: eventId.toString() });
@@ -53,12 +53,12 @@ const EventCard: React.FC<EventCardProps> = ({
         // Navigate to the voting dashboard if the application was successful
         navigate(`/voter-dashboard/?tab=applied`);
       } catch (error) {
-        console.error("Error applying to event:", error);
+        console.error('Error applying to event:', error);
         // Handle any errors, such as showing a message to the user
       }
     } else {
       // If not authenticated, redirect to the login page
-      navigate("/login");
+      navigate('/login');
     }
   };
 
@@ -66,8 +66,9 @@ const EventCard: React.FC<EventCardProps> = ({
     <Card
       sx={{
         maxWidth: 345,
-        textAlign: "start",
+        textAlign: 'start',
         minWidth: 345,
+        height: '400px',
       }}
     >
       <CardHeader
@@ -75,7 +76,7 @@ const EventCard: React.FC<EventCardProps> = ({
           <Avatar
             aria-label="logo"
             sx={{
-              bgcolor: "primary.main",
+              bgcolor: 'primary.main',
               width: 40,
               height: 40,
             }}
@@ -85,11 +86,17 @@ const EventCard: React.FC<EventCardProps> = ({
         }
         title={name}
       />
-      <CardMedia component="img" height="194" image={photo} alt={"Image"} />
-      <CardContent>
+      <CardMedia component="img" height="180" image={photo} alt={'Image'} />
+      <CardContent sx={{ p: 1 }}>
         <Typography
-          variant="body2"
-          sx={{ color: "text.secondary", whiteSpace: "pre-wrap" }}
+          variant="subtitle2"
+          sx={{
+            color: 'text.secondary',
+            whiteSpace: 'pre-wrap',
+            height: '80px',
+            overflow: 'auto',
+            borderRadius: '5px',
+          }}
         >
           {description}
         </Typography>
