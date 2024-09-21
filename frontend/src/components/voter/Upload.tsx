@@ -129,13 +129,13 @@ const Upload: React.FC<Props> = ({ eventId }) => {
       >
         <Link sx={{ mx: 1 }} />
         <Typography variant="body1" sx={{ mr: 2 }}>
-          https://3-cast.web.app
+          https://judg3.web.app
         </Typography>
         <Button
           variant="contained"
           startIcon={<Share />}
           onClick={(e) => {
-            navigator.clipboard.writeText('https://3-cast.web.app');
+            navigator.clipboard.writeText('https://judg3.web.app');
             enqueueSnackbar('Link copied to clipboard', {
               variant: 'success',
             });
