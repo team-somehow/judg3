@@ -73,7 +73,9 @@ function EventDashboard() {
   const renderLeftLayout = () => {
     switch (event?.status) {
       case "voters":
-        return <VoterDetails eventId={id} />;
+        return (
+          <VoterDetails eventId={id} blockChainId={event.blockchain_event_id} />
+        );
       case "project":
         return <Upload eventId={id} />; // Example component
       case "active":

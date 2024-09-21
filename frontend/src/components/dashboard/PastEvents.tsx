@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import StatusCard from './StatusCard';
-import { Box, Skeleton, Typography } from '@mui/material';
-import axiosInstance from '../../config/axios';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import StatusCard from "./StatusCard";
+import { Box, Skeleton, Typography } from "@mui/material";
+import axiosInstance from "../../config/axios";
+import { useNavigate } from "react-router-dom";
 
 export interface EventStatus {
   id: number;
@@ -10,6 +10,7 @@ export interface EventStatus {
   description: string;
   photo: string;
   status: string;
+  blockchain_event_id: string;
 }
 
 const PastEvents: React.FC = () => {
@@ -21,13 +22,13 @@ const PastEvents: React.FC = () => {
     const fetchEvents = async () => {
       try {
         setLoading(true);
-        const response = await axiosInstance.get('/get-event-admin');
+        const response = await axiosInstance.get("/get-event-admin");
         const temp = response.data.filter(
-          (event: EventStatus) => event.status === 'complete'
+          (event: EventStatus) => event.status === "complete"
         );
         setEvents(temp);
       } catch (error) {
-        console.error('Error fetching events:', error);
+        console.error("Error fetching events:", error);
       } finally {
         setLoading(false);
       }
@@ -37,18 +38,18 @@ const PastEvents: React.FC = () => {
   }, []);
 
   const handleButtonClick = (id: number) => {
-    console.log('Go to Event clicked');
+    console.log("Go to Event clicked");
     navigate(`/dashboard/event/${id}`);
   };
 
   return (
     <Box
       sx={{
-        display: 'flex',
-        gap: '1rem',
-        flexWrap: 'wrap',
-        justifyContent: 'center',
-        alignItems: 'center',
+        display: "flex",
+        gap: "1rem",
+        flexWrap: "wrap",
+        justifyContent: "center",
+        alignItems: "center",
       }}
     >
       {loading ? (

@@ -5,6 +5,8 @@ import * as t from "@onflow/types";
 export const useFlowInteraction = () => {
   const { magic } = useMagic();
   const handleCreateEvent = async () => {
+    console.log("Creating event");
+
     const txId = await fcl.send([
       fcl.transaction`
       import VotingSystem2 from 0xee884352e5d52524
@@ -36,6 +38,8 @@ export const useFlowInteraction = () => {
     ]);
 
     await fcl.tx(txId).onceSealed();
+
+    console.log("Event created transaction: ", txId);
   };
 
   const getEvents = async () => {
@@ -102,6 +106,8 @@ export const useFlowInteraction = () => {
 
     await fcl.tx(txId).onceSealed();
 
+    console.log("Project created transaction: ", txId);
+
     // const res = await fcl.query({
     //   cadence: `
 
@@ -156,7 +162,7 @@ export const useFlowInteraction = () => {
     eventId,
     voterAddress,
   }: {
-    eventId: string;
+    eventId: number;
     voterAddress: string;
   }) => {
     const txId = await fcl.send([
@@ -190,7 +196,7 @@ export const useFlowInteraction = () => {
 
     await fcl.tx(txId).onceSealed();
 
-    console.log("Voter " + voterAddress + " approved transaction: " + txId);
+    console.log("Voter " + voterAddress + " approved transaction: ", txId);
   };
 
   const castVote = async ({
@@ -243,7 +249,7 @@ export const useFlowInteraction = () => {
 
     await fcl.tx(txId).onceSealed();
 
-    console.log("Vote casted transaction: " + txId);
+    console.log("Vote casted transaction: ", txId);
   };
 
   const getNextEventId = async () => {

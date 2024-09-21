@@ -23,7 +23,8 @@ const AuthWorldCoin = ({ onSuccess, buttonText, onVerify }: Props) => {
       enqueueSnackbar("Address or appChain not found", {
         variant: "error",
       });
-      return false;
+      // return false;
+      throw new Error("Address or appChain not found");
     }
 
     console.log("Address and appChain found");

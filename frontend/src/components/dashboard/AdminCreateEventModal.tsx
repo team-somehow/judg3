@@ -32,7 +32,8 @@ const AdminCreateEventModal: React.FC<AdminCreateEventModalProps> = ({
     imageURL: null as string | null,
     uploading: false,
   });
-  const { handleCreateEvent, getNextEventId } = useFlowInteraction();
+  const { handleCreateEvent, getNextEventId, getEvents } = useFlowInteraction();
+  getEvents();
 
   // Handle input changes for text fields
   const handleInputChange = useCallback(
