@@ -1,11 +1,11 @@
-import Layout from "../components/dashboard/Layout";
 import { Box, Button, Divider, Typography } from "@mui/material";
-import CustomStepper from "../components/shared/CustomStepper";
-import VoterDetails from "../components/voter/VoterDetails";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import axiosInstance from "../config/axios";
+import Layout from "../components/dashboard/Layout";
 import { EventStatus } from "../components/dashboard/LiveEvents";
+import CustomStepper from "../components/shared/CustomStepper";
+import VoterDetails from "../components/voter/VoterDetails";
+import axiosInstance from "../config/axios";
 
 // Define the possible status choices
 const STATUS_CHOICES = ["voters", "project", "active", "complete"];
