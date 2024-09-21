@@ -13,11 +13,10 @@ const adminLabels = [
   'Event Creation',
   'Open Applications',
   'Project Uploads',
-  'Live Leaderboard',
-  'Event Completed',
+  'Completed',
 ];
 
-const voterLabels = ['Request Submitted', 'Approval Pending', 'Voting Open'];
+const voterLabels = ['Pending', 'Accepted', 'Rejected'];
 
 export default function CustomStepper({
   status,
@@ -45,13 +44,13 @@ export default function CustomStepper({
               StepIconProps={{
                 sx: {
                   color: index === activeStep ? 'primary.main' : 'white',
-                  fontSize: isVertical ? '1.5rem' : '1rem', 
+                  fontSize: isVertical ? '1.5rem' : '1rem',
                 },
               }}
               sx={{
                 '& .MuiStepLabel-label': {
                   color: index === activeStep ? 'inherit' : 'white',
-                  fontSize: isVertical ? '1.1rem' : '1rem', 
+                  fontSize: isVertical ? '1.1rem' : '1rem',
                 },
               }}
             >

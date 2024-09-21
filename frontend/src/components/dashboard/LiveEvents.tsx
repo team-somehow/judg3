@@ -2,25 +2,28 @@ import React, { useEffect, useState } from 'react';
 import StatusCard from './StatusCard';
 import { Box, CircularProgress } from '@mui/material';
 import axiosInstance from '../../config/axios';
+import { useNavigate } from 'react-router-dom';
 
 interface EventStatus {
-  image: string;
-  logo: string;
-  eventName: string;
-  eventHost: string;
+  id: number;
+  name: string;
   description: string;
-  approvalStatus: string;
-  buttonText: string;
+  photo: string;
+  status: string;
 }
 
 const LiveEvents: React.FC = () => {
   const [events, setEvents] = useState<EventStatus[]>([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchEvents = async () => {
       try {
         const response = await axiosInstance.get('/get-event-admin');
-        setEvents(response.data as EventStatus[]);
+        const temp = response.data.filter(
+          (event: EventStatus) => event.status === 'Active'
+        );
+        setEvents(temp);
       } catch (error) {
         console.error('Error fetching events:', error);
       }
@@ -29,8 +32,9 @@ const LiveEvents: React.FC = () => {
     fetchEvents();
   }, []);
 
-  const handleButtonClick = () => {
+  const handleButtonClick = (id: number) => {
     console.log('Go to Event clicked');
+    navigate(`/dashboard/applications/${id}`);
   };
 
   return (
@@ -48,15 +52,14 @@ const LiveEvents: React.FC = () => {
       ) : (
         events.map((event, index) => (
           <StatusCard
+            id={event.id}
             key={index}
-            image={event.image}
-            logo={event.logo}
-            eventName={event.eventName}
-            eventHost={event.eventHost}
+            name={event.name}
             description={event.description}
-            approvalStatus={event.approvalStatus}
-            buttonText={event.buttonText}
-            onButtonClick={handleButtonClick}
+            photo={event.photo}
+            status={event.status}
+            buttonText="Go to Event"
+            onButtonClick={() => handleButtonClick(event.id)}
             isAdmin
           />
         ))

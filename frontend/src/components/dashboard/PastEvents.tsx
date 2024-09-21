@@ -1,48 +1,41 @@
 import React, { useEffect, useState } from 'react';
 import StatusCard from './StatusCard';
-import { Box, CircularProgress } from '@mui/material';
+import { Box, CircularProgress, Typography } from '@mui/material';
+import axiosInstance from '../../config/axios';
+import { useNavigate } from 'react-router-dom';
 
 interface EventStatus {
-  image: string;
-  logo: string;
-  eventName: string;
-  eventHost: string;
+  id: number;
+  name: string;
   description: string;
-  approvalStatus: string;
-  buttonText: string;
+  photo: string;
+  status: string;
 }
 
 const PastEvents: React.FC = () => {
   const [events, setEvents] = useState<EventStatus[]>([]);
 
-  useEffect(() => {
-    // Simulating an API call
-    const fetchEvents = async () => {
-      const response = await new Promise((resolve) =>
-        setTimeout(() => {
-          resolve([
-            {
-              image: '/ethsingapore.png',
-              logo: '/ethglobal.png',
-              eventName: 'ETH India',
-              eventHost: 'ETHGlobal',
-              description:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-              approvalStatus: 'Live Leaderboard',
-              buttonText: 'Go to Event',
-            },
-          ]);
-        }, 1000)
-      );
+  const navigate = useNavigate();
 
-      setEvents(response as EventStatus[]);
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const response = await axiosInstance.get('/get-event-admin');
+        const temp = response.data.filter(
+          (event: EventStatus) => event.status !== 'Active'
+        );
+        setEvents(temp);
+      } catch (error) {
+        console.error('Error fetching events:', error);
+      }
     };
 
     fetchEvents();
   }, []);
 
-  const handleButtonClick = () => {
+  const handleButtonClick = (id: number) => {
     console.log('Go to Event clicked');
+    navigate(`/dashboard/applications/${id}`);
   };
 
   return (
@@ -56,19 +49,18 @@ const PastEvents: React.FC = () => {
       }}
     >
       {events.length === 0 ? (
-        <CircularProgress />
+        <Typography variant="h6">No past events</Typography>
       ) : (
         events.map((event, index) => (
           <StatusCard
             key={index}
-            image={event.image}
-            logo={event.logo}
-            eventName={event.eventName}
-            eventHost={event.eventHost}
+            id={event.id}
+            name={event.name}
             description={event.description}
-            approvalStatus={event.approvalStatus}
-            buttonText={event.buttonText}
-            onButtonClick={handleButtonClick}
+            photo={event.photo}
+            status={event.status}
+            buttonText="Go to Event"
+            onButtonClick={() => handleButtonClick(event.id)}
             isAdmin
           />
         ))
