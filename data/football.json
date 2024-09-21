@@ -1,0 +1,102 @@
+[
+    {
+      "name": "Arsenal",
+      "Description": "Arsenal Football Club is a professional football club based in Islington, London. They are known for their attacking style and youth development.",
+      "LOGO_URL": "https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg"
+    },
+    {
+      "name": "Aston Villa",
+      "Description": "Aston Villa is a football club based in Birmingham. One of the oldest and most successful clubs in English football history.",
+      "LOGO_URL": "https://upload.wikimedia.org/wikipedia/en/f/f9/Aston_Villa_FC_crest_%282016%29.svg"
+    },
+    {
+      "name": "Bournemouth",
+      "Description": "AFC Bournemouth is a professional football club based in Kings Park, Boscombe, a suburb of Bournemouth, Dorset, England.",
+      "LOGO_URL": "https://upload.wikimedia.org/wikipedia/en/e/e5/AFC_Bournemouth_%282013%29.svg"
+    },
+    {
+      "name": "Brentford",
+      "Description": "Brentford Football Club is a professional football club based in Brentford, West London. They are known for their analytics-driven approach to the game.",
+      "LOGO_URL": "https://upload.wikimedia.org/wikipedia/en/2/2a/Brentford_FC_crest.svg"
+    },
+    {
+      "name": "Brighton & Hove Albion",
+      "Description": "Brighton & Hove Albion FC is a professional football club based in the city of Brighton and Hove, East Sussex, known for their attractive style of play.",
+      "LOGO_URL": "https://upload.wikimedia.org/wikipedia/en/f/fd/Brighton_%26_Hove_Albion_logo.svg"
+    },
+    {
+      "name": "Burnley",
+      "Description": "Burnley Football Club is a professional football club based in Burnley, Lancashire, known for their defensive tactics and resilience.",
+      "LOGO_URL": "https://upload.wikimedia.org/wikipedia/en/6/62/Burnley_F.C._Logo.svg"
+    },
+    {
+      "name": "Chelsea",
+      "Description": "Chelsea Football Club is a professional football club based in Fulham, London. They are one of the biggest clubs in England, with numerous domestic and European titles.",
+      "LOGO_URL": "https://upload.wikimedia.org/wikipedia/en/c/cc/Chelsea_FC.svg"
+    },
+    {
+      "name": "Crystal Palace",
+      "Description": "Crystal Palace Football Club is a professional football club based in Selhurst, South London. Known for their strong counter-attacking football.",
+      "LOGO_URL": "https://upload.wikimedia.org/wikipedia/en/0/0c/Crystal_Palace_FC_logo.svg"
+    },
+    {
+      "name": "Everton",
+      "Description": "Everton Football Club is a professional football club based in Liverpool. They have a rich history in English football, being one of the oldest clubs in the league.",
+      "LOGO_URL": "https://upload.wikimedia.org/wikipedia/en/7/7c/Everton_FC_logo.svg"
+    },
+    {
+      "name": "Fulham",
+      "Description": "Fulham Football Club is a professional football club based in Fulham, London. They are known for their attractive playing style and strong home support.",
+      "LOGO_URL": "https://upload.wikimedia.org/wikipedia/en/5/5e/Fulham_FC.svg"
+    },
+    {
+      "name": "Liverpool",
+      "Description": "Liverpool Football Club is one of the most successful and popular football clubs in the world, known for their attacking football and passionate fanbase.",
+      "LOGO_URL": "https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg"
+    },
+    {
+      "name": "Luton Town",
+      "Description": "Luton Town Football Club is a professional football club based in Luton, Bedfordshire. They recently gained promotion to the Premier League.",
+      "LOGO_URL": "https://upload.wikimedia.org/wikipedia/en/9/92/LutonTownFC2009.png"
+    },
+    {
+      "name": "Manchester City",
+      "Description": "Manchester City Football Club is one of the most successful clubs in recent times, known for their dominant possession-based football under Pep Guardiola.",
+      "LOGO_URL": "https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg"
+    },
+    {
+      "name": "Manchester United",
+      "Description": "Manchester United Football Club is one of the most famous football clubs in the world, known for their rich history, attacking football, and global fanbase.",
+      "LOGO_URL": "https://upload.wikimedia.org/wikipedia/en/7/7a/Manchester_United_FC_crest.svg"
+    },
+    {
+      "name": "Newcastle United",
+      "Description": "Newcastle United Football Club is a professional football club based in Newcastle upon Tyne. Known for their passionate fanbase and recent resurgence.",
+      "LOGO_URL": "https://upload.wikimedia.org/wikipedia/en/5/56/Newcastle_United_Logo.svg"
+    },
+    {
+      "name": "Nottingham Forest",
+      "Description": "Nottingham Forest Football Club is a professional football club based in West Bridgford, Nottinghamshire. They have a rich European history.",
+      "LOGO_URL": "https://upload.wikimedia.org/wikipedia/en/8/87/Nottingham_Forest_FC_logo.svg"
+    },
+    {
+      "name": "Sheffield United",
+      "Description": "Sheffield United Football Club is a professional football club based in Sheffield, South Yorkshire. Known for their hard-working style and passionate fanbase.",
+      "LOGO_URL": "https://upload.wikimedia.org/wikipedia/en/3/3f/Sheffield_United_FC_logo.svg"
+    },
+    {
+      "name": "Tottenham Hotspur",
+      "Description": "Tottenham Hotspur Football Club is a professional football club based in North London. Known for their attacking football and competitive rivalry with Arsenal.",
+      "LOGO_URL": "https://upload.wikimedia.org/wikipedia/en/b/b4/Tottenham_Hotspur.svg"
+    },
+    {
+      "name": "West Ham United",
+      "Description": "West Ham United Football Club is a professional football club based in East London. Known for their strong fanbase and recent success in European competitions.",
+      "LOGO_URL": "https://upload.wikimedia.org/wikipedia/en/c/c2/West_Ham_United_FC_logo.svg"
+    },
+    {
+      "name": "Wolverhampton Wanderers",
+      "Description": "Wolverhampton Wanderers Football Club, also known as Wolves, is a professional football club based in Wolverhampton. Known for their counter-attacking football.",
+      "LOGO_URL": "https://upload.wikimedia.org/wikipedia/en/f/fc/Wolverhampton_Wanderers.svg"
+    }
+  ]
