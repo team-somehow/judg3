@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
-import ProjectCard from "../project/ProjectCard";
-import { Grid, LinearProgress, Box } from "@mui/material";
-import { useParams } from "react-router-dom";
-import axiosInstance from "../../config/axios";
+import React, { useEffect, useState } from 'react';
+import ProjectCard from '../project/ProjectCard';
+import { Grid, LinearProgress, Box } from '@mui/material';
+import { useParams } from 'react-router-dom';
+import axiosInstance from '../../config/axios';
+import Loading from '../ui/Loading';
 
 interface Project {
   photo: string;
@@ -39,7 +40,7 @@ const VotingSystem: React.FC = () => {
       setLeftProject(leftResponse.data);
       setRightProject(rightResponse.data);
     } catch (error) {
-      console.error("Error fetching data:", error);
+      console.error('Error fetching data:', error);
     }
   };
 
@@ -58,22 +59,22 @@ const VotingSystem: React.FC = () => {
     };
 
     try {
-      const response = await axiosInstance.post("/vote", votePayload);
-      console.log("Vote successful:", response.data);
+      const response = await axiosInstance.post('/vote', votePayload);
+      console.log('Vote successful:', response.data);
       // Fetch the next set of projects to vote on
       fetchProjects();
     } catch (error) {
-      console.error("Error submitting vote:", error);
+      console.error('Error submitting vote:', error);
     }
   };
 
   if (!data || !leftProject || !rightProject) {
-    return <div>Loading...</div>;
+    return <Loading loading={true} />;
   }
 
   return (
     <div>
-      <Box sx={{ width: "100%" }}>
+      <Box sx={{ width: '100%' }}>
         <LinearProgress
           variant="determinate"
           value={(data.curr_vote_count / data.total_available_vote_count) * 100}
@@ -84,8 +85,8 @@ const VotingSystem: React.FC = () => {
         container
         spacing={2}
         sx={{
-          height: "calc(100vh - 150px)", // Adjusted for progress bar height
-          width: "100vw",
+          height: 'calc(100vh - 150px)', // Adjusted for progress bar height
+          width: '100vw',
           padding: 2,
         }}
       >

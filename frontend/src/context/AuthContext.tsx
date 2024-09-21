@@ -1,5 +1,6 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
-import { useMagic } from "../components/auth/magic/MagicContext";
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import { useMagic } from '../components/auth/magic/MagicContext';
+import Loading from '../components/ui/Loading';
 
 type Props = {
   children: React.ReactNode;
@@ -29,14 +30,14 @@ const AuthProvider = ({ children }: Props) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      if (!magic) return console.error("Magic not initialized");
+      if (!magic) return console.error('Magic not initialized');
       try {
-        console.log("Fetching user metadata");
+        console.log('Fetching user metadata');
 
         setLoading(true);
         const m = await magic.user.getMetadata();
         setAddress(m.publicAddress!);
-        setToken(localStorage.getItem("token")!);
+        setToken(localStorage.getItem('token')!);
 
         setLoading(false);
       } catch (error) {
@@ -49,7 +50,7 @@ const AuthProvider = ({ children }: Props) => {
   }, [magic, setAddress, setToken]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loading loading={true} />;
   }
 
   return (

@@ -1,17 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import {
-  Box,
-  Avatar,
-  Typography,
-  Button,
-  Card,
-  CardContent,
-  Grid,
-  Divider,
-} from '@mui/material';
-import { Cloud, Link, Share } from '@mui/icons-material';
+import { Box, Typography, Button, Divider, TextField } from '@mui/material';
+import { Link, Share } from '@mui/icons-material';
 import { enqueueSnackbar } from 'notistack';
 import axiosInstance from '../../config/axios';
+import Loading from '../ui/Loading';
 
 type Props = {
   eventId: string;
@@ -24,6 +16,7 @@ interface Voter {
 
 const Upload: React.FC<Props> = ({ eventId }) => {
   const [voters, setVoters] = useState<Voter[]>();
+  const [jsonField, setJsonField] = useState(''); // State to track TextField value
 
   useEffect(() => {
     const getVoters = async () => {
@@ -38,48 +31,46 @@ const Upload: React.FC<Props> = ({ eventId }) => {
     getVoters();
   }, [eventId]);
 
-  // Handle accept
-  const handleAccept = async (voterId: number) => {
-    try {
-      const response = await axiosInstance.post('/voters/update-status/', {
-        event_id: Number(eventId), // Ensure event_id is a number
-        voter_id: voterId,
-        status: 'Accepted',
-      });
-      console.log('Voter accepted:', response.data);
-      // Update state to reflect the accepted status
-      setVoters((prevVoters) =>
-        prevVoters.map((voter) =>
-          voter.voter_id === voterId ? { ...voter, status: 'Accepted' } : voter
-        )
-      );
-    } catch (error) {
-      console.error('Error accepting voter:', error);
-    }
+  // Handle input change for the JSON field
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setJsonField(event.target.value); // Update state when input changes
   };
 
-  // Handle reject
-  const handleReject = async (voterId: number) => {
+  // Handle submit button click
+  const handleSubmit = async () => {
     try {
-      const response = await axiosInstance.post('/voters/update-status/', {
-        event_id: Number(eventId), // Ensure event_id is a number
-        voter_id: voterId,
-        status: 'Rejected',
+      const parsedJson = JSON.parse(jsonField); // Parse the JSON field
+      if (!Array.isArray(parsedJson)) {
+        enqueueSnackbar('Invalid JSON format', {
+          variant: 'error',
+        });
+        return;
+      }
+
+      for (const project of parsedJson) {
+        try {
+          const response = await axiosInstance.post('/project', project); // Post each project
+          console.log('Project uploaded:', response.data);
+        } catch (error) {
+          console.error(`Error uploading project ${project.name}:`, error);
+          enqueueSnackbar(`Error uploading project ${project.name}`, {
+            variant: 'error',
+          });
+        }
+      }
+      enqueueSnackbar(`Projects uploaded successfully`, {
+        variant: 'success',
       });
-      console.log('Voter rejected:', response.data);
-      // Update state to reflect the rejected status
-      setVoters((prevVoters) =>
-        prevVoters.map((voter) =>
-          voter.voter_id === voterId ? { ...voter, status: 'Rejected' } : voter
-        )
-      );
     } catch (error) {
-      console.error('Error rejecting voter:', error);
+      console.error('Error parsing JSON or uploading project:', error);
+      enqueueSnackbar('Error parsing JSON or uploading project', {
+        variant: 'error',
+      });
     }
   };
 
   if (!voters) {
-    return <Box>Loading...</Box>;
+    return <Loading loading={true} />;
   }
 
   return (
@@ -140,6 +131,9 @@ const Upload: React.FC<Props> = ({ eventId }) => {
               variant: 'success',
             });
           }}
+          sx={{
+            width: '100%',
+          }}
         >
           Copy Link
         </Button>
@@ -166,18 +160,26 @@ const Upload: React.FC<Props> = ({ eventId }) => {
           mt: 2,
         }}
       >
-        <Button
-          variant="outlined"
-          color="primary"
-          startIcon={<Cloud />}
+        <TextField
+          variant="filled"
+          label="JSON Field"
+          name="jsonField"
           fullWidth
-          sx={{
-            padding: '50px 20px',
-          }}
-        >
-          Upload JSON
-        </Button>
+          multiline
+          rows={10}
+          value={jsonField}
+          onChange={handleInputChange}
+          sx={{ mb: 1 }}
+        />
       </Box>
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={handleSubmit}
+        fullWidth
+      >
+        Submit Projects
+      </Button>
     </Box>
   );
 };

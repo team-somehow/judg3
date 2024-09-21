@@ -80,7 +80,7 @@ function EventDashboard() {
       case 'active':
         return <Leaderboard />; // Example component
       case 'complete':
-        return <Leaderboard />; // Example component
+        return <Leaderboard title="Final Leaderboard" />;
       default:
         return (
           <Typography variant="h6">No data available for this event</Typography>
@@ -103,6 +103,7 @@ function EventDashboard() {
               gap: 2,
               justifyContent: 'space-between',
               height: '100%',
+              overflow: 'auto',
             }}
           >
             {renderLeftLayout()}

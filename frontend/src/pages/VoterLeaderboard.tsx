@@ -28,7 +28,11 @@ interface LeaderboardRow {
   score: string;
 }
 
-const Leaderboard: React.FC = () => {
+type Props = {
+  title?: string;
+};
+
+const Leaderboard: React.FC<Props> = ({ title = 'Live Leaderboard' }) => {
   const { id } = useParams<{ id: string }>();
 
   const [leaderboardData, setLeaderboardData] = React.useState<
@@ -53,7 +57,7 @@ const Leaderboard: React.FC = () => {
   return (
     <Box sx={{ padding: 4 }}>
       <Typography variant="h4" align="center" fontWeight="900" gutterBottom>
-        Leaderboard
+        {title}
       </Typography>
 
       {/* Top 3 Teams Section */}
@@ -123,7 +127,7 @@ const Leaderboard: React.FC = () => {
                   }}
                   startIcon={<Link />}
                 >
-                  Project Link
+                  Project
                 </Button>
               </Box>
             </Card>

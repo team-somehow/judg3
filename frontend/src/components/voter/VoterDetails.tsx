@@ -12,6 +12,7 @@ import {
 import { Link, Share } from '@mui/icons-material';
 import { enqueueSnackbar } from 'notistack';
 import axiosInstance from '../../config/axios';
+import Loading from '../ui/Loading';
 
 type Props = {
   eventId: string;
@@ -79,7 +80,7 @@ const VoterDetails: React.FC<Props> = ({ eventId }) => {
   };
 
   if (!voters) {
-    return <Box>Loading...</Box>;
+    return <Loading loading={true} />;
   }
 
   return (
