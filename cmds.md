@@ -37,3 +37,42 @@ Contracts (hidden, use --include contracts)
 ```bash
 flow accounts update-contract ./cadence/contracts/Counter.cdc --network=testnet --signer=default
 ```
+
+## MACI
+
+```
+<!-- Gen coordinator key - only need to put the public key in the json file - keep the private -->
+cd packages/cli
+node build/ts/index.js genMaciKeyPair
+cd ../contracts
+https://github.com/privacy-scaling-explorations/maci/blob/dev/packages/contracts/deploy-config-example.json#L326-L327 - set coordinator key and poll duration (duration is in seconds so 300 is 5 minutes)
+cp deploy-config-example.json deploy-config.json
+pnpm deploy:localhost
+<!-- For each poll deploy it -->
+pnpm deploy-poll:localhost
+<!-- Finalization  -->
+pnpm merge:localhost --poll $ID
+pnpm prove:localhost --poll $ID --coordinator-private-key $PRIVATE_KEY --blocks-per-batch 100000
+<!-- Parse the tally.json file and you will have the results -->
+```
+
+Frontend
+
+signup: https://github.com/privacy-scaling-explorations/maci-platform/blob/main/packages/interface/src/contexts/Maci.tsx#L231
+
+Vote: https://github.com/privacy-scaling-explorations/maci-platform/blob/main/packages/interface/src/contexts/Maci.tsx#L276
+
+# Flow
+
+- jobs
+- market size
+- complicated decisions cost a huge amount of money for people
+- human computation
+- biggest segment
+- future roadmap
+
+- world usecase
+- airbnb took a lot time to hire 1st decisions
+- had to be an imp descisions
+
+- each param of voting hot or not
