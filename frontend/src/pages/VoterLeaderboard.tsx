@@ -29,9 +29,13 @@ interface LeaderboardRow {
 
 type Props = {
   title?: string;
+  eventId?: string;
 };
 
-const Leaderboard: React.FC<Props> = ({ title = 'Live Leaderboard' }) => {
+const Leaderboard: React.FC<Props> = ({
+  title = 'Live Leaderboard',
+  eventId,
+}) => {
   const { id } = useParams<{ id: string }>();
 
   const [leaderboardData, setLeaderboardData] = React.useState<
@@ -42,7 +46,7 @@ const Leaderboard: React.FC<Props> = ({ title = 'Live Leaderboard' }) => {
     const postData = async () => {
       try {
         const response = await axiosInstance.post(`/leaderboard`, {
-          event: id,
+          event: eventId ? eventId : id,
         });
         console.log('Response:', response.data);
         setLeaderboardData(response.data);
@@ -51,7 +55,7 @@ const Leaderboard: React.FC<Props> = ({ title = 'Live Leaderboard' }) => {
       }
     };
     postData();
-  }, [id]);
+  }, [id, eventId]);
 
   return (
     <Box sx={{ padding: 4 }}>
