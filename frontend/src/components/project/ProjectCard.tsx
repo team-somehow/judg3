@@ -9,8 +9,10 @@ import {
   Avatar,
   Chip,
   Grid,
+  Divider,
+  IconButton,
 } from '@mui/material';
-import { GitHub, Language, YouTube } from '@mui/icons-material';
+import { GitHub, Language, Link, YouTube } from '@mui/icons-material';
 
 interface ProjectCardProps {
   id: number;
@@ -19,6 +21,7 @@ interface ProjectCardProps {
   photo: string;
   url: string;
   onVote: (projectId: number) => void;
+  isRight?: boolean;
   // onViewSource: (projectId: number) => void;
 }
 
@@ -29,8 +32,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   photo,
   url,
   onVote,
+  isRight,
   // onViewSource,
 }) => {
+  const primaryColor = isRight ? '#1E50FF' : 'primary.main';
+
   return (
     <Box
       sx={{
@@ -49,24 +55,48 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         }}
       >
         <CardContent sx={{ flexGrow: 1 }}>
-          <Box display="flex" alignItems="center" mb={2}>
-            <Avatar
+          <Box
+            display="flex"
+            alignItems="center"
+            mb={2}
+            justifyContent="space-between"
+          >
+            <Box
               sx={{
-                bgcolor: 'primary.main',
-                marginRight: 2,
-                borderRadius: '10px',
+                display: 'flex',
+                alignItems: 'center',
               }}
             >
-              {name[0]}
-            </Avatar>
-            <Box>
-              <Typography variant="h5" fontWeight="600">
-                {name}
-              </Typography>
+              <Avatar
+                sx={{
+                  bgcolor: primaryColor,
+                  marginRight: 2,
+                  borderRadius: '10px',
+                }}
+              >
+                {name[0]}
+              </Avatar>
+              <Box>
+                <Typography variant="h5" fontWeight="600">
+                  {name}
+                </Typography>
+              </Box>
               {/* <Typography variant="subtitle2" color="text.secondary">
                 {description}
               </Typography> */}
             </Box>
+            <Button
+              href={url}
+              target="_blank"
+              aria-label="project-url"
+              variant="contained"
+              sx={{
+                bgcolor: primaryColor,
+              }}
+              startIcon={<Language />}
+            >
+              Project URL
+            </Button>
           </Box>
           {/* <Grid container spacing={1} mb={2}>
             {project.tags.map((tag) => (
@@ -98,48 +128,31 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
               objectFit: 'cover',
               borderRadius: '10px',
               border: '2px solid rgba(248, 248, 255, 0.60)',
-              mb: 2,
             }}
           />
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'row',
-              gap: 1,
-            }}
-          >
-            <Button
-              variant="contained"
-              color="primary"
-              href={url}
-              target="_blank"
-              fullWidth
-              startIcon={<YouTube />}
-            >
-              Live Demo
-            </Button>
-            {/* <Button
-              variant="outlined"
-              color="primary"
-              onClick={() => onViewSource(project.id)}
-              fullWidth
-              startIcon={<GitHub />}
-            >
-              Source Code
-            </Button> */}
-          </Box>
-
           <Typography variant="h6" gutterBottom>
             Project Description
           </Typography>
-          <Typography variant="subtitle2">{description}</Typography>
+          <Box
+            sx={{
+              height: '100px',
+              bgcolor: 'rgba(0, 0, 0, 0.40)',
+              overflow: 'auto',
+              p: 1,
+              borderRadius: '5px',
+            }}
+          >
+            <Typography variant="subtitle2">{description}</Typography>
+          </Box>
         </CardContent>
         <CardActions>
           <Button
             variant="contained"
-            color="primary"
             onClick={() => onVote(id)}
             fullWidth
+            sx={{
+              bgcolor: primaryColor,
+            }}
           >
             Vote this Project
           </Button>

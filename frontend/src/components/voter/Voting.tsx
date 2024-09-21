@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import ProjectCard from "../project/ProjectCard";
+import React, { useEffect, useState } from 'react';
+import ProjectCard from '../project/ProjectCard';
 import {
   Grid,
   LinearProgress,
@@ -9,13 +9,14 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
-} from "@mui/material";
-import { useNavigate, useParams } from "react-router-dom";
-import axiosInstance from "../../config/axios";
-import Loading from "../ui/Loading";
-import { useAuth } from "../../context/AuthContext";
-import { useFlowInteraction } from "../../hooks/useFlowInteraction";
-import useMorphInteractions from "../../hooks/morph/useInteractions";
+} from '@mui/material';
+import { useNavigate, useParams } from 'react-router-dom';
+import axiosInstance from '../../config/axios';
+import Loading from '../ui/Loading';
+import { useAuth } from '../../context/AuthContext';
+import { useFlowInteraction } from '../../hooks/useFlowInteraction';
+import useMorphInteractions from '../../hooks/morph/useInteractions';
+import VoteBg from '../ui/VoteBg';
 
 interface Project {
   photo: string;
@@ -69,7 +70,7 @@ const VotingSystem: React.FC = () => {
       setLeftProject(leftResponse.data);
       setRightProject(rightResponse.data);
     } catch (error) {
-      console.error("Error fetching data:", error);
+      console.error('Error fetching data:', error);
     }
   };
 
@@ -88,9 +89,9 @@ const VotingSystem: React.FC = () => {
     };
 
     try {
-      const response = await axiosInstance.post("/vote", votePayload);
+      const response = await axiosInstance.post('/vote', votePayload);
       {
-        currentAuthSupply === "magic" &&
+        currentAuthSupply === 'magic' &&
           castVote({
             eventId: id!,
             project1Id: data.left_proj_id.toString(),
@@ -99,7 +100,7 @@ const VotingSystem: React.FC = () => {
           });
       }
       {
-        currentAuthSupply === "dynamic" &&
+        currentAuthSupply === 'dynamic' &&
           handleCastVote({
             eventId: id!,
             project1Id: data.left_proj_id.toString(),
@@ -107,11 +108,11 @@ const VotingSystem: React.FC = () => {
             winnerProjectId: winnerId.toString(),
           });
       }
-      console.log("Vote successful:", response.data);
+      console.log('Vote successful:', response.data);
       // Fetch the next set of projects to vote on
       fetchProjects();
     } catch (error) {
-      console.error("Error submitting vote:", error);
+      console.error('Error submitting vote:', error);
     }
   };
 
@@ -120,8 +121,8 @@ const VotingSystem: React.FC = () => {
   }
 
   return (
-    <div>
-      <Box sx={{ width: "100%" }}>
+    <Box>
+      <Box sx={{ width: '100%' }}>
         <LinearProgress
           variant="determinate"
           value={(data.curr_vote_count / data.total_available_vote_count) * 100}
@@ -132,8 +133,8 @@ const VotingSystem: React.FC = () => {
         container
         spacing={2}
         sx={{
-          height: "calc(100vh - 150px)", // Adjusted for progress bar height
-          width: "100vw",
+          height: 'calc(100vh - 150px)', // Adjusted for progress bar height
+          width: '100vw',
           padding: 2,
         }}
       >
@@ -155,11 +156,20 @@ const VotingSystem: React.FC = () => {
             photo={rightProject.photo}
             url={rightProject.url}
             onVote={() => handleVote(data.right_proj_id)} // Pass right project ID as winner
+            isRight
           />
         </Grid>
       </Grid>
 
-      <Dialog open={markComplete} onClose={handleCloseModal}>
+      <Dialog
+        open={markComplete}
+        onClose={handleCloseModal}
+        sx={{
+          '& .MuiDialog-paper': {
+            backgroundColor: '#121212',
+          },
+        }}
+      >
         <DialogTitle>Voting Completed</DialogTitle>
         <DialogContent>
           You have reached the maximum number of votes for this event.
@@ -170,7 +180,8 @@ const VotingSystem: React.FC = () => {
           </Button>
         </DialogActions>
       </Dialog>
-    </div>
+      <VoteBg />
+    </Box>
   );
 };
 
