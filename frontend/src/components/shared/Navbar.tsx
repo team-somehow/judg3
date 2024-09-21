@@ -38,8 +38,13 @@ const NavBar: React.FC = () => {
           <Box sx={{ gap: 2, display: "flex" }}>
             {token ? (
               <>
-                <Button onClick={handleDisconnectOnClick} variant="outlined">
-                  {address}
+                <Button variant="outlined">{address}</Button>
+                <Button
+                  onClick={handleDisconnectOnClick}
+                  variant="text"
+                  color="error"
+                >
+                  logout
                 </Button>
               </>
             ) : (
@@ -47,7 +52,12 @@ const NavBar: React.FC = () => {
                 <Button
                   variant="contained"
                   onClick={() => {
-                    navigate("/login");
+                    console.log("Organise Voting");
+                    if (token) {
+                      navigate("/dashboard");
+                    } else {
+                      navigate("/login");
+                    }
                   }}
                 >
                   Organize Voting
@@ -56,7 +66,12 @@ const NavBar: React.FC = () => {
                 <Button
                   variant="outlined"
                   onClick={() => {
-                    navigate("/login");
+                    console.log("Start Voting", token);
+                    if (token) {
+                      navigate("/voter-dashboard");
+                    } else {
+                      navigate("/login");
+                    }
                   }}
                 >
                   Start Voting

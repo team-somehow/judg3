@@ -12,24 +12,27 @@ const AuthWrapper = ({ children }: Props) => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      // console.log(
-      //   "address, token",
-      //   localStorage.getItem("address"),
-      //   localStorage.getItem("token")
-      // );
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     // console.log(
+  //     //   "address, token",
+  //     //   localStorage.getItem("address"),
+  //     //   localStorage.getItem("token")
+  //     // );
 
-      if (
-        !localStorage.getItem("address") ||
-        (!localStorage.getItem("token") && pathname !== "/")
-      )
-        return navigate("/login");
-      setAddress(localStorage.getItem("address")!);
-      setToken(localStorage.getItem("token")!);
-    };
-    fetchData();
-  }, [navigate, pathname, setAddress, setToken]);
+  //     if (
+  //       !localStorage.getItem("address") ||
+  //       (!localStorage.getItem("token") && pathname !== "/")
+  //     )
+  //       return navigate("/login");
+  //     setAddress(localStorage.getItem("address")!);
+  //     setToken(localStorage.getItem("token")!);
+  //   };
+  //   fetchData();
+  // }, [navigate, pathname, setAddress, setToken]);
+  if (!localStorage.getItem("token")) {
+    return navigate("/login");
+  }
 
   return <Box>{children}</Box>;
 };

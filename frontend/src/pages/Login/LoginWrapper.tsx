@@ -10,11 +10,13 @@ import { useDynamicWallet } from "../../components/auth/dynamic/dynamicHooks";
 const LoginWrapper = () => {
   const navigate = useNavigate();
   const { chain, address } = useDynamicWallet();
-  useEffect(() => {
-    if (localStorage.getItem("token")) {
-      navigate("/"); // TODO: Redirect to home if user is already logged in
-    }
-  }, [navigate, chain, address]);
+
+  // useEffect(() => {
+  //   if (localStorage.getItem("token")) {
+  //     navigate("/");
+  //   }
+  // }, [navigate, chain, address]);
+
   return (
     <Box sx={{ textAlign: "center", padding: "1rem" }}>
       <Container maxWidth="lg">
