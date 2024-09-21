@@ -1,48 +1,89 @@
-import React from "react";
-import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import { Box, Button } from "@mui/material";
-import { useAuth } from "../../context/AuthContext";
+import React, { useState } from 'react';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import { Box, Button, Divider } from '@mui/material';
+import { useAuth } from '../../context/AuthContext';
 // import { DynamicWidget } from "@dynamic-labs/sdk-react-core";
-import useMagicLogin from "../auth/magic/useLogin";
-import { useDynamicWallet } from "../auth/dynamic/dynamicHooks";
+import useMagicLogin from '../auth/magic/useLogin';
+import { useDynamicWallet } from '../auth/dynamic/dynamicHooks';
 // import { useNavigate } from 'react-router-dom';
-import { DynamicWidget } from "@dynamic-labs/sdk-react-core";
+import { DynamicWidget } from '@dynamic-labs/sdk-react-core';
+import { useNavigate } from 'react-router-dom';
 
 const NavBar: React.FC = () => {
   const { token, address, setAddress, setToken, currentAuthSupply } = useAuth();
   const { handleLogOut } = useDynamicWallet();
   const { handleDisconnect } = useMagicLogin();
+  const navigate = useNavigate();
 
   const handleDisconnectOnClick = async () => {
-    if (currentAuthSupply === "dynamic") {
+    if (currentAuthSupply === 'dynamic') {
       await handleLogOut();
     }
-    if (currentAuthSupply === "magic") {
+    if (currentAuthSupply === 'magic') {
       await handleDisconnect();
     }
-    setAddress("");
-    setToken("");
+    setAddress('');
+    setToken('');
   };
 
   return (
     <>
       <AppBar position="sticky" elevation={1}>
-        <Toolbar>
-          <img src="/favicon.svg" style={{ height: "40px" }} />
-          <Typography
-            variant="h6"
-            pl={1}
-            sx={{ flexGrow: 1 }}
-            fontWeight="bold"
+        <Toolbar
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+          }}
+        >
+          <Box
+            sx={{
+              display: 'flex',
+            }}
           >
-            Judg3
-          </Typography>
-          <Box sx={{ gap: 2, display: "flex" }}>
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                cursor: 'pointer',
+              }}
+              onClick={() => {
+                navigate('/');
+              }}
+            >
+              <img src="/favicon.svg" style={{ height: '40px' }} />
+              <Typography
+                variant="h6"
+                pl={1}
+                sx={{ flexGrow: 1 }}
+                fontWeight="bold"
+                mr={2}
+              >
+                Judg3
+              </Typography>
+            </Box>
             {token && (
               <>
-                {currentAuthSupply === "magic" && (
+                <Divider orientation="vertical" flexItem />
+                <Button
+                  variant="outlined"
+                  sx={{
+                    ml: 2,
+                  }}
+                  onClick={() => {
+                    navigate('/event-status');
+                  }}
+                >
+                  View Status
+                </Button>
+              </>
+            )}
+          </Box>
+          <Box sx={{ gap: 2, display: 'flex' }}>
+            {token && (
+              <>
+                {currentAuthSupply === 'magic' && (
                   <Button variant="outlined">{address}</Button>
                 )}
 
@@ -55,7 +96,7 @@ const NavBar: React.FC = () => {
                 </Button>
               </>
             )}
-            {currentAuthSupply === "dynamic" && (
+            {currentAuthSupply === 'dynamic' && (
               <DynamicWidget variant="modal" />
             )}
           </Box>
