@@ -1,7 +1,16 @@
 import React, { useEffect, useState } from "react";
 import ProjectCard from "../project/ProjectCard";
-import { Grid, LinearProgress, Box } from "@mui/material";
-import { useParams } from "react-router-dom";
+import {
+  Grid,
+  LinearProgress,
+  Box,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+} from "@mui/material";
+import { useNavigate, useParams } from "react-router-dom";
 import axiosInstance from "../../config/axios";
 import Loading from "../ui/Loading";
 import { useAuth } from "../../context/AuthContext";
@@ -21,6 +30,8 @@ const VotingSystem: React.FC = () => {
   const { castVote } = useFlowInteraction();
   const { handleCastVote } = useMorphInteractions();
 
+  const navigate = useNavigate();
+
   const [data, setData] = useState<{
     left_proj_id: number;
     right_proj_id: number;
@@ -31,10 +42,22 @@ const VotingSystem: React.FC = () => {
   const [leftProject, setLeftProject] = useState<Project>();
   const [rightProject, setRightProject] = useState<Project>();
 
+  const [markComplete, setMarkComplete] = useState<boolean>(false);
+
+  const handleCloseModal = () => {
+    setMarkComplete(false);
+    navigate(`/leaderboard/${id}`);
+  };
+
   const fetchProjects = async () => {
     try {
       const response = await axiosInstance.get(`/suggest/${id}`);
       setData(response.data);
+
+      setMarkComplete(
+        response.data.curr_vote_count ===
+          response.data.total_available_vote_count
+      );
 
       const { left_proj_id, right_proj_id } = response.data;
 
@@ -135,6 +158,18 @@ const VotingSystem: React.FC = () => {
           />
         </Grid>
       </Grid>
+
+      <Dialog open={markComplete} onClose={handleCloseModal}>
+        <DialogTitle>Voting Completed</DialogTitle>
+        <DialogContent>
+          You have reached the maximum number of votes for this event.
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseModal} color="primary">
+            Go to Leaderboard
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };
