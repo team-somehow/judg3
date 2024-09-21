@@ -34,7 +34,7 @@ const LiveEvents: React.FC = () => {
 
   const handleButtonClick = (id: number) => {
     console.log("Go to Event clicked");
-    navigate(`/dashboard/applications/${id}`);
+    navigate(`/dashboard/event/${id}`);
   };
 
   return (

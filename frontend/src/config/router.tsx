@@ -15,6 +15,7 @@ import VotingSystem from '../components/voter/Voting';
 import VoterLeaderboard from '../pages/VoterLeaderboard';
 import AuthWrapper from '../components/ui/AuthWrapper';
 import UploadProject from '../pages/UploadProject';
+import EventDashboard from '../pages/EventDashboard';
 
 const router = createBrowserRouter([
   {
@@ -61,13 +62,17 @@ const router = createBrowserRouter([
             path: '',
             element: <Dashboard />,
           },
+          // {
+          //   path: 'applications/:id',
+          //   element: <Applications />,
+          // },
+          // {
+          //   path: 'upload-project/:id',
+          //   element: <UploadProject />,
+          // },
           {
-            path: 'applications/:id',
-            element: <Applications />,
-          },
-          {
-            path: 'upload-project/:id',
-            element: <UploadProject />,
+            path: 'event/:id',
+            element: <EventDashboard />,
           },
         ],
       },
