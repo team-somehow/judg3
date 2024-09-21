@@ -22,7 +22,7 @@ const UpcomingEvents: React.FC = () => {
         const response = await axiosInstance.get('/get-event/');
         const temp = response.data.filter(
           (hackathon: Hackathon) => hackathon.status === 'not_applied'
-        );
+        ).reverse();
         setHackathons(temp);
         setLoading(false);
       } catch (error) {

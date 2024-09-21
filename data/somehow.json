@@ -1,0 +1,50 @@
+[
+  {
+    "name": "CashKaka",
+    "description": "CashKaka makes expense tracking easy on WhatsApp. Using AI, it understands your messages, making it simple for anyone to manage their money wisely.",
+    "url": "https://www.youtube.com/watch?v=gNJza3gld1A",
+    "logo_url": "https://firebasestorage.googleapis.com/v0/b/somehow-eth-singapore.appspot.com/o/seed%2FCashKaka.png?alt=media&token=54d1b24b-ddec-460e-aef7-aacfccd6349c"
+  },
+  {
+    "name": "3 Bricks",
+    "description": "A decentralised platform using Polygon and NFTs to streamline the property buying and selling process, increase transparency and security, and minimise the use of intermediaries by simplifying the transfer of ownership. Includes a smart contract to perform the escrow process.",
+    "url": "https://three-bricks-app.web.app/",
+    "logo_url": "https://firebasestorage.googleapis.com/v0/b/somehow-eth-singapore.appspot.com/o/seed%2F3%20bricks.webp?alt=media&token=3b96d847-97a8-4942-8ff0-032ac6186b17"
+  },
+  {
+    "name": "3 Chain",
+    "description": "A blockchain-based supply chain project that enhances trust, transparency, and efficiency by offering services like escrow for goods transfer, reverse logistics, quality assurance, location tracking, secure payments, and a user-friendly dashboard for key supply chain actors. Supplier -> Manufacturer -> Regulator -> Logistics -> Buyer",
+    "url": "https://three-chain.pettiboy.com/",
+    "logo_url": "https://firebasestorage.googleapis.com/v0/b/somehow-eth-singapore.appspot.com/o/seed%2F3%20chain.webp?alt=media&token=35c15153-866c-4a01-9e32-99cf7a7fd454"
+  },
+  {
+    "name": "Apni Bachat",
+    "description": "A Decentralized Bank with decentralised credit score calculation. A system that is transparent, fair and financially inclusive. The Defi platform aims to establish a more secure more, user friendly and more scalable financial enviourment",
+    "url": "https://github.com/inspectElements/Apni-Bachat",
+    "logo_url": "https://firebasestorage.googleapis.com/v0/b/somehow-eth-singapore.appspot.com/o/seed%2FScreenshot%202024-09-22%20at%206.13.04%E2%80%AFAM.png?alt=media&token=4c6dbe82-9640-4247-8684-59cd913d7eeb"
+  },
+  {
+    "name": "Chakra View",
+    "description": "An end to end tool for monitoring ground personnel (police bandobast). A mobile app, web dashboard and NFC tags to accurately track and secure a bandobast.",
+    "url": "https://www.jagran.com/uttar-pradesh/noida-ncr-noida-mumbai-college-of-engineering-student-made-chakravyuh-app-for-policeman-duty-23496616.html",
+    "logo_url": "https://pettiboy.com/projects/chakra-view/1.webp"
+  },
+  {
+    "name": "CodeCat",
+    "description": "A web-based code compiler that supports multiple languages and provides a user-friendly interface for compiling and running code.",
+    "url": "https://compiler-codecat.vercel.app/",
+    "logo_url": "https://firebasestorage.googleapis.com/v0/b/somehow-eth-singapore.appspot.com/o/seed%2FScreenshot%202024-09-22%20at%206.17.18%E2%80%AFAM.png?alt=media&token=2a001881-1622-42d8-ba5d-a1a7bb95e30a"
+  },
+  {
+    "name": "Open source npm package for react",
+    "description": "Customizable Scroll Spy component for react which is Easy To Use and Lightweight with callback, typescript, auto-update URL hash and throttle support among others. 120k+ instals.",
+    "url": "https://pettiboy.github.io/react-ui-scrollspy/#orange",
+    "logo_url": "https://pettiboy.com/projects/react-ui-scrollspy/banner.webp"
+  },
+  {
+    "name": "Any Chains",
+    "description": "Managing the real time big data (records of 1500+ derivatives/sec) of futures and options chain to provide a light weight web app. Pre-processing unformatted raw data from TCP stream to the socket.",
+    "url": "https://www.youtube.com/watch?v=AreBDHiYldE",
+    "logo_url": "https://pettiboy.com/projects/any-chains/1.webp"
+  }
+]
