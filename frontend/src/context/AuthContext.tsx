@@ -27,7 +27,7 @@ export const useAuth = () => useContext(AuthContext);
 
 const AuthProvider = ({ children }: Props) => {
   const [currentAuthSupply, setCurrentSupply] = useState<"magic" | "dynamic">(
-    "magic"
+    "dynamic"
   );
 
   const [token, setToken] = useState<string | null>(null);

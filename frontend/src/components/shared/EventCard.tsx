@@ -9,6 +9,8 @@ import { Avatar, Button } from "@mui/material";
 import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../config/axios"; // Import your axios instance
+import useMorphInteractions from "../../hooks/morph/useMorphInteractions";
+import { useFlowInteraction } from "../../hooks/useFlowInteraction";
 
 interface EventCardProps {
   id: number;
@@ -25,6 +27,9 @@ const EventCard: React.FC<EventCardProps> = ({
 }) => {
   const { token } = useAuth();
   const navigate = useNavigate();
+  const { handleAddVoterToEvent } = useMorphInteractions();
+  const { applyVoter } = useFlowInteraction();
+  const { currentAuthSupply } = useAuth();
 
   const handleButtonClick = async (eventId: number) => {
     console.log("Button clicked", eventId);
@@ -36,6 +41,14 @@ const EventCard: React.FC<EventCardProps> = ({
           event_id: eventId,
         });
         console.log("Application successful:", response.data);
+        {
+          currentAuthSupply === "magic" &&
+            applyVoter({ eventId: eventId.toString() });
+        }
+        {
+          currentAuthSupply === "dynamic" &&
+            handleAddVoterToEvent({ eventId: eventId.toString() });
+        }
 
         // Navigate to the voting dashboard if the application was successful
         navigate(`/voter-dashboard/?tab=applied`);

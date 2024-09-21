@@ -5,6 +5,8 @@ import { enqueueSnackbar } from "notistack";
 import axiosInstance from "../../config/axios";
 import Loading from "../ui/Loading";
 import { useFlowInteraction } from "../../hooks/useFlowInteraction";
+import useMorphInteractions from "../../hooks/morph/useMorphInteractions";
+import { useAuth } from "../../context/AuthContext";
 
 type Props = {
   eventId: string;
@@ -19,6 +21,8 @@ const Upload: React.FC<Props> = ({ eventId }) => {
   const [voters, setVoters] = useState<Voter[]>();
   const [jsonField, setJsonField] = useState(""); // State to track TextField value
   const { createProject } = useFlowInteraction();
+  const { currentAuthSupply } = useAuth();
+  const { handleAddProject } = useMorphInteractions();
   useEffect(() => {
     const getVoters = async () => {
       try {
@@ -53,10 +57,20 @@ const Upload: React.FC<Props> = ({ eventId }) => {
           const response = await axiosInstance.post("/project", project); // Post each project
 
           console.log("system", eventId, response.data["project_id"]);
-          await createProject({
-            eventId: eventId,
-            projectId: response.data["project_id"].toString(),
-          }); // Create project
+          {
+            currentAuthSupply === "magic" &&
+              (await createProject({
+                eventId: eventId,
+                projectId: response.data["project_id"].toString(),
+              }));
+          }
+          {
+            currentAuthSupply === "morph" &&
+              (await handleAddProject({
+                eventId: eventId,
+                projectId: response.data["project_id"].toString(),
+              }));
+          }
 
           console.log("Project uploaded:", response.data);
         } catch (error) {

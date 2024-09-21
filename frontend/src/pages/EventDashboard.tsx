@@ -1,33 +1,32 @@
-import Layout from '../components/dashboard/Layout';
-import { Box, Button, Divider, Typography } from '@mui/material';
-import CustomStepper from '../components/shared/CustomStepper';
-import VoterDetails from '../components/voter/VoterDetails';
-import { useNavigate, useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import axiosInstance from '../config/axios';
-import { EventStatus } from '../components/dashboard/PastEvents';
-import Upload from '../components/voter/Upload';
-import Leaderboard from './VoterLeaderboard';
+import Layout from "../components/dashboard/Layout";
+import { Box, Button, Divider, Typography } from "@mui/material";
+import CustomStepper from "../components/shared/CustomStepper";
+import VoterDetails from "../components/voter/VoterDetails";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axiosInstance from "../config/axios";
+import { EventStatus } from "../components/dashboard/PastEvents";
+import Upload from "../components/voter/Upload";
+import Leaderboard from "./VoterLeaderboard";
 
 // Define the possible status choices
-const STATUS_CHOICES = ['voters', 'project', 'active', 'complete'];
+const STATUS_CHOICES = ["voters", "project", "active", "complete"];
 
 function EventDashboard() {
   const { id } = useParams();
   const [event, setEvent] = useState<EventStatus | null>(null);
-  const navigate = useNavigate();
 
   useEffect(() => {
     if (!id) return;
     const fetchEvents = async () => {
       try {
-        const response = await axiosInstance.get('/get-event-admin');
+        const response = await axiosInstance.get("/get-event-admin");
         const temp = response.data.find(
           (event: EventStatus) => event.id.toString() === id
         );
         setEvent(temp);
       } catch (error) {
-        console.error('Error fetching events:', error);
+        console.error("Error fetching events:", error);
       }
     };
 
@@ -42,7 +41,7 @@ function EventDashboard() {
     const nextStatus =
       currentIndex < STATUS_CHOICES.length - 1
         ? STATUS_CHOICES[currentIndex + 1]
-        : 'complete'; // Fallback to "complete" if at the last status
+        : "complete"; // Fallback to "complete" if at the last status
 
     try {
       // Send the API request to update the status
@@ -50,7 +49,7 @@ function EventDashboard() {
         status: nextStatus,
       });
 
-      console.log('Status updated:', response.data);
+      console.log("Status updated:", response.data);
 
       // Update the local state with the new status
       setEvent((prevEvent) =>
@@ -62,7 +61,7 @@ function EventDashboard() {
           : null
       );
     } catch (error) {
-      console.error('Error updating status:', error);
+      console.error("Error updating status:", error);
     }
   };
 
@@ -73,13 +72,13 @@ function EventDashboard() {
   // Function to render the left layout content based on status
   const renderLeftLayout = () => {
     switch (event?.status) {
-      case 'voters':
+      case "voters":
         return <VoterDetails eventId={id} />;
-      case 'project':
+      case "project":
         return <Upload eventId={id} />; // Example component
-      case 'active':
+      case "active":
         return <Leaderboard />; // Example component
-      case 'complete':
+      case "complete":
         return <Leaderboard title="Final Leaderboard" />;
       default:
         return (
@@ -98,12 +97,12 @@ function EventDashboard() {
         left={
           <Box
             sx={{
-              display: 'flex',
-              flexDirection: 'column',
+              display: "flex",
+              flexDirection: "column",
               gap: 2,
-              justifyContent: 'space-between',
-              height: '100%',
-              overflow: 'auto',
+              justifyContent: "space-between",
+              height: "100%",
+              overflow: "auto",
             }}
           >
             {renderLeftLayout()}
@@ -112,11 +111,11 @@ function EventDashboard() {
         right={
           <Box
             sx={{
-              display: 'flex',
-              flexDirection: 'column',
+              display: "flex",
+              flexDirection: "column",
               gap: 2,
-              justifyContent: 'space-between',
-              height: '100%',
+              justifyContent: "space-between",
+              height: "100%",
             }}
           >
             <Box>

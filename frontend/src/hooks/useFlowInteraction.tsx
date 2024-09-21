@@ -150,17 +150,23 @@ export const useFlowInteraction = () => {
     await fcl.tx(txId).onceSealed();
   };
 
-  const approveVoter = async ({ eventId }: { eventId: string }) => {
+  const approveVoter = async ({
+    eventId,
+    voterAddress,
+  }: {
+    eventId: string;
+    voterAddress: string;
+  }) => {
     const txId = await fcl.send([
       fcl.transaction`
       import VotingSystem2 from 0xee884352e5d52524
 
-      transaction(eventId: UInt64) {
+      transaction(eventId: UInt64, voter: Address) {
         prepare(signer: auth(BorrowValue, IssueStorageCapabilityController, PublishCapability, SaveValue) &Account) {
           log(signer.address)
           VotingSystem2.approveVoter(
             eventId: eventId,
-            voter: signer.address,
+            voter: voter,
           )
         }
         execute {
@@ -169,7 +175,7 @@ export const useFlowInteraction = () => {
         }
       }
         `,
-      fcl.args([fcl.arg(eventId, t.UInt64)]),
+      fcl.args([fcl.arg(eventId, t.UInt64), fcl.arg(voterAddress, t.Address)]),
       fcl.proposer(magic!.flow.authorization),
       fcl.payer(magic!.flow.authorization),
 

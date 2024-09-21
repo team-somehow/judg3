@@ -11,6 +11,8 @@ import { uploadFileToFirebase } from "../../utils/uploadFile";
 import axiosInstance from "../../config/axios";
 import { enqueueSnackbar } from "notistack";
 import { useFlowInteraction } from "../../hooks/useFlowInteraction";
+import useMorphInteractions from "../../hooks/morph/useMorphInteractions";
+import { useAuth } from "../../context/AuthContext";
 
 interface AdminCreateEventModalProps {
   open: boolean;
@@ -21,6 +23,8 @@ const AdminCreateEventModal: React.FC<AdminCreateEventModalProps> = ({
   open,
   handleClose,
 }) => {
+  const { handleCreateEventMorph } = useMorphInteractions();
+  const { currentAuthSupply } = useAuth();
   const [formData, setFormData] = useState({
     eventName: "",
     description: "",
@@ -95,8 +99,13 @@ const AdminCreateEventModal: React.FC<AdminCreateEventModalProps> = ({
       });
 
       if (response.status === 201) {
+        {
+          currentAuthSupply === "magic" && (await handleCreateEvent());
+        }
+        {
+          currentAuthSupply === "morph" && (await handleCreateEventMorph());
+        }
         enqueueSnackbar("Event created successfully.", { variant: "success" });
-        await handleCreateEvent();
 
         handleClose();
       }
