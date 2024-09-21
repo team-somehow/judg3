@@ -13,6 +13,7 @@ export type AuthContextType = {
   setAddress: (address: string) => void;
 
   currentAuthSupply: string;
+  appChain: string | null;
 };
 export const AuthContext = createContext<AuthContextType>({
   token: null,
@@ -20,12 +21,15 @@ export const AuthContext = createContext<AuthContextType>({
   address: null,
   setAddress: () => {},
   currentAuthSupply: "",
+  appChain: null,
 });
 
 // eslint-disable-next-line react-refresh/only-export-components,
 export const useAuth = () => useContext(AuthContext);
 
 const AuthProvider = ({ children }: Props) => {
+  const [appChain, setAppChain] = useState<string | null>(null);
+
   const [currentAuthSupply, setCurrentSupply] = useState<"magic" | "dynamic">(
     "magic"
   );
@@ -35,8 +39,11 @@ const AuthProvider = ({ children }: Props) => {
   const [loading, setLoading] = useState<boolean>(true);
 
   const { magic } = useMagic();
-  const { address: dynamicAddress, isConnecting: isConnectingDynamic } =
-    useDynamicWallet();
+  const {
+    address: dynamicAddress,
+    isConnecting: isConnectingDynamic,
+    chain: dynamicChain,
+  } = useDynamicWallet();
 
   useEffect(() => {
     if (currentAuthSupply === "magic") {
@@ -50,6 +57,7 @@ const AuthProvider = ({ children }: Props) => {
           setAddress(m.publicAddress!);
           // setToken(localStorage.getItem("jwtToken")!);
 
+          setAppChain("flow");
           setLoading(false);
         } catch (error) {
           console.error(error);
@@ -64,15 +72,22 @@ const AuthProvider = ({ children }: Props) => {
   useEffect(() => {
     if (currentAuthSupply === "dynamic") {
       setLoading(true);
-      if (dynamicAddress) {
+      if (dynamicAddress && dynamicChain) {
         setAddress(dynamicAddress);
+        setAppChain(dynamicChain.name);
       }
 
       if (!isConnectingDynamic) {
         setLoading(false);
       }
     }
-  }, [currentAuthSupply, dynamicAddress, isConnectingDynamic, setAddress]);
+  }, [
+    currentAuthSupply,
+    dynamicAddress,
+    dynamicChain,
+    isConnectingDynamic,
+    setAddress,
+  ]);
 
   if (loading) {
     return <Loading loading={true} />;
@@ -80,7 +95,14 @@ const AuthProvider = ({ children }: Props) => {
 
   return (
     <AuthContext.Provider
-      value={{ token, setToken, setAddress, address, currentAuthSupply }}
+      value={{
+        token,
+        setToken,
+        setAddress,
+        address,
+        currentAuthSupply,
+        appChain,
+      }}
     >
       {children}
     </AuthContext.Provider>

@@ -7,6 +7,7 @@ import {
 import { WORLDCOIN_VERIFICATION_ROUTE } from "../../../constants";
 import { Button } from "@mui/material";
 import { useAuth } from "../../../context/AuthContext";
+import { enqueueSnackbar } from "notistack";
 
 type Props = {
   onSuccess: () => void;
@@ -15,9 +16,18 @@ type Props = {
 };
 
 const AuthWorldCoin = ({ onSuccess, buttonText, onVerify }: Props) => {
-  const { setToken } = useAuth();
+  const { setToken, address, appChain } = useAuth();
   const handleVerify = async (proof: ISuccessResult) => {
     console.log(proof);
+    if (!address || !appChain) {
+      enqueueSnackbar("Address or appChain not found", {
+        variant: "error",
+      });
+      return;
+    }
+
+    console.log("Address and appChain found");
+    console.log(address, appChain);
 
     const res = await fetch(WORLDCOIN_VERIFICATION_ROUTE, {
       // route to your backend will depend on implementation
@@ -25,7 +35,13 @@ const AuthWorldCoin = ({ onSuccess, buttonText, onVerify }: Props) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ ...proof, action: "login" }),
+      body: JSON.stringify({
+        ...proof,
+        action: "login",
+
+        user_address: address,
+        chain_of_address: appChain,
+      }),
     });
     const data = await res.json();
 
