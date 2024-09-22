@@ -34,9 +34,9 @@ const EventCard: React.FC<EventCardProps> = ({
   const { token } = useAuth();
   const navigate = useNavigate();
   const { handleAddVoterToEvent } = useMorphInteractions();
-  const { applyVoter } = useFlowInteraction();
+  const { applyVoter, getEvents } = useFlowInteraction();
   const { currentAuthSupply } = useAuth();
-
+  getEvents();
   const handleButtonClick = async (eventId: number) => {
     console.log("Button clicked", eventId);
 

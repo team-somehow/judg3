@@ -31,7 +31,7 @@ const AuthProvider = ({ children }: Props) => {
   const [appChain, setAppChain] = useState<string | null>(null);
 
   const [currentAuthSupply, setCurrentSupply] = useState<"magic" | "dynamic">(
-    "magic"
+    "dynamic"
   );
 
   const [token, setToken] = useState<string | null>(null);
@@ -44,7 +44,6 @@ const AuthProvider = ({ children }: Props) => {
     isConnecting: isConnectingDynamic,
     chain: dynamicChain,
   } = useDynamicWallet();
-  console.log(appChain, token);
 
   useEffect(() => {
     localStorage.getItem("hussainToken") &&

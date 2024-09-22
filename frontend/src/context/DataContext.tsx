@@ -25,6 +25,15 @@ const DataProvider = ({ children }: Props) => {
           castVoteHash:
             "V0x18b9328d7fe63bafae407873cc97d35561ea23de80cdc2fe1dd9b690d935ccdb",
         },
+        Flow: {
+          eventTransactionHash:
+            "44e727dd19fe97f9ca70e3c0ef187594860fa516d7c0aa97e1a2a34e8fea5977",
+          addProjectTransactionHash:
+            "e5874c19c1b25a0721cc5f5bd9cccd45892a8548ffadc6a404bb5e609479e9d8",
+          addVoterTransactionHash: "",
+          approveVoterTransactionHash: "",
+          castVoteHash: "",
+        },
       }}
     >
       {children}
